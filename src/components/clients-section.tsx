@@ -5,7 +5,7 @@ import { Church, Building, Store, GraduationCap } from "lucide-react"
 const clients = [
   {
     name: "St Fortunata Church",
-    description: "Complete IT support and network management for church operations and community programs.",
+    description: "Complete System Configuration, Hardware Upgrades and Diagnostic Services for church operations.",
     icon: Church,
   }
 ]
