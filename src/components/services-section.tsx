@@ -46,6 +46,12 @@ const services = [
     icon: Code,
     available: false,
   },
+    {
+    title: "Security Cameras Setup",
+    description: "Custom installation and configuration of security camera systems for church, home and business.",
+    icon: Code,
+    available: false,
+  },
 ]
 
 export function ServicesSection() {
@@ -80,7 +86,7 @@ export function ServicesSection() {
                     variant="ghost"
                     className="p-0 h-auto text-black hover:text-gray-600 dark:text-white dark:hover:text-gray-300"
                   >
-                    Learn More <ExternalLink className="ml-2 h-4 w-4" />
+                    {/* Learn More <ExternalLink className="ml-2 h-4 w-4" /> */}
                   </Button>
                 ) : (
                   <p className="text-sm text-gray-500 dark:text-gray-400 italic">
