@@ -40,6 +40,7 @@ function Button({
   variant,
   size,
   asChild = false,
+  children,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
@@ -47,13 +48,25 @@ function Button({
   }) {
   const Comp = asChild ? Slot : "button"
 
+  if (
+    process.env.NODE_ENV === "development" &&
+    !children &&
+    !props["aria-label"] &&
+    !props.title
+  ) {
+    console.warn("⚠️ Button rendered without accessible name:", props)
+  }
+
   return (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
-    />
+    >
+      {children}
+    </Comp>
   )
 }
+
 
 export { Button, buttonVariants }

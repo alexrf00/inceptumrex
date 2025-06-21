@@ -80,13 +80,13 @@ export function ServicesSection() {
                 </div>
                 <h3 className="text-xl font-semibold mb-3 text-black dark:text-white">{service.title}</h3>
                 <p className="text-gray-800 dark:text-gray-200 mb-4">{service.description}</p>
-                {service.available ? (
-                  <Button
-                    variant="ghost"
-                    className="p-0 h-auto text-black hover:text-gray-900 dark:text-white dark:hover:text-gray-200"
-                  >
-                    {/* Learn More <ExternalLink className="ml-2 h-4 w-4" /> */}
-                  </Button>
+                {service.available ? (null /* Uncomment if you want to add a button for available services */
+                  // <Button
+                  //   variant="ghost"
+                  //   className="p-0 h-auto text-black hover:text-gray-900 dark:text-white dark:hover:text-gray-200"
+                  // >
+                  //   Learn More <ExternalLink className="ml-2 h-4 w-4" />
+                  // </Button>
                 ) : (
                   <p className="text-sm text-gray-700 dark:text-gray-200 italic">
                     This service will be available soon.

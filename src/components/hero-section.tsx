@@ -10,7 +10,11 @@ export function HeroSection() {
             <Monitor className="h-16 w-16 text-white dark:text-black" />
           </div>
         </div>
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 text-black dark:text-white">InceptumRex</h1>
+        <section>
+          <h1 className="text-5xl md:text-7xl font-bold text-black dark:text-white">
+            InceptumRex
+          </h1>
+        </section>
         <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
           Professional Computer Repair, Configuration & Diagnostic Services. We fix what's broken and optimize what's
           working.
