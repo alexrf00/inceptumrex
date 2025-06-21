@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://inceptumrex.com
+
+# Sitemaps
+Sitemap: https://inceptumrex.com/sitemap.xml
