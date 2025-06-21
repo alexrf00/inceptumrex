@@ -5,15 +5,13 @@ export function HeroSection() {
   return (
     <section className="pt-24 pb-16 px-4 bg-white dark:bg-black">
       <div className="container mx-auto text-center">
-        <div className="mb-8">
           <div className="flex items-center justify-center">
               <img
                 src="/favicon.ico"
                 alt="Icon"
-                className="w-32 h-32 rounded-full"
+                className="max-w-[128px] h-auto rounded-full" 
               />
           </div>
-        </div>
         <section>
           <h1 className="text-5xl md:text-7xl font-bold text-black dark:text-white">
             InceptumRex
