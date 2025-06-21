@@ -29,7 +29,14 @@ export function Navigation() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="text-2xl font-bold text-black dark:text-white flex items-center">
-            <Monitor className="mr-2 h-8 w-8" />
+
+            <div className="bg-white p-2 rounded-full inline-block">
+              <img
+                src="/favicon.ico"
+                alt="Icon"
+                className="w-12 h-12 object-contain block"
+              />
+            </div>
             InceptumRex
           </div>
 

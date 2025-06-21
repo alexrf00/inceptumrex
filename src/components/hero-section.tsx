@@ -6,8 +6,12 @@ export function HeroSection() {
     <section className="pt-24 pb-16 px-4 bg-white dark:bg-black">
       <div className="container mx-auto text-center">
         <div className="mb-8">
-          <div className="w-32 h-32 mx-auto mb-6 bg-black dark:bg-white rounded-full flex items-center justify-center">
-            <Monitor className="h-16 w-16 text-white dark:text-black" />
+          <div className="flex items-center justify-center">
+              <img
+                src="/favicon.ico"
+                alt="Icon"
+                className="w-32 h-32 rounded-full"
+              />
           </div>
         </div>
         <section>
