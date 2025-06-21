@@ -72,7 +72,7 @@ export function ContactSection() {
                   <span className="text-gray-700 dark:text-gray-300">Mon-Fri: 9AM-6PM, Sat: 10AM-4PM</span>
                 </div>
               </div>
-              <div className="flex space-x-4 mt-8">
+              {/* <div className="flex space-x-4 mt-8">
                 <Button
                   size="icon"
                   variant="outline"
@@ -80,7 +80,7 @@ export function ContactSection() {
                 >
                   <Globe className="h-5 w-5" />
                 </Button>
-              </div>
+              </div> */}
             </div>
 
             <Card className="p-8 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">

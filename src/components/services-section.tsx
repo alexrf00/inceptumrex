@@ -46,7 +46,7 @@ const services = [
     icon: Code,
     available: false,
   },
-    {
+  {
     title: "Security Cameras Setup",
     description: "Custom installation and configuration of security camera systems for church, home and business.",
     icon: Code,
@@ -63,9 +63,8 @@ export function ServicesSection() {
           {services.map((service, index) => (
             <Card
               key={index}
-              className={`p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 ${
-                !service.available ? "opacity-75" : ""
-              }`}
+              className={`p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 ${!service.available ? "opacity-75" : ""
+                }`}
             >
               <CardContent className="p-0">
                 <div className="flex items-start justify-between mb-4">
@@ -73,24 +72,24 @@ export function ServicesSection() {
                   {!service.available && (
                     <Badge
                       variant="secondary"
-                      className="bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-400"
+                      className="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-100"
                     >
                       Coming Soon
                     </Badge>
                   )}
                 </div>
                 <h3 className="text-xl font-semibold mb-3 text-black dark:text-white">{service.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">{service.description}</p>
+                <p className="text-gray-800 dark:text-gray-200 mb-4">{service.description}</p>
                 {service.available ? (
                   <Button
                     variant="ghost"
-                    className="p-0 h-auto text-black hover:text-gray-600 dark:text-white dark:hover:text-gray-300"
+                    className="p-0 h-auto text-black hover:text-gray-900 dark:text-white dark:hover:text-gray-200"
                   >
                     {/* Learn More <ExternalLink className="ml-2 h-4 w-4" /> */}
                   </Button>
                 ) : (
-                  <p className="text-sm text-gray-500 dark:text-gray-400 italic">
-                    This service will be available soon. Contact us for updates.
+                  <p className="text-sm text-gray-700 dark:text-gray-200 italic">
+                    This service will be available soon.
                   </p>
                 )}
               </CardContent>
