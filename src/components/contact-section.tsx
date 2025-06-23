@@ -181,6 +181,17 @@ export function ContactSection() {
                     </div>
 
                     <div>
+                      <label className="block text-sm font-medium mb-2 text-black dark:text-white">Email</label>
+                      <input
+                        type="email"
+                        name="email"
+                        className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-transparent dark:bg-gray-700 dark:text-white"
+                        placeholder="Your Email Address"
+                        required
+                      />
+                    </div>
+
+                    <div>
                       <label className="block text-sm font-medium mb-2 text-black dark:text-white">
                         Issue Description
                       </label>
