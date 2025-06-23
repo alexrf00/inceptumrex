@@ -19,7 +19,8 @@ export function ContactSection() {
     const formData = new FormData(form)
 
     try {
-      const response = await fetch("https://formsubmit.co/04b6b8b0410f1290bbb7e95d396c6743", {
+      // const response = await fetch("https://formsubmit.co/04b6b8b0410f1290bbb7e95d396c6743", {
+      const response = await fetch("https://usebasin.com/f/188b999b80b6", {
         method: "POST",
         body: formData,
       })
