@@ -13,6 +13,10 @@ export function Wall() {
       <p className="wall__stencil" aria-hidden="true">
         Post no bills
       </p>
+      {/* Shown by the WebGL wall once a bill has been torn off. */}
+      <button type="button" className="wall__repaste" data-repaste hidden>
+        Paste the bills back
+      </button>
       <WallGL />
     </section>
   )

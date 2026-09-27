@@ -18,8 +18,24 @@ export const COMPACT = 230
 
 type Strip = { text: string; short: string; bg: string; fg: string }
 
-// An older bill pasted underneath, revealed only when the corner peels (WebGL).
-export type UnderBill = { bg: string; fg: string; name: string; line: string; year: string }
+// An older bill pasted under an image bill: wood-type lines fitted to the bill,
+// one line of print and a strip. It exists only in the WebGL paper, which
+// paints it; peel the bill above off the wall and it becomes the link.
+export type OlderBill = {
+  kind: "older"
+  id: string
+  href: string
+  label: string
+  bg: string
+  fg: string
+  lines: string[]
+  line: string
+  strip: Strip
+}
+
+// What lies under an image bill, top to bottom: more bills of the same run
+// (another image bill with the same anatomy) or an older bill.
+export type UnderSpec = Omit<ImagePoster, "under"> | OlderBill
 
 export type HeadlinerPoster = {
   kind: "headliner"
@@ -45,7 +61,7 @@ export type ImagePoster = {
   title?: { text: string; size: number; color: string }
   sub: { text: string; color: string }
   strip: Strip
-  under: UnderBill
+  under: UnderSpec[]
 }
 
 export type LineupPoster = {
@@ -83,6 +99,9 @@ export type RemnantPoster = {
 
 export type PosterSpec = HeadlinerPoster | ImagePoster | LineupPoster | FlyerPoster | RemnantPoster
 
+// Anything the WebGL paper can paint: a bill on the wall or one pasted under it.
+export type BillSpec = PosterSpec | UnderSpec
+
 export const posters: PosterSpec[] = [
   {
     kind: "headliner",
@@ -110,22 +129,47 @@ export const posters: PosterSpec[] = [
     logo: { src: "/work/bigparty-logo.png", width: 1280, height: 370, size: 74 },
     sub: { text: "Up to 12 outlaws. three.js", color: ink.paper },
     strip: { text: "In development. 2D demo free on Steam", short: "In development", bg: ink.yellow, fg: ink.black },
-    under: { bg: ink.yellow, fg: ink.black, name: "Big Party", line: "2D, Godot. Free demo on Steam", year: "2026" },
+    under: [
+      {
+        kind: "older",
+        id: "big-party-2d",
+        href: "#work-big-party",
+        label: "BIG PARTY, the 2D Godot game it began as: coming soon on Steam, with a free demo",
+        bg: ink.yellow,
+        fg: ink.black,
+        lines: ["Big", "Party"],
+        line: "2D, Godot. Free demo on Steam",
+        strip: { text: "Coming soon on Steam", short: "On Steam", bg: ink.black, fg: ink.yellow },
+      },
+    ],
   },
   {
     kind: "image",
     id: "fiscalia",
     href: "#work-fiscalia",
-    label: "Fiscalia. Electronic invoicing for Dominican businesses, built to DGII rules. Live",
+    label: "Fiscalia. An ERP for Dominican businesses, built around DGII electronic invoicing. Live",
     bg: ink.paper,
     image: { src: "/work/fiscalia-poster.webp", width: 1150, height: 1000, focusX: 0.62, focusY: 0.6 },
     inset: 4,
     imageHeight: 62,
     frame: true,
     title: { text: "Fiscalia", size: 22, color: ink.black },
-    sub: { text: "e-CF invoicing, built to DGII rules", color: ink.black },
+    sub: { text: "An ERP built on DGII e-invoicing", color: ink.black },
     strip: { text: "Live: fiscaliaservice.com", short: "Live", bg: ink.orange, fg: ink.black },
-    under: { bg: ink.black, fg: ink.yellow, name: "Asepre Business Suite", line: "Invoices and NCF, Spring Boot", year: "2025" },
+    // Fiscalia's older bill, from before it was set as an ERP.
+    under: [
+      {
+        kind: "older",
+        id: "fiscalia-2025",
+        href: "#work-fiscalia",
+        label: "Fiscalia's older bill: e-CF invoicing, built to DGII rules, since 2025",
+        bg: ink.black,
+        fg: ink.yellow,
+        lines: ["Fiscalia", "e-CF"],
+        line: "Invoicing built to DGII rules",
+        strip: { text: "Since 2025", short: "2025", bg: ink.orange, fg: ink.black },
+      },
+    ],
   },
   {
     kind: "image",
@@ -140,7 +184,19 @@ export const posters: PosterSpec[] = [
     title: { text: "LuzRD", size: 25, color: ink.black },
     sub: { text: "Blackouts, live, barrio by barrio", color: ink.black },
     strip: { text: "Live: luzrd.do", short: "Live", bg: ink.black, fg: ink.yellow },
-    under: { bg: ink.yellow, fg: ink.black, name: "InceptumRex", line: "Full-stack studio", year: "2018" },
+    under: [
+      {
+        kind: "older",
+        id: "inceptumrex-2018",
+        href: "#about",
+        label: "InceptumRex, the studio: full-stack work since 2018",
+        bg: ink.yellow,
+        fg: ink.black,
+        lines: ["Inceptum", "Rex"],
+        line: "Full-stack studio",
+        strip: { text: "Since 2018", short: "2018", bg: ink.black, fg: ink.yellow },
+      },
+    ],
   },
   {
     kind: "image",
@@ -155,7 +211,19 @@ export const posters: PosterSpec[] = [
     title: { text: "Fixion", size: 24, color: ink.paper },
     sub: { text: "Co-op folklore horror", color: ink.paper },
     strip: { text: "Prototype, with Frankely Diaz", short: "Prototype, with Frankely Diaz", bg: ink.paper, fg: ink.black },
-    under: { bg: ink.pink, fg: ink.black, name: "Excel Enricher", line: "Spreadsheets filled from the web", year: "2026" },
+    under: [
+      {
+        kind: "older",
+        id: "fixion-2d",
+        href: "#work-fixion-2d",
+        label: "Fixion 2D: a top-down, four-player prototype",
+        bg: ink.pink,
+        fg: ink.black,
+        lines: ["Fixion", "2D"],
+        line: "Top-down, four players",
+        strip: { text: "Prototype, 2026", short: "Prototype", bg: ink.black, fg: ink.paper },
+      },
+    ],
   },
   {
     kind: "lineup",
@@ -216,7 +284,7 @@ export const posters: PosterSpec[] = [
 ]
 
 // Vertical positions inside an image poster, in cqw. Shared by both renderers.
-export function imageLayout(spec: ImagePoster, compact: boolean) {
+export function imageLayout(spec: Omit<ImagePoster, "under">, compact: boolean) {
   const imageHeight = compact ? 60 : spec.imageHeight
   const inset = compact ? 0 : spec.inset
   if (spec.logo) {

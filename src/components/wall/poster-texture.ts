@@ -1,4 +1,4 @@
-import { COMPACT, blurbTop, imageLayout, lineupTops, remnantNameSize, type PosterSpec, type UnderBill } from "./posters"
+import { COMPACT, blurbTop, imageLayout, lineupTops, remnantNameSize, type BillSpec, type ImagePoster, type OlderBill } from "./posters"
 
 // Paints a bill onto a canvas for the three.js paper. Every number here is the
 // same cqw value Poster.tsx and the .poster rules in globals.css use, and every
@@ -42,6 +42,25 @@ export async function loadPosterImages(el: HTMLElement): Promise<PosterImages> {
     }
   }
   const [photo, logo] = await Promise.all([load("photo"), load("logo")])
+  return { photo, logo }
+}
+
+async function loadImage(src: string) {
+  const img = new Image()
+  img.decoding = "async"
+  img.src = src
+  try {
+    await img.decode()
+    return img
+  } catch {
+    return undefined
+  }
+}
+
+// A bill pasted under another has no HTML twin, so its prints load straight
+// from their files.
+export async function loadImageSet(spec: Omit<ImagePoster, "under">): Promise<PosterImages> {
+  const [photo, logo] = await Promise.all([loadImage(spec.image.src), spec.logo ? loadImage(spec.logo.src) : undefined])
   return { photo, logo }
 }
 
@@ -91,7 +110,21 @@ function cover(ctx: Ctx, img: HTMLImageElement, x: number, y: number, w: number,
   ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h)
 }
 
-export function paintPoster(canvas: HTMLCanvasElement, images: PosterImages, spec: PosterSpec, width: number, height: number, fonts: Fonts, cssWidth: number) {
+type StripSpec = { text: string; short: string; bg: string; fg: string }
+
+// The strip: height max(11cqw, 28px) and text max(4.6cqw, 12px); compact
+// bills use max(11cqw, 24px) and max(5cqw, 11px) with the short text.
+function paintStrip(ctx: Ctx, s: StripSpec, small: boolean, W: number, H: number, u: number, px: number, fonts: Fonts) {
+  const h = small ? Math.max(11 * u, 24 * px) : Math.max(11 * u, 28 * px)
+  const size = small ? Math.max(5 * u, 11 * px) : Math.max(4.6 * u, 12 * px)
+  ctx.fillStyle = s.bg
+  ctx.fillRect(0, H - h, W, h)
+  setFont(ctx, 800, size, fonts.display, 0.05)
+  line(ctx, (small ? s.short : s.text).toUpperCase(), 6 * u, H - h, size, h / size, s.fg)
+  return h
+}
+
+export function paintPoster(canvas: HTMLCanvasElement, images: PosterImages, spec: BillSpec, width: number, height: number, fonts: Fonts, cssWidth: number) {
   canvas.width = Math.round(width)
   canvas.height = Math.round(height)
   const ctx = canvas.getContext("2d") as Ctx
@@ -100,20 +133,12 @@ export function paintPoster(canvas: HTMLCanvasElement, images: PosterImages, spe
   const u = W / 100
   const px = W / cssWidth
   const compact = cssWidth < COMPACT
-
-  // The strip: height max(11cqw, 28px) and text max(4.6cqw, 12px); compact
-  // bills use max(11cqw, 24px) and max(5cqw, 11px) with the short text.
-  const strip = (s: { text: string; short: string; bg: string; fg: string }, small: boolean) => {
-    const h = small ? Math.max(11 * u, 24 * px) : Math.max(11 * u, 28 * px)
-    const size = small ? Math.max(5 * u, 11 * px) : Math.max(4.6 * u, 12 * px)
-    ctx.fillStyle = s.bg
-    ctx.fillRect(0, H - h, W, h)
-    setFont(ctx, 800, size, fonts.display, 0.05)
-    line(ctx, (small ? s.short : s.text).toUpperCase(), 6 * u, H - h, size, h / size, s.fg)
-  }
+  const strip = (s: StripSpec, small: boolean) => paintStrip(ctx, s, small, W, H, u, px, fonts)
 
   ctx.fillStyle = spec.bg
   ctx.fillRect(0, 0, W, H)
+
+  if (spec.kind === "older") paintOlder(ctx, spec, W, H, u, px, compact, fonts)
 
   if (spec.kind === "remnant") {
     const size = remnantNameSize(spec.name) * u
@@ -209,59 +234,28 @@ export function paintPoster(canvas: HTMLCanvasElement, images: PosterImages, spe
   }
 }
 
-// The older bill under a poster, pasted as a 2 x 2 sniping run. Each copy
-// sets its text against the bill's outer corner, so whichever corner peels
-// uncovers a readable name. WebGL only.
-export function paintUnderBill(canvas: HTMLCanvasElement, bill: UnderBill, width: number, height: number, fonts: Fonts) {
-  canvas.width = Math.round(width)
-  canvas.height = Math.round(height)
-  const ctx = canvas.getContext("2d") as Ctx
-  const W = canvas.width
-  const H = canvas.height
-  ctx.fillStyle = "#2b4d31"
-  ctx.fillRect(0, 0, W, H)
-  const cw = W / 2
-  const ch = H / 2
-  for (let r = 0; r < 2; r++) {
-    for (let c = 0; c < 2; c++) {
-      const x0 = c * cw + 3
-      const y0 = r * ch + 3
-      const iw = cw - 6
-      const ih = ch - 6
-      const u = iw / 100
-      ctx.fillStyle = bill.bg
-      ctx.fillRect(x0, y0, iw, ih)
-      const right = c === 1
-      const bottom = r === 1
-      const edgeX = right ? x0 + iw - 6 * u : x0 + 6 * u
-      setFont(ctx, 900, 20 * u, fonts.display)
-      const perEm = ctx.measureText(bill.name.toUpperCase()).width / (20 * u)
-      const fit = Math.min((88 * u) / perEm, 26 * u, ih * 0.3)
-      const lineSize = 7 * u
-      const block = fit * 0.9 + 2 * u + lineSize * 1.2
-      const top = bottom ? y0 + ih - 6 * u - block : y0 + 6 * u
-      ctx.save()
-      if (right) {
-        // Right-hand copies align to the bill's right edge.
-        setFont(ctx, 900, fit, fonts.display)
-        const nw = ctx.measureText(bill.name.toUpperCase()).width
-        line(ctx, bill.name.toUpperCase(), edgeX - nw, top, fit, 0.9, bill.fg)
-        setFont(ctx, 600, lineSize, fonts.narrow)
-        const lw = ctx.measureText(bill.line).width
-        line(ctx, bill.line, edgeX - lw, top + fit * 0.9 + 2 * u, lineSize, 1.2, bill.fg)
-      } else {
-        setFont(ctx, 900, fit, fonts.display)
-        line(ctx, bill.name.toUpperCase(), edgeX, top, fit, 0.9, bill.fg)
-        setFont(ctx, 600, lineSize, fonts.narrow)
-        line(ctx, bill.line, edgeX, top + fit * 0.9 + 2 * u, lineSize, 1.2, bill.fg)
-      }
-      // The year sits in the opposite vertical half of the copy.
-      const year = Math.min(22 * u, ih * 0.26)
-      setFont(ctx, 900, year, fonts.display)
-      const yw = ctx.measureText(bill.year).width
-      const yTop = bottom ? y0 + 6 * u : y0 + ih - 6 * u - year * 0.9
-      line(ctx, bill.year, right ? edgeX - yw : edgeX, yTop, year, 0.9, bill.fg)
-      ctx.restore()
-    }
+// An older bill: its name in wood type, each line fitted to 88cqw of the bill
+// (at most 30cqw, and smaller if the lines would crowd the print), one line of
+// print and a strip. There is no HTML twin, so the painter measures the face
+// itself instead of estimating it.
+function paintOlder(ctx: Ctx, bill: OlderBill, W: number, H: number, u: number, px: number, compact: boolean, fonts: Fonts) {
+  const printSize = Math.max(4.6 * u, 12 * px)
+  const stripH = compact ? Math.max(11 * u, 24 * px) : Math.max(11 * u, 28 * px)
+  const top = 6 * u
+  const room = H - stripH - top - (compact ? 5 * u : 3 * u + printSize * 1.2 + 6 * u)
+  setFont(ctx, 900, 20 * u, fonts.display, -0.005)
+  let sizes = bill.lines.map((l) => Math.min((88 * u * 20 * u) / ctx.measureText(l.toUpperCase()).width, 30 * u))
+  const block = sizes.reduce((sum, v) => sum + v * 0.86, 0)
+  if (block > room) sizes = sizes.map((v) => (v * room) / block)
+  let y = top
+  bill.lines.forEach((l, i) => {
+    setFont(ctx, 900, sizes[i], fonts.display, -0.005)
+    line(ctx, l.toUpperCase(), 6 * u, y, sizes[i], 0.86, bill.fg)
+    y += sizes[i] * 0.86
+  })
+  if (!compact) {
+    setFont(ctx, 600, printSize, fonts.narrow)
+    line(ctx, bill.line, 6 * u, y + 3 * u, printSize, 1.2, bill.fg)
   }
+  paintStrip(ctx, bill.strip, compact, W, H, u, px, fonts)
 }

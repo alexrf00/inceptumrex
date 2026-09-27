@@ -80,11 +80,12 @@ export function Poster({ spec, index }: { spec: PosterSpec; index: number }) {
       "--c-logo-top": cq(small.logoTop),
     }
     return (
-      <a className="poster poster--image" data-poster={spec.id} href={spec.href} aria-label={spec.label} style={vars}>
+      <a className="poster poster--image" data-poster={spec.id} href={spec.href} aria-label={spec.label} style={vars} draggable={false}>
         <span className="poster__paper">
           <span className={`poster__img${spec.frame ? " poster__img--frame" : ""}`}>
             <Image
               data-role="photo"
+              draggable={false}
               src={spec.image.src}
               alt=""
               fill
@@ -95,7 +96,7 @@ export function Poster({ spec, index }: { spec: PosterSpec; index: number }) {
           </span>
           {spec.logo ? (
             <span className="poster__logo" style={{ "--logo-w": cq(full.logoSize), "--logo-top": cq(full.logoTop) } as Vars}>
-              <Image data-role="logo" src={spec.logo.src} alt="" fill sizes="30vw" style={{ objectFit: "contain" }} />
+              <Image data-role="logo" draggable={false} src={spec.logo.src} alt="" fill sizes="30vw" style={{ objectFit: "contain" }} />
             </span>
           ) : spec.title ? (
             <span className="poster__title" style={{ "--top": cq(full.titleTop), "--size": cq(full.titleSize), color: spec.title.color } as Vars}>
@@ -114,7 +115,7 @@ export function Poster({ spec, index }: { spec: PosterSpec; index: number }) {
   if (spec.kind === "lineup") {
     const tops = lineupTops(spec)
     return (
-      <a className="poster poster--lineup" data-poster={spec.id} href={spec.href} aria-label={spec.label} style={base}>
+      <a className="poster poster--lineup" data-poster={spec.id} href={spec.href} aria-label={spec.label} style={base} draggable={false}>
         <span className="poster__paper">
           <span className="poster__heading">{spec.heading}</span>
           <span className="poster__lineup">
@@ -131,7 +132,7 @@ export function Poster({ spec, index }: { spec: PosterSpec; index: number }) {
   }
 
   return (
-    <a className="poster poster--flyer" data-poster={spec.id} href={spec.href} aria-label={spec.label} style={base}>
+    <a className="poster poster--flyer" data-poster={spec.id} href={spec.href} aria-label={spec.label} style={base} draggable={false}>
       <span className="poster__paper">
         <span className="poster__flyer-title" style={{ "--size": cq(spec.titleSize) } as Vars}>
           {spec.title.map((t) => (

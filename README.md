@@ -23,7 +23,9 @@ npm run dev
 | The HTML poster (accessible, and the no-WebGL wall) | `src/components/wall/Poster.tsx` |
 | The three.js paper (lighting, corner curl, shadows) | `src/components/wall/wall-scene.ts` |
 | The canvas that paints each poster's WebGL texture | `src/components/wall/poster-texture.ts` |
-| The paper program, résumé and contact flyer | `src/components/paper/` |
+| The paper program, papers sheet, résumé and contact flyer | `src/components/paper/` |
+| The list of papers (title, status, findings) | `src/content/papers.ts` |
+| Each paper's own page, verbatim, with its figures | `src/app/papers/<slug>/`, `src/components/papers/` |
 | Product truth, claims to avoid, evidence | `PRODUCT.md` |
 
 ## Adding or changing a project
@@ -34,6 +36,12 @@ npm run dev
    `src/content/work.ts`.
 3. To give it a poster on the wall, add a spec in `posters.ts` and a position rule in
    `globals.css`; the lineup poster lists minor projects by id.
+
+An image poster's `under` array is its stack: the real bills pasted beneath it, top to
+bottom. Each is another image bill with the same anatomy or an `older` bill (wood-type name, one
+line, a strip), and each needs an `href` into the printed
+program, because what the peel reveals must also be in print. The last bill of a stack stays
+on the wall.
 
 Poster sizes are in `cqw`, percent of the poster's own width. `Poster.tsx` and
 `poster-texture.ts` read the same numbers (`imageLayout`, `lineupTops`), so the HTML poster
@@ -47,7 +55,17 @@ and its three.js paper twin always agree. Change a number in one place only.
   the focus targets and the text screen readers read.
 - The corner nearest the pointer curls; keyboard focus curls the bottom-right corner.
   Nothing renders while nothing moves.
+- Press and drag a poster and the corner follows the pointer; let go far enough and it tears
+  off and falls, and the poster underneath becomes the poster and the link. A plain click
+  still follows the link. On phones a sideways swipe peels and a vertical one scrolls.
+  "Paste the bills back" restores the wall.
 - Under `prefers-reduced-motion` or without WebGL, the HTML wall is the wall.
+
+## Papers
+
+Add a paper to `src/content/papers.ts` (it appears on the home page's Papers sheet) and give
+it a page at `src/app/papers/<slug>/page.tsx`; the shared page styles live in
+`src/app/papers/papers.css`. A paper's text is set verbatim from the owner's final draft.
 
 ## Contact form
 

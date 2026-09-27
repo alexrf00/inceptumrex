@@ -1,0 +1,678 @@
+/* ---------------------------------------------------------------------------
+   Papers: a paper typeset on one newsprint sheet, pasted straight on the wall.
+   Loaded only under /papers (src/app/papers/layout.tsx). Every class here is
+   prefixed pp- so nothing collides with globals.css; the few rules that touch
+   a global class are scoped to a page that holds a paper sheet.
+
+   Ink: Press Black for heads and labels, Long-Copy Ink for reading, Press Grey
+   for secondary print. Colour appears on the sheet only as the pink rule under
+   links and the focus ring. Rules: 0.35rem under the title block and over a
+   note, 2px over tables, facts and listings, 1px between rows. No radius.
+   ------------------------------------------------------------------------ */
+
+.pp-sheet {
+  --pp-ink: #2b2b27; /* Long-Copy Ink */
+  --pp-mono: ui-monospace, "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+
+/* The way back: a program link. */
+.pp-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0;
+  font: 700 0.98rem/1 var(--font-narrow);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sheet-ink);
+  text-decoration: none;
+  border-bottom: 0.2rem solid var(--pink);
+  transition: border-color 0.2s;
+}
+.pp-back:hover {
+  border-bottom-color: var(--sheet-ink);
+}
+.pp-back svg {
+  flex: none;
+  width: 1em;
+  height: 1em;
+}
+
+/* --- Contents and article ------------------------------------------------ */
+
+.pp-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.75rem;
+  margin-top: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+.pp-toc__wide {
+  display: none;
+}
+.pp-toc__label,
+.pp-toc__fold > summary {
+  font: 700 0.78rem/1.3 var(--font-narrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.pp-toc__label {
+  padding-bottom: 0.55rem;
+  border-bottom: 2px solid var(--rule);
+  color: var(--sheet-dim);
+}
+.pp-toc__list {
+  display: grid;
+  margin-top: 0.45rem;
+}
+.pp-toc__list a {
+  display: grid;
+  grid-template-columns: 1.9rem minmax(0, 1fr);
+  padding: 0.3rem 0;
+  font: 500 0.94rem/1.35 var(--font-body);
+  color: var(--sheet-ink);
+  text-decoration: none;
+}
+.pp-toc__n {
+  font: 700 0.84rem/1.51 var(--font-narrow);
+  font-variant-numeric: tabular-nums;
+  color: var(--sheet-dim);
+}
+.pp-toc__t {
+  text-decoration: underline 0.2rem transparent;
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color 0.2s;
+}
+.pp-toc__list a:hover .pp-toc__t {
+  text-decoration-color: var(--pink);
+}
+
+/* Under 900px the contents fold, closed, above the article. */
+.pp-toc__fold {
+  border-top: 2px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.pp-toc__fold > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 0;
+  color: var(--sheet-ink);
+  cursor: pointer;
+  list-style: none;
+}
+.pp-toc__fold > summary::-webkit-details-marker {
+  display: none;
+}
+.pp-toc__fold .pp-toc__list {
+  margin: 0 0 0.9rem;
+}
+/* A printed plus that loses its upright when the fold is open. */
+.pp-toc__sign {
+  position: relative;
+  flex: none;
+  width: 0.8rem;
+  height: 0.8rem;
+}
+.pp-toc__sign::before,
+.pp-toc__sign::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50% - 1px);
+  height: 2px;
+  background: var(--sheet-ink);
+}
+.pp-toc__sign::after {
+  transform: rotate(90deg);
+}
+.pp-toc__fold[open] .pp-toc__sign::after {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .pp-layout {
+    grid-template-columns: 13rem minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+  }
+  /* The column sticks below the strip; it scrolls itself on a short screen, and
+     its padding keeps the focus rings of its links inside the scroll box. */
+  .pp-toc {
+    position: sticky;
+    top: calc(var(--strip-h) + 2rem);
+    max-height: calc(100svh - var(--strip-h) - 3rem);
+    margin: -0.5rem;
+    padding: 0.5rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sheet-dim) transparent;
+  }
+  .pp-toc__wide {
+    display: block;
+  }
+  .pp-toc__fold {
+    display: none;
+  }
+}
+
+.pp-article {
+  min-width: 0;
+  font: 400 1.0625rem/1.65 var(--font-body);
+  color: var(--pp-ink);
+}
+.pp-article p,
+.pp-article li {
+  max-width: 66ch;
+}
+.pp-article strong,
+.pp-article b {
+  font-weight: 600;
+  color: var(--sheet-ink);
+}
+.pp-article :not(pre) > code {
+  font-family: var(--pp-mono);
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+}
+
+/* Labels: eyebrows, the notes' heads, fact labels. */
+.pp-eyebrow,
+.pp-facts dt {
+  font: 700 0.78rem/1.3 var(--font-narrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sheet-dim);
+}
+
+/* --- Title block ---------------------------------------------------------- */
+
+.pp-head {
+  padding-bottom: 1.6rem;
+  border-bottom: 0.35rem solid var(--rule);
+}
+.pp-title {
+  margin-top: 0.85rem;
+}
+.pp-subtitle {
+  max-width: 44ch;
+  margin-top: 1.15rem;
+  font: 600 1.25rem/1.4 var(--font-body);
+  color: var(--sheet-ink);
+  text-wrap: balance;
+}
+.pp-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+  margin-top: 1.6rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--rule);
+}
+.pp-facts dd {
+  margin-top: 0.35rem;
+  font: 500 0.98rem/1.45 var(--font-body);
+  color: var(--sheet-ink);
+}
+
+/* --- Abstract and the note on what changed ------------------------------- */
+
+.pp-abstract {
+  margin-top: 2rem;
+}
+.pp-abstract > p + p {
+  margin-top: 0.55rem;
+}
+.pp-changes {
+  margin-top: 2rem;
+  padding: 1rem 0 1.1rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+.pp-changes ul {
+  margin-top: 0.65rem;
+}
+
+/* --- Sections ------------------------------------------------------------- */
+
+.pp-section {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  scroll-margin-top: calc(var(--strip-h) + 1rem);
+}
+.pp-section > * + * {
+  margin-top: 1rem;
+}
+.pp-h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.3rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 2px solid var(--rule);
+  font: 800 1.55rem/1 var(--font-display);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--sheet-ink);
+  text-wrap: balance;
+}
+.pp-h2 .pp-n {
+  flex: none;
+  min-width: 1.3em;
+  color: var(--sheet-dim);
+  font-variant-numeric: tabular-nums;
+}
+/* A table or the glossary straight under a head brings its own 2px rule; that
+   rule becomes the head's, instead of printing two rules a line apart. */
+.pp-h2:has(+ :is(.pp-defs, .pp-scroll)) {
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+.pp-section > .pp-h2 + :is(.pp-defs, .pp-scroll) {
+  margin-top: 0;
+}
+.pp-h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  font: 600 1.2rem/1.3 var(--font-body);
+  color: var(--sheet-ink);
+  text-wrap: balance;
+}
+.pp-h3 .pp-n {
+  flex: none;
+  font: 700 0.92rem/1 var(--font-narrow);
+  letter-spacing: 0.04em;
+  color: var(--sheet-dim);
+  font-variant-numeric: tabular-nums;
+}
+.pp-section > .pp-h3 {
+  margin-top: 2.1rem;
+}
+.pp-section > .pp-h3 + * {
+  margin-top: 0.45rem;
+}
+
+/* Lists: a short printed rule for a bullet. */
+.pp-article ul {
+  display: grid;
+  gap: 0.5rem;
+}
+.pp-article ul > li {
+  position: relative;
+  padding-left: 1.2rem;
+}
+.pp-article ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.1rem;
+  top: 0.8em;
+  width: 0.5rem;
+  height: 2px;
+  background: var(--rule);
+}
+
+/* Numbered steps: a Big Shoulders numeral in a printed square. */
+.pp-steps {
+  display: grid;
+  gap: 0.85rem;
+  counter-reset: pp-step;
+}
+.pp-steps > li {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr);
+  counter-increment: pp-step;
+}
+.pp-steps > li::before {
+  content: counter(pp-step);
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-top: 0.05rem;
+  box-shadow: inset 0 0 0 2px var(--black);
+  font: 800 1.02rem/1 var(--font-display);
+  color: var(--sheet-ink);
+}
+
+/* Terms: a printed glossary, 2px over it, 1px between rows. */
+.pp-defs {
+  border-top: 2px solid var(--rule);
+}
+.pp-defs > div {
+  display: grid;
+  grid-template-columns: 10.5rem minmax(0, 1fr);
+  gap: 0.15rem 1.5rem;
+  padding: 0.75rem 0 0.8rem;
+  border-bottom: 1px solid var(--rule);
+}
+.pp-defs dt {
+  font: 600 1rem/1.55 var(--font-body);
+  color: var(--sheet-ink);
+}
+.pp-defs dd {
+  max-width: 62ch;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* Goals and non-goals, side by side. */
+.pp-goals {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem clamp(1.5rem, 3vw, 2.75rem);
+}
+.pp-goals ul {
+  margin-top: 0.6rem;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* A printed note: a heavy rule on top, a label, no field. */
+.pp-note {
+  max-width: 66ch;
+  padding-top: 0.85rem;
+  border-top: 0.35rem solid var(--rule);
+}
+.pp-note > p + p {
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.pp-section > .pp-note {
+  margin-top: 1.9rem;
+}
+
+/* Adoption: dated rows like the résumé's. */
+.pp-phases {
+  display: grid;
+  gap: 1rem;
+}
+.pp-phases > li {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0.15rem 1.25rem;
+  max-width: none;
+}
+.pp-phases__when {
+  font: 600 0.95rem/1.84 var(--font-narrow);
+  font-variant-numeric: tabular-nums;
+  color: var(--sheet-dim);
+}
+
+/* References. */
+.pp-refs {
+  display: grid;
+  gap: 0.55rem;
+  padding-left: 2rem;
+  list-style: decimal;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+.pp-refs > li {
+  padding-left: 0.3rem;
+}
+.pp-refs > li::marker {
+  font: 700 0.9rem var(--font-narrow);
+  font-variant-numeric: tabular-nums;
+  color: var(--sheet-dim);
+}
+
+.pp-end {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  padding-top: 1rem;
+  border-top: 2px solid var(--rule);
+  font: 500 0.9rem/1.5 var(--font-body);
+  color: var(--sheet-dim);
+}
+
+/* --- Figures, tables and listings ----------------------------------------- */
+
+.pp-section > .pp-figure {
+  margin-top: 2rem;
+}
+.pp-section > .pp-figure + *,
+.pp-section > .pp-scroll + * {
+  margin-top: 1.6rem;
+}
+.pp-cap {
+  max-width: 66ch;
+  margin-top: 0.85rem;
+  font: 500 0.9rem/1.45 var(--font-body);
+  color: var(--sheet-dim);
+}
+.pp-cap b {
+  margin-right: 0.55rem;
+  font: 700 0.78rem/1 var(--font-narrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sheet-dim);
+}
+
+/* The only elements allowed to scroll sideways; focusable, so keys scroll them. */
+.pp-scroll {
+  position: relative;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sheet-dim) transparent;
+}
+
+/* Diagrams: black line work, no fills. */
+.pp-svg {
+  display: block;
+  width: 100%;
+  min-width: 600px;
+  height: auto;
+  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--sheet-ink);
+}
+.pp-fig-frame,
+.pp-fig-box,
+.pp-fig-link,
+.pp-fig-sealed,
+.pp-fig-zone,
+.pp-fig-arrow,
+.pp-seq-head,
+.pp-seq-msg,
+.pp-seq-note {
+  fill: none;
+  stroke: var(--rule);
+}
+.pp-fig-key,
+.pp-fig-tip,
+.pp-seq-tip {
+  fill: var(--rule);
+}
+.pp-seq-life {
+  stroke: var(--sheet-dim);
+}
+.pp-fig-head {
+  font: 700 13px var(--font-narrow), sans-serif;
+  letter-spacing: 0.12em;
+  fill: var(--sheet-ink);
+}
+.pp-fig-small {
+  font: 600 12.5px var(--font-narrow), sans-serif;
+  fill: var(--sheet-dim);
+}
+.pp-fig-name {
+  font: 600 14px var(--font-body), sans-serif;
+  fill: var(--sheet-ink);
+}
+.pp-fig-name--sm {
+  font-size: 13px;
+}
+.pp-fig-mono {
+  font: 400 11.5px var(--pp-mono);
+  fill: var(--pp-ink);
+}
+.pp-seq-head-text {
+  font: 600 13px var(--font-body), sans-serif;
+  fill: var(--sheet-ink);
+}
+.pp-seq-label {
+  font: 400 12px var(--font-body), sans-serif;
+  fill: var(--pp-ink);
+}
+.pp-seq-note-text {
+  font: 600 12px var(--font-body), sans-serif;
+  fill: var(--sheet-ink);
+}
+
+/* Tables: 2px over the head, 1px between rows. */
+.pp-table {
+  width: 100%;
+  min-width: 38rem;
+  border-collapse: collapse;
+  border-top: 2px solid var(--rule);
+  font: 400 0.98rem/1.5 var(--font-body);
+  color: var(--pp-ink);
+}
+.pp-table th,
+.pp-table td {
+  padding: 0.7rem 1.1rem 0.75rem 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rule);
+}
+.pp-table :is(th, td):last-child {
+  padding-right: 0;
+}
+.pp-table thead th {
+  padding-block: 0.75rem 0.6rem;
+  vertical-align: bottom;
+  font: 700 0.78rem/1.3 var(--font-narrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sheet-dim);
+}
+.pp-table tbody th {
+  font-weight: 600;
+  color: var(--sheet-ink);
+}
+.pp-table--threats tbody th,
+.pp-table .chip {
+  white-space: nowrap;
+}
+/* Status in words: Yes is a black field, Partly and No the outlined paper chip. */
+.pp-sheet .pp-chip--yes {
+  background: var(--black);
+  color: var(--paper);
+}
+/* The model this paper proposes: boxed in heavier rules, its head in black. */
+.pp-table--compare .pp-chosen {
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--rule);
+  border-right: 2px solid var(--rule);
+  color: var(--sheet-ink);
+}
+.pp-table--compare .pp-chosen + :is(th, td) {
+  padding-left: 1rem;
+}
+.pp-table--compare thead .pp-chosen {
+  border-top: 0.35rem solid var(--rule);
+}
+.pp-table--compare tbody tr:last-child .pp-chosen {
+  border-bottom: 2px solid var(--rule);
+}
+
+/* Listings: set flush on the sheet between a 2px and a 1px rule. */
+.pp-scroll--code {
+  border-top: 2px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.pp-code {
+  width: max-content;
+  min-width: 100%;
+  padding: 1rem 0 1.05rem;
+  font: 400 0.84rem/1.6 var(--pp-mono);
+  color: var(--sheet-ink);
+  white-space: pre;
+  tab-size: 2;
+}
+.pp-code code {
+  font: inherit;
+}
+.pp-k {
+  font-weight: 700;
+  color: var(--sheet-ink);
+}
+.pp-s {
+  color: var(--pp-ink);
+}
+.pp-c {
+  font-style: italic;
+  color: var(--sheet-dim);
+}
+
+/* --- Small screens --------------------------------------------------------- */
+
+@media (max-width: 559px) {
+  .pp-defs > div,
+  .pp-phases > li,
+  .pp-goals {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pp-code {
+    font-size: 0.8rem;
+  }
+}
+
+/* --- Print: the sheet alone, in black on white ----------------------------- */
+
+@media print {
+  /* The site declares a dark colour scheme for its wall; paper prints light. */
+  html:has(.pp-sheet),
+  body:has(.pp-sheet) {
+    color-scheme: light;
+    background: none;
+  }
+  body:has(.pp-sheet) :is(.skip, .strip, .foot) {
+    display: none;
+  }
+  body:has(.pp-sheet) .paper {
+    padding: 0;
+  }
+  .pp-sheet {
+    max-width: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+  .pp-back,
+  .pp-toc {
+    display: none;
+  }
+  .pp-layout {
+    display: block;
+    margin: 0;
+  }
+  .pp-scroll {
+    overflow: visible;
+  }
+  .pp-svg,
+  .pp-table {
+    min-width: 0;
+  }
+  .pp-code {
+    width: auto;
+    white-space: pre-wrap;
+  }
+  .pp-figure,
+  .pp-note,
+  .pp-table tr,
+  .pp-steps > li,
+  .pp-phases > li {
+    break-inside: avoid;
+  }
+  .pp-h2,
+  .pp-h3 {
+    break-after: avoid;
+  }
+}

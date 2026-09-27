@@ -225,6 +225,15 @@ components:
     height: "11.5rem"
   tear-tab-hover:
     backgroundColor: "color-mix(in srgb, {colors.paper} 78%, {colors.yellow})"
+  repaste-tag:
+    backgroundColor: "{colors.black}"
+    textColor: "{colors.yellow}"
+    typography: "{typography.nav}"
+    rounded: "{rounded.none}"
+    padding: "0.8rem 1.1rem 0.75rem"
+    height: "2.75rem"
+  repaste-tag-hover:
+    backgroundColor: "color-mix(in srgb, {colors.black} 86%, {colors.paper})"
 ---
 
 # Design System: InceptumRex
@@ -233,7 +242,7 @@ components:
 
 **Creative North Star: "The Wheat-Paste Wall"**
 
-Every project is a street poster announcing its release, wheat-pasted on one sidewalk-shed wall, newest on top; below the wall the same work is set straight on printed paper. The page has exactly two registers and never mixes them. The wall shouts: condensed wood type in black, paper white and three fluorescent inks, torn edges, paste crinkle and gloss, and, where WebGL runs, real lit paper whose corner lifts under the cursor to show the older bill pasted beneath. The paper reads: newsprint sheets with black rules, straight columns and printed status chips, holding everything the wall shouted in a calm order.
+Every project is a street poster announcing its release, wheat-pasted on one sidewalk-shed wall, newest on top; below the wall the same work is set straight on printed paper. The page has exactly two registers and never mixes them. The wall shouts: condensed wood type in black, paper white and three fluorescent inks, torn edges, paste crinkle and gloss, and, where WebGL runs, real lit paper whose corner lifts under the cursor and that a visitor can grab and tear off the wall to uncover the bill pasted beneath. The paper reads: newsprint sheets with black rules, straight columns and printed status chips, holding everything the wall shouted in a calm order, then the owner's papers, the résumé and the contact flyer.
 
 Everything on the page is a physical material under one raking light from the top left. There is one ground: hunter-green painted plywood, built from a real CC0 photograph with seams, screw rows, paint runs and buffed-out graffiti. Bills and sheets are paper pasted onto it, never panels floating over it. The work itself, screenshots and in-game renders, prints unretouched; only the paper it is printed on wears. The interface recedes into the world: navigation is a black sniping strip, the contact form is a flyer with tear-off tabs, the footer is a stencil painted on the wall.
 
@@ -245,7 +254,8 @@ The first viewport holds every project at once: the headliner bill carries the n
 - Condensed wood type sized to fill its bill; lineup acts ranked by size like a concert bill.
 - Black, paper white and three fluorescent inks; every status is written in words.
 - Torn masks, paste crinkle, newsprint fibre and green-black shadows from one top-left light.
-- A WebGL paper twin for every bill that only paints; the HTML bill stays the link, the focus target and the text.
+- A WebGL paper twin for every bill that only paints; the HTML bill stays the link, the focus target and the text, and follows whichever bill is showing.
+- Stacks of real bills: peel one off and the next is underneath.
 - Real screenshots and renders, unretouched, each carrying its provenance.
 
 ## Colors
@@ -254,7 +264,7 @@ Hunter-green paint as the only ground, two printing inks (Poster Black and Bill 
 
 ### Primary
 - **Sidewalk-Shed Green** (#355e3b): the painted plywood, New York sidewalk-shed green, and the ground of the entire page. The body stacks, top to bottom: a white radial highlight (8%, 110vw by 70vh at 8% / -5%, gone by 62%) for the raking light, the wear layer (`/wall/wear.webp`, 1700 by 1150 css px tiles offset 310 / 170), the plywood (`/wall/plywood.webp`, 1200 by 800 css px tiles) and this paint as the fallback. The two tile periods realign only every 20,400 by 18,400 px, so the wall never visibly repeats. The texture's measured mean is #36603c.
-- **Shed Shadow Green** (#2b4d31): the plate under the wall: the `html` background (seen on overscroll), the scrollbar track, and the ground of the older bills a peeled corner uncovers in WebGL.
+- **Shed Shadow Green** (#2b4d31): the plate under the wall: the `html` background (seen on overscroll) and the scrollbar track.
 
 ### Secondary
 - **Fluorescent Pink** (#ff2d87): as a field, the headliner's live-now strip, the LuzRD bill, a remnant and the pink chip. On paper it appears only as the 0.2rem rule under program links, the underline of résumé links, the text caret and the focus ring around form fields. It is also the text-selection colour, with Poster Black type.
@@ -338,7 +348,7 @@ Chrome and paint:
 
 ## Layout
 
-The page is one column in four parts: the sticky sniping strip (3.5rem), the wall (at least the viewport height below the strip), the paper (the program sheet, the résumé sheet and the contact flyer, clamp(3.5rem, 7vw, 7rem) apart) and the foot. Every anchor target clears the strip (`scroll-margin-top`: the strip plus 1rem).
+The page is one column in four parts: the sticky sniping strip (3.5rem), the wall (at least the viewport height below the strip), the paper (the program sheet, the papers sheet, the résumé sheet and the contact flyer, clamp(3.5rem, 7vw, 7rem) apart) and the foot. Each paper also has a page of its own at `/papers/<slug>`, with the same strip and foot around one sheet. Every anchor target clears the strip (`scroll-margin-top`: the strip plus 1rem).
 
 ### The wall and its three stages
 The wall holds a fixed-aspect stage. Each bill is placed on it by custom properties: x and width as a percentage of the stage's width, y as a percentage of its height, plus aspect ratio, rotation and stacking level, set per stage in the `[data-poster]` rules of `globals.css`. The wall is padded clamp(0.9rem, 2vw, 1.5rem) on top, clamp(0.75rem, 1.6vw, 1.5rem) at the sides and 3rem below, with the POST NO BILLS stencil bottom right.
@@ -357,7 +367,7 @@ Every bill dimension is `cqw` of the bill's own width, defined once in `posters.
 **The One-Number Rule.** A bill measurement lives in exactly one place and both renderers read it; the WebGL paper must be able to replace the HTML bill without the layout moving.
 
 ### DOM order is story order
-The DOM runs: skip link, strip, the headliner (the page's `h1`), the four image bills in program order (Big Party, Fiscalia, LuzRD, Fixion), the lineup bill (one link, to the paper list of the same projects), the flyer bill, then the program, the résumé, the contact form and the footer. Stages move bills only through custom properties, so reading and tab order are the same on all three.
+The DOM runs: skip link, strip, the headliner (the page's `h1`), the four image bills in program order (Big Party, Fiscalia, LuzRD, Fixion), the lineup bill (one link, to the paper list of the same projects), the flyer bill, the re-paste tag (hidden until a bill has been torn off), then the program, the papers, the résumé, the contact form and the footer. Stages move bills only through custom properties, so reading and tab order are the same on all three.
 
 ### The paper program
 Sheets are straight and square, at most 78rem wide, padded clamp(1.5rem, 4.5vw, 4.5rem), inside a clamp(0.75rem, 3vw, 3rem) page gutter.
@@ -366,8 +376,10 @@ Sheets are straight and square, at most 78rem wide, padded clamp(1.5rem, 4.5vw, 
   - **row**: pictures beside the text, then the facts as one four-column row under both (Fiscalia, BattlePassTimer).
   - **side**: the pictures run long on the left across two rows; the facts hang under the text (Fixion).
 - **Pictures**: the main print at its own aspect ratio, further prints as a row of equal 16:9 thumbnails 0.75rem apart, a caption under them.
+- **Papers sheet**: one program entry per paper in the row layout, with the paper's own Figure 1 in the wide column and the text in the narrow one (text first in the DOM): the kind as a fact label over the name, the subtitle as the standfirst, "What it finds" with the paper's findings numbered in wood type (900, 1.3rem), and a Read the paper link (an arrow right; it stays in the tab). Facts: Status (the outlined paper chip, "Draft", and the status in words), Kind with the year, Version with the date, Topics.
 - **Minor projects**: a two-column list under a 0.35rem rule.
 - **Résumé**: 4fr / 8fr, the portrait and links in a side column that sticks below the strip (2rem clear). The main column runs: name, role line, a two-paragraph bio, then Experience, Skills, Education, Certificates and Languages under 2px-ruled display heads. Experience, Education and Certificates are dated rows (an 8.5rem date column in Archivo Narrow, tabular figures); experience points are Long-Copy Ink with a short 2px printed rule as the bullet; skills are a grouped definition list on the same 8.5rem grid. Under 560px every row stacks. The content is merged from the owner's two résumé PDFs; the page carries only the site's public contact channels, never the personal email or phone printed on those PDFs. The side column's first link downloads `public/Alex-M-Rodriguez-Resume.pdf`: the Feb 2026 PDF with the personal email and phone truly redacted (removed from the text layer, links swapped) and the public contacts set in the PDF's own Open Sans (OFL).
+- **A paper's page** (`/papers/<slug>`; styles in `src/app/papers/papers.css`, every class prefixed `pp-`): the strip and foot around one straight sheet. It opens with Back to the papers (a program link, arrow left), then on desktop a sticky numbered Contents column (13rem, clear of the strip) beside the article; under 900px the contents fold into a closed `<details>`. The title block sets the kind and status as a label, the name at the sheet-title scale, the subtitle as the standfirst and a facts row (Author, Version, Date, and Status as the outlined chip) between rules. Sections are numbered display heads over a 2px rule; the text is Archivo at 1.0625rem/1.65 within about 66ch. Figures are the paper's own diagrams redrawn in print: black line work on newsprint, solid rules for open ground, dashed rules for what is sealed, 12px squares for keys, no fills and no rounding. Sequence diagrams are static SVG built from data, with the same steps in a list only screen readers get; no diagram library loads. Tables are printed (a heavy rule on top, 1px rules between rows, row headers in the first column); in the threat model Yes is a solid Poster Black chip and Partly and No are outlined chips. Code sits in a 1px ruled box in the system monospace, highlighted in print: keywords bold, comments italic Press Grey. Anything wider than a phone scrolls sideways inside a focusable, named frame, never the page. A print stylesheet drops the strip, foot, contents and back link. The text is set verbatim from the owner's final draft; the byline carries the owner's name as the site gives it.
 - **Contact flyer**: at most 48rem, centred, tilted -0.6°, a two-column form and a row of six tear-off tabs across its foot.
 
 Under 900px, entries, the minor list and the résumé go to one column, row-layout facts drop to two columns, and the portrait stops sticking and caps at 22rem. Under 560px the facts go to one column in every layout, the form to one column, résumé dates stack over their rows, the tabs drop to four, and the strip's type shrinks.
@@ -383,7 +395,7 @@ Depth is material, not interface elevation: paper pasted on a wall under one rak
 - **WebGL paper shadow**: a soft-edged copy of the bill, 1.2% larger, pushed away from the light by 7px plus 0.9 times the paper's height, alpha 0.34 rising to 0.56 as a flap lifts, in rgb(0.02, 0.07, 0.04). It replaces the bill drop once the WebGL wall takes over.
 - **Keylines, not elevation**: printed images on paper sit in a 1px Printed Rule ring (`box-shadow: 0 0 0 1px`); the paper chip is a 2px inset ring.
 
-In WebGL each stacking level sits 8px deeper than the one above it, every mesh scaled back so perspective never enlarges it past its HTML twin; the older bill under an image bill sits 6px beneath it, and an engaged bill lifts 3px.
+In WebGL each stacking level sits 8px deeper than the one above it, every mesh scaled back so perspective never enlarges it past its HTML twin; the bill under an image bill sits 6px beneath it, an engaged bill lifts 3px, a held bill 6px, and a bill tearing away lifts 28px and is drawn in front of every other bill, its shadow with it.
 
 ### Named Rules
 **The One Light Rule.** One light, from the upper left: the wall's radial highlight, the crinkle's diffuse light (azimuth 225°, elevation 60°), every CSS shadow offset (positive x, positive y) and the WebGL light vector (-0.55, 0.62, 0.56) agree. No second light, no glow, no neutral-grey shadow.
@@ -403,12 +415,12 @@ No radius anywhere: paper is cut or torn, and form controls stay square (`border
 Components are plain classes and custom properties in `src/app/globals.css` over Tailwind's preflight; Tailwind utilities are not used for styling (only `sr-only`).
 
 ### Sniping Strip (navigation)
-A long black bill pasted across the top of the wall: sticky, 3.5rem tall, Poster Black under the strip shadow. On the left the studio mark: the owner's InceptumRex emblem (2.125rem, 1.875rem under 560px) beside INCEPTUMREX in the stencil face (Bill Paper), 0.7rem apart, one link back to the wall; on the right Work, About and Contact in yellow display capitals with 0.6rem by 0.1rem of hit padding, turning Bill Paper on hover (0.2s). Links sit clamp(1.1rem, 3vw, 2.5rem) apart inside clamp(1rem, 3vw, 2.5rem) of padding. A skip link ("Skip to the work", black capitals on yellow) drops in above the strip on focus.
+A long black bill pasted across the top of the wall: sticky, 3.5rem tall, Poster Black under the strip shadow. On the left the studio mark: the owner's InceptumRex emblem (2.125rem, 1.875rem under 560px) beside INCEPTUMREX in the stencil face (Bill Paper), 0.7rem apart, one link back to the wall; on the right Work, Papers, About and Contact in yellow display capitals with 0.6rem by 0.1rem of hit padding, turning Bill Paper on hover (0.2s). The links point at the home page's sections (`/#work` and so on), so the strip works the same on a paper's own page. Under 480px the wordmark steps aside (the link's accessible name keeps it) and the links close up to 0.95rem apart. Links sit clamp(1.1rem, 3vw, 2.5rem) apart inside clamp(1rem, 3vw, 2.5rem) of padding. A skip link ("Skip to the work", black capitals on yellow) drops in above the strip on focus.
 
 ### Bills (wall posters)
 A bill is two boxes. The outer box holds place, rotation, stacking and the drop shadow, and is a size container; the paper inside carries the colour, the torn mask, the crinkle (a neutral soft-light relief at 0.9) and the content. Content hangs from a 6cqw left margin (8cqw on the flyer bill), and most bills end in a status strip across the full width of the foot, max(11cqw, 28px) tall.
 - **Headliner** (black): the name lines from 6cqw down, each advancing 0.86 times its size; the blurb 4cqw below them, 84cqw wide, in Bill Paper; the pink live-now strip. Not a link.
-- **Image bill** (black, paper or pink; links to the project's program entry): the print at the top, full-bleed on black bills or inset 4cqw inside a 0.4cqw black keyline on paper and coloured bills, 44 to 66cqw tall and cropped around a focus point; the title 3.5cqw under the print; the one-line sub 1.4cqw under the title; the status strip. Big Party sets its logo instead of a title, 74cqw wide and centred, overlapping the print's foot by 62% of its own height, with the sub 2cqw under it.
+- **Image bill** (black, paper or pink; links to the project's program entry, or to whichever bill of its stack is showing): the print at the top, full-bleed on black bills or inset 4cqw inside a 0.4cqw black keyline on paper and coloured bills, 44 to 66cqw tall and cropped around a focus point; the title 3.5cqw under the print; the one-line sub 1.4cqw under the title; the status strip. Big Party sets its logo instead of a title, 74cqw wide and centred, overlapping the print's foot by 62% of its own height, with the sub 2cqw under it.
 - **Compact image bill** (under 230px wide, by container query): the print goes full-bleed at 60cqw, the title drops to 17cqw (the logo widens to 84cqw), the sub hides and the strip switches to its short text, max(11cqw, 24px) tall.
 - **Lineup** (yellow; one link to "Also on the bill" in the program, named by an `aria-label` that lists every act): the heading at 6cqw, then one act per line from 19cqw down, each act advancing its size times 1.02 plus 1.5cqw, ranked by the Billing Rule; a black strip, "Details in print below". The acts are print, not separate links: the whole bill is the target, so small acts never become small tap targets.
 - **Flyer bill** (paper; links to the contact flyer): "Work inquiries" in two 16cqw lines; the bottom 42% cut into four dashed tear-off tabs with the email running vertically (decorative, hidden from assistive technology).
@@ -421,9 +433,13 @@ A bill is two boxes. The outer box holds place, rotation, stacking and the drop 
 ### The WebGL Paper Twin
 Where WebGL runs, every bill gets a lit paper twin on one canvas laid over the wall (z-index 12, `pointer-events: none`, `aria-hidden`). The twin only paints. The HTML bill underneath stays the link, the hit target (the pointer is resolved with `elementFromPoint`), the focus target and the text screen readers read.
 - **Material**: the bill's texture painted from the same spec, on a 64 by 64 plane with low paste bubbles (stronger within 18% of the edge), a two-octave crinkle in the surface normal (0.2), shading of 1 + 0.95 x (n·L - L.z) so flat paper shows exactly its HTML twin's colour, wet-paste sheen in patches (specular exponent 60, 0.03 to 0.12), 1% grain and the ragged alpha edge. Colours stay sRGB end to end.
-- **The peel**: the corner nearest the pointer, found in the bill's rotated frame, rolls around a cylinder of radius clamp(0.065 x the short side, 10px, 30px), up to (0.045 + 0.2 x nearness^1.6) x the short side. The flap shows Paper Back, the paper just past the fold darkens by up to 30%, and the shadow grows with the flap. Under each of the four image bills sits an older real bill (a 2 by 2 sniping run on Shed Shadow Green, names set against the outer corners) that only the peel reveals. A press or tap kicks the fold (+520px/s); keyboard focus peels the bottom-right corner to 0.2 x the short side. The fold is a spring (stiffness 170, damping 18), and a change of corner first relaxes to flat.
+- **The peel**: the corner nearest the pointer, found in the bill's rotated frame, rolls around a cylinder of radius clamp(0.065 x the short side, 10px, 30px), up to (0.045 + 0.2 x nearness^1.6) x the short side. The flap shows Paper Back, the paper just past the fold darkens by up to 30%, and the shadow grows with the flap. A press or tap kicks the fold (+520px/s); keyboard focus peels the bottom-right corner to 0.2 x the short side. The fold is a spring (stiffness 170, damping 18), and a change of corner first relaxes to flat. Near a corner of a bill that can come away, the cursor is a grab hand.
+- **Pulling a bill off**: a press that travels 6px (10px for touch) becomes a pull, and the fold follows the pointer. The fold line turns toward the pull while the pull points into the paper, within 60° of the corner's diagonal, and runs half the pointer's travel plus half a turn of the cylinder, so the lifted corner stays under the finger; pulled sideways or away, the corner peels back along its diagonal. While held the spring stiffens (900, damping 60) and the bill lifts 6px. Let go past 42% of the bill's reach along the fold, or past 16% with a flick faster than 900px/s, and the bill tears away: the fold runs past the far edge, the sheet lifts 28px in front of every bill, drops (60px/s plus 1300px/s² of fall), turns by up to ±0.7 rad/s and fades out between 0.1s and 0.42s. Short of that it springs back. A pull never follows the link (the click after it is swallowed) and uses pointer capture, so it keeps tracking outside the wall. Image bills take `touch-action: pan-y pinch-zoom`: on a phone a sideways swipe peels and a vertical one scrolls the page.
+- **Stacks**: under every image bill are real bills whose facts also live in print. Big Party covers BIG PARTY, the 2D Godot game (yellow, "Coming soon on Steam"); LuzRD covers the InceptumRex studio bill (yellow, "Since 2018"); Fixion covers Fixion 2D (pink, "Prototype, 2026"). Fiscalia covers its own older bill from before it was set as an ERP (black, FISCALIA / E-CF in yellow wood type, "Invoicing built to DGII rules", an orange "Since 2025" strip). An older bill sets its name in wood type, each line fitted to 88cqw by the painter's own measurement (at most 30cqw, smaller if the lines would crowd the print), one line of print and a strip. When a bill tears off, the bill below takes the top paint, the paper seed and the HTML twin's `href` and `aria-label`, and the next bill down is painted into the freed canvas (its prints load on the first press of that bill). The last bill of a stack, and every bill without one, is pasted for good: a pull gives up to 30% of its reach and only 15% of any more, then springs back.
+- **Re-pasting**: after the first tear-off the re-paste tag appears. It slaps every torn bill back on (0.5s: its alpha rises and it drops from 26px to the wall), puts every link back and moves focus to the first re-pasted bill.
+- **The tease**: once per visit, 1.1s after the handover and only if nobody has touched the wall, Fiscalia's bottom-right corner lifts to 0.26 x its short side and settles 0.75s later, so a visitor sees that the bills come away.
 - **Render on demand**: frames run only while a spring moves and the wall is on screen; a resize lays out and paints once. Textures repaint only when a bill's width changes by more than 12% or it crosses the compact threshold, at most 1800px wide; the pixel ratio caps at 2, and at 1.5 once the wall exceeds 1.6 million CSS px².
-- **Mount and handover**: three.js loads when the browser is idle (within 1.2s), never under reduced motion or Save-Data, and waits for the fonts and prints. The canvas fades in over 0.3s no earlier than 1.5s after navigation, when the paste-up has finished, and only then do the HTML bills stop painting (opacity, after a 0.3s step). If WebGL fails or the context is lost, the HTML wall paints again.
+- **Mount and handover**: three.js loads when the browser is idle (within 1.2s), never under reduced motion or Save-Data, and waits for the fonts and prints. The canvas fades in over 0.3s no earlier than 1.5s after navigation, when the paste-up has finished, and only then do the HTML bills stop painting (opacity, after a 0.3s step). If WebGL fails or the context is lost, the HTML wall paints again, every link goes back to its own bill and the re-paste tag hides.
 
 ### Status Chips
 Printed status on paper: display 800 capitals, black type, 0.4rem by 0.55rem of padding (0.35rem below), square. Yellow, pink and orange fields for live or shipping work; the paper chip (no field, a 2px inset black ring) for prototypes, offline and local builds. A note in Press Grey can follow the chip ("pre-revenue", "2D demo free on Steam").
@@ -448,6 +464,9 @@ Newsprint under a fibre texture and the sheet shadow. A sheet's head is a sheet 
 
 ### Tear-off Tabs
 Six paper tabs (four under 560px) across the contact flyer's foot, bleeding to its edges, 11.5rem tall, split by 2px dashed perforations, the email running vertically in Archivo Narrow 600. Hover tints them with 22% yellow. Pressing a tab copies the email (or opens the mail app) and tears the tab off: 0.8s on the same ease-out, a 4° tug, then a 9rem drop turning 16° as it fades; a polite live region says what happened. Under reduced motion the torn tab rests at 25% opacity.
+
+### Re-paste Tag
+A scrap of the sniping strip pasted low on the wall, bottom left and tilted -1.4°: yellow display capitals (800, 0.95rem, 0.1em) on Poster Black, 0.8rem by 1.1rem of padding, at least 2.75rem tall, under the bill drop shadow. Hover warms the black with 14% Bill Paper; focus is the wall's 3px yellow ring. It reads "Paste the bills back" and exists only for the WebGL wall, hidden until a bill has been torn off.
 
 ### Footer
 Centred on the wall: the full InceptumRex logo lockup printed on a label pasted to the wall (Bill Paper under the fibre, the sheet shadow, tilted -1.2°, at most 34rem wide), because its black type needs a light ground; then a credit line and GitHub, LinkedIn and email links, all in Stencil White.
@@ -480,6 +499,7 @@ Screenshots and renders print unretouched: no duotone, tint, grunge or colour fi
 - **Do** keep every focus ring in contrast with the surface it lands on: yellow on the wall and the strip, black on paper and newsprint, pink around fields.
 - **Do** print screenshots and renders unretouched and caption what is simulated or rendered.
 - **Do** give every shipping raster an ORIGIN record: a `.json` sidecar for WebP, embedded metadata for JPEG and PNG.
+- **Do** give every image bill a stack of real bills whose facts are also in print, and keep the last bill of a stack pasted for good.
 
 ### Don't:
 - **Don't** set the work in a card grid, a dark hero or a logo wall; work lives on the wall as bills and on paper as entries.
@@ -496,6 +516,7 @@ Screenshots and renders print unretouched: no duotone, tint, grunge or colour fi
 - **Don't** tint, duotone or filter a screenshot, and don't ship a raster without its ORIGIN record.
 - **Don't** set readable text on the wall in anything dimmer than Stencil White, or shrink a lineup act below 4.8cqw; the grain eats contrast and 4.8cqw is the legibility floor.
 - **Don't** split a bill into several small links; one bill is one target.
+- **Don't** let a pull follow a link, or take vertical swipes on the wall away from the page.
 - **Don't** recolour or redraw the InceptumRex logo, or bring its cyan into the interface.
 - **Don't** put the personal email or phone from the résumé PDFs on the page; the site's public channels are the only contact.
 - **Don't** let the résumé paste-up hide the sheet when it cannot reveal it: no three.js, reduced motion, Save-Data, a jump to #about or print all show the sheet as is.

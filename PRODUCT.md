@@ -13,7 +13,7 @@ web
 
 ## Product Purpose
 
-inceptumrex.com is the personal portfolio of Alex M. Rodriguez, with InceptumRex as the studio label. It shows every project and game Alex has built (shipped, live and prototype) with real imagery, and turns interest into a work inquiry through one contact form. Success: within the first screen a visitor sees the range (games, fiscal software, civic tools) and the proof (live sites, a Steam listing, real screenshots), then follows a live link or sends an inquiry.
+inceptumrex.com is the personal portfolio of Alex M. Rodriguez, with InceptumRex as the studio label. It shows every project and game Alex has built (shipped, live and prototype) with real imagery, carries the papers Alex writes, and turns interest into a work inquiry through one contact form. Success: within the first screen a visitor sees the range (games, fiscal software, civic tools) and the proof (live sites, a Steam listing, real screenshots), then follows a live link or sends an inquiry.
 
 The site used to sell computer repair and IT support. Owner decision (2026-09-27): **portfolio only**. The repair-business copy, service list, hours and "certified technicians" claims are retired; one contact form stays for work inquiries.
 
@@ -35,6 +35,7 @@ One engineer who builds whole products end to end, across worlds that rarely sha
 - **Language:** English (chosen by default in the 2026-09-27 session; the owner was not asked). Spanish product names and taglines stay in Spanish.
 - **Most repositories are private.** Link to live products, store pages and the GitHub profile, never to private repos.
 - **Status honesty:** BIG PARTY (the 2D Godot game) is "Coming soon" on Steam with a free demo released 2026-08-06 and a free itch.io build; Big Party 3D (the three.js remake) is in development and not released, and its iOS build is not publicly listed; Fixion and Omni Run are prototypes; BxGoatDrip, ASEPRE and BrolickGym are currently offline; dubbtogether, Excel Enricher and Stitch Designer are local or desktop tools with no public build.
+- **Fiscalia is an ERP** (owner, 2026-09-27: «showcase my ERP system»): point of sale with cash shifts, invoices with credit and debit notes, inventory by branch with lot expiry, purchases and expenses, recurring billing, payroll with TSS and IR-3, and the DGII's 606 and 609 report files, around the e-CF core. Claims follow the product's own marketing rules: the POS takes cash, transfer or cheque (card is "coming soon", never claimed), and nothing implies multi-business, an API or a customer portal.
 - **Fiscalia wording:** DGII certified Alex's own taxpayer registration as an electronic invoicer (Facturador Electrónico) using Fiscalia's software, on 2026-05-03 and again on a fresh production account on 2026-09-11. Never call Fiscalia a "DGII-certified provider". Documents are signed with XMLDSig (RSA-SHA256). The product is pre-revenue. Product screenshots come from a demo tenant running against a DGII simulator, so any "accepted by DGII" state on screen is simulated and must be labelled that way.
 - **Big Party art:** the 3D game's images are rendered inside the game; the 2D game's sprites and painted capsules are AI-generated and must be labelled as such if shown.
 - **Credit:** Fixion was co-developed with Frankely Diaz, who wrote most of its core gameplay; Alex built its menus, Steam networking and lobbies, economy and backend worker, and map pipeline. BrolickGym was a collaboration.
@@ -57,6 +58,7 @@ One engineer who builds whole products end to end, across worlds that rarely sha
 - **BattlePassTimer:** the live site.
 - **Portrait:** the photo the owner chose in chat (red cap, black pug), EXIF stripped.
 - **Résumé:** the owner's two résumé PDFs (Feb 2026 and an earlier version), merged; titles and dates follow the Feb 2026 one. They also carry a personal Gmail and a phone number, which the site does not publish. The downloadable résumé (`public/Alex-M-Rodriguez-Resume.pdf`) is the Feb 2026 PDF with those two redacted and inceptumrex@gmail.com and inceptumrex.com in their place.
+- **Papers:** *Sealed Skills* (position paper, v0.2, draft for discussion, 27 September 2026). It proposes encrypting AI agent skills to a key the AI company publishes on its own domain; it is a proposal, not a product, a feature of any AI provider or a standard, and says so. The site sets the owner's final draft verbatim at `/papers/sealed-skills`.
 - **Absences (do not fabricate):** no gameplay video for Fixion or Omni Run; no screenshots for BxGoatDrip, dubbtogether, Stitch Designer or Excel Enricher; no testimonials; no client list beyond named work.
 
 ## Product Principles
@@ -64,7 +66,7 @@ One engineer who builds whole products end to end, across worlds that rarely sha
 1. **Proof before adjectives.** Every project shows a real artifact and its honest status; the claim is the screenshot.
 2. **Range is the story, depth is the proof.** Games and fiscal software share the stage; each earns one concrete engineering fact.
 3. **Everything at once, one action.** The first screen holds all the work; the page asks for exactly one thing, a work inquiry.
-4. **Credit and status are part of the craft.** Prototypes are labeled, collaborators are named, offline work is marked as such.
+4. **Credit and status are part of the craft.** Prototypes are labeled, collaborators are named, offline work is marked as such, and a draft paper says it is a draft.
 5. **Dominican and New York roots are content, not decoration.**
 
 ## Accessibility & Inclusion

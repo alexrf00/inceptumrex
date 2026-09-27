@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-27T21:25:26Z",
+  "generatedAt": "2026-09-27T23:27:58Z",
   "title": "Design System: InceptumRex",
   "extensions": {
     "colorMeta": {
@@ -407,11 +407,6 @@
         "name": "reduced-motion",
         "value": "no paste-up, no WebGL mount, no tear (torn tab rests at opacity 0.25), scroll-behavior auto",
         "purpose": "prefers-reduced-motion: reduce. The HTML wall is the complete wall."
-      },
-      {
-        "name": "resume-paste-up",
-        "value": "WebGL roll; run clamp(0.9ms per px of sheet, 1.6s, 3.2s) ease-in-out cubic; radius clamp(2.8% of sheet width, 14px, 34px) thinning to 55%; fade 280ms; clip-path reveal on the HTML sheet",
-        "purpose": "The résumé sheet is pasted up as it arrives: a rolled sheet waits on its top edge, then unrolls down it, revealing the real HTML sheet above the roll. Skipped under reduced motion, Save-Data, an in-view arrival, print, or before three.js is ready; never hides the sheet for more than 4s."
       }
     ],
     "breakpoints": [
@@ -479,7 +474,7 @@
       },
       {
         "name": "raking-light",
-        "value": "radial-gradient(110vw 70vh at 8% -5%, color-mix(in srgb, var(--paper) 8%, transparent), transparent 62%)",
+        "value": "radial-gradient(110vw 70vh at 8% -5%, rgb(255 255 255 / 0.08), transparent 62%)",
         "purpose": "The top-left light on the wall."
       },
       {
@@ -518,9 +513,9 @@
       "name": "Lineup Bill",
       "kind": "custom",
       "refersTo": "bill-lineup",
-      "description": "Every other project as a ranked concert bill: act size is billing. The whole bill is one link (to the paper list of the same projects) named by an aria-label that lists every act; the acts are print, so small acts never become small tap targets. Its focus ring lands on the wall, outside the paper.",
-      "html": "<a class=\"ds-lineup\" href=\"#\" aria-label=\"Also on the bill: BattlePassTimer, Omni Run, dubbtogether, BxGoatDrip, Stitch Designer, Excel Enricher, Fixion 2D, ASEPRE, Brolick Gym. Details in print below\"><span class=\"ds-lineup__paper\"><span class=\"ds-lineup__heading\">Also on the bill</span><span class=\"ds-lineup__acts\"><span class=\"ds-lineup__act\" style=\"--top:19cqw;--size:8cqw\">BattlePassTimer</span><span class=\"ds-lineup__act\" style=\"--top:28.66cqw;--size:6.6cqw\">Omni Run</span><span class=\"ds-lineup__act\" style=\"--top:36.89cqw;--size:6.6cqw\">dubbtogether</span><span class=\"ds-lineup__act\" style=\"--top:45.12cqw;--size:5.8cqw\">BxGoatDrip</span><span class=\"ds-lineup__act\" style=\"--top:52.54cqw;--size:5.8cqw\">Stitch Designer</span><span class=\"ds-lineup__act\" style=\"--top:59.96cqw;--size:5.2cqw\">Excel Enricher</span><span class=\"ds-lineup__act\" style=\"--top:66.76cqw;--size:5.2cqw\">Fixion 2D</span><span class=\"ds-lineup__act\" style=\"--top:73.56cqw;--size:4.8cqw\">ASEPRE</span><span class=\"ds-lineup__act\" style=\"--top:79.96cqw;--size:4.8cqw\">Brolick Gym</span></span><span class=\"ds-lineup__strip\">Details in print below</span></span></a>",
-      "css": ".ds-lineup{display:block;color:inherit;text-decoration:none;position:relative;width:min(100%,380px);aspect-ratio:1;container-type:size;transform:rotate(.8deg);filter:drop-shadow(.3rem .5rem .45rem rgb(6 16 10/.45))}.ds-lineup__paper{position:absolute;inset:0;overflow:hidden;background:var(--yellow,#ffe414);-webkit-mask:var(--torn) 0 0/100% 100% no-repeat;mask:var(--torn) 0 0/100% 100% no-repeat}.ds-lineup__paper::after{content:\"\";position:absolute;inset:0;pointer-events:none;background:var(--crinkle) 0 0/260px 260px;mix-blend-mode:soft-light;opacity:.9}.ds-lineup__heading{position:absolute;left:6cqw;top:6cqw;font:900 9cqw/1 var(--font-display,'Big Shoulders Display',sans-serif);text-transform:uppercase;color:var(--black,#121212)}.ds-lineup__acts{display:block}.ds-lineup__act{white-space:nowrap;color:var(--black,#121212);position:absolute;left:6cqw;right:6cqw;top:var(--top);font:800 var(--size)/1.02 var(--font-display,'Big Shoulders Display',sans-serif);text-transform:uppercase}.ds-lineup__strip{position:absolute;left:0;right:0;bottom:0;height:max(11cqw,28px);padding-left:6cqw;font:800 max(4.6cqw,12px)/max(11cqw,28px) var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;background:var(--black,#121212);color:var(--yellow,#ffe414)}.ds-lineup:focus-visible{outline:4px solid var(--yellow,#ffe414);outline-offset:6px}"
+      "description": "Every other project as a ranked concert bill: act size is billing. Its focus ring is black because a ring must contrast with its paper.",
+      "html": "<div class=\"ds-lineup\"><span class=\"ds-lineup__paper\"><span class=\"ds-lineup__heading\">Also on the bill</span><ul class=\"ds-lineup__acts\"><li style=\"--top:19cqw;--size:8cqw\"><a href=\"#\">BattlePassTimer</a></li><li style=\"--top:28.66cqw;--size:6.6cqw\"><a href=\"#\">Omni Run</a></li><li style=\"--top:36.89cqw;--size:6.6cqw\"><a href=\"#\">dubbtogether</a></li><li style=\"--top:45.12cqw;--size:5.8cqw\"><a href=\"#\">BxGoatDrip</a></li><li style=\"--top:52.54cqw;--size:5.8cqw\"><a href=\"#\">Stitch Designer</a></li><li style=\"--top:59.96cqw;--size:5.2cqw\"><a href=\"#\">Excel Enricher</a></li><li style=\"--top:66.76cqw;--size:5.2cqw\"><a href=\"#\">Fixion 2D</a></li><li style=\"--top:73.56cqw;--size:4.8cqw\"><a href=\"#\">ASEPRE</a></li><li style=\"--top:79.96cqw;--size:4.8cqw\"><a href=\"#\">Brolick Gym</a></li></ul><span class=\"ds-lineup__strip\">Details in print below</span></span></div>",
+      "css": ".ds-lineup{position:relative;width:min(100%,380px);aspect-ratio:1;container-type:size;transform:rotate(.8deg);filter:drop-shadow(.3rem .5rem .45rem rgb(6 16 10/.45))}.ds-lineup__paper{position:absolute;inset:0;overflow:hidden;background:var(--yellow,#ffe414);-webkit-mask:var(--torn) 0 0/100% 100% no-repeat;mask:var(--torn) 0 0/100% 100% no-repeat}.ds-lineup__paper::after{content:\"\";position:absolute;inset:0;pointer-events:none;background:var(--crinkle) 0 0/260px 260px;mix-blend-mode:soft-light;opacity:.9}.ds-lineup__heading{position:absolute;left:6cqw;top:6cqw;font:900 9cqw/1 var(--font-display,'Big Shoulders Display',sans-serif);text-transform:uppercase;color:var(--black,#121212)}.ds-lineup__acts{margin:0;padding:0;list-style:none}.ds-lineup__acts li{position:absolute;left:6cqw;right:6cqw;top:var(--top);font:800 var(--size)/1.02 var(--font-display,'Big Shoulders Display',sans-serif);text-transform:uppercase}.ds-lineup__acts a{color:var(--black,#121212);text-decoration:none}.ds-lineup__acts a:hover{text-decoration:underline;text-decoration-thickness:.5cqw;text-underline-offset:.6cqw}.ds-lineup__acts a:focus-visible{outline:3px solid var(--black,#121212);outline-offset:3px}.ds-lineup__strip{position:absolute;left:0;right:0;bottom:0;height:max(11cqw,28px);padding-left:6cqw;font:800 max(4.6cqw,12px)/max(11cqw,28px) var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;background:var(--black,#121212);color:var(--yellow,#ffe414)}"
     },
     {
       "name": "Status Chips",
@@ -552,7 +547,7 @@
       "refersTo": "button-quiet",
       "description": "Send another: black capitals on yellow, after a message is sent.",
       "html": "<button class=\"ds-btn-quiet\" type=\"button\">Send another</button>",
-      "css": ".ds-btn-quiet{padding:1rem 1.5rem;font:800 1.12rem/1 var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.09em;text-transform:uppercase;color:var(--black,#121212);background:var(--yellow,#ffe414);border:0;border-radius:0;cursor:pointer;transition:background .2s,transform .1s}.ds-btn-quiet:hover{background:color-mix(in srgb,var(--yellow,#ffe414) 92%,var(--black,#121212))}.ds-btn-quiet:active{transform:translateY(1px)}.ds-btn-quiet:focus-visible{outline:3px solid var(--black,#121212);outline-offset:3px}"
+      "css": ".ds-btn-quiet{padding:1rem 1.5rem;font:800 1.12rem/1 var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.09em;text-transform:uppercase;color:var(--black,#121212);background:var(--yellow,#ffe414);border:0;border-radius:0;cursor:pointer;transition:background .2s,transform .1s}.ds-btn-quiet:hover{background:#f2d600}.ds-btn-quiet:active{transform:translateY(1px)}.ds-btn-quiet:focus-visible{outline:3px solid var(--black,#121212);outline-offset:3px}"
     },
     {
       "name": "Underline Field",
@@ -568,19 +563,20 @@
       "refersTo": "tear-tab",
       "description": "The contact flyer's foot: dashed perforated tabs; pressing one copies the email and tears it off (static under reduced motion).",
       "html": "<div class=\"ds-tabs\"><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button></div>",
-      "css": ".ds-tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:2px dashed var(--black,#121212);background:var(--paper,#f4f4ef)}.ds-tabs__tab{height:11.5rem;display:grid;place-items:center;padding:0;background:var(--paper,#f4f4ef);border:0;border-left:2px dashed var(--black,#121212);cursor:pointer;transform-origin:50% 0;transition:background .2s}.ds-tabs__tab:first-child{border-left:0}.ds-tabs__tab:hover{background:color-mix(in srgb,var(--paper,#f4f4ef) 78%,var(--yellow,#ffe414))}.ds-tabs__tab:focus-visible{outline:3px solid var(--black,#121212);outline-offset:3px}.ds-tabs__tab span{writing-mode:vertical-rl;transform:rotate(180deg);font:600 .92rem/1 var(--font-narrow,'Archivo Narrow',sans-serif);color:var(--black,#121212);white-space:nowrap}.ds-tabs__tab.ds-is-torn{pointer-events:none;animation:ds-tear .8s cubic-bezier(.16,1,.3,1) forwards}@keyframes ds-tear{0%{transform:none}25%{transform:translateY(.3rem) rotate(4deg)}100%{transform:translateY(9rem) rotate(16deg);opacity:0}}@media (prefers-reduced-motion:reduce){.ds-tabs__tab.ds-is-torn{animation:none;opacity:.25}}@media (max-width:559px){.ds-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}.ds-tabs__tab:nth-child(n+5){display:none}}"
+      "css": ".ds-tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:2px dashed var(--black,#121212);background:var(--paper,#f4f4ef)}.ds-tabs__tab{height:11.5rem;display:grid;place-items:center;padding:0;background:var(--paper,#f4f4ef);border:0;border-left:2px dashed var(--black,#121212);cursor:pointer;transform-origin:50% 0;transition:background .2s}.ds-tabs__tab:first-child{border-left:0}.ds-tabs__tab:hover{background:#fffbd1}.ds-tabs__tab:focus-visible{outline:3px solid var(--black,#121212);outline-offset:3px}.ds-tabs__tab span{writing-mode:vertical-rl;transform:rotate(180deg);font:600 .92rem/1 var(--font-narrow,'Archivo Narrow',sans-serif);color:var(--black,#121212);white-space:nowrap}.ds-tabs__tab.ds-is-torn{pointer-events:none;animation:ds-tear .8s cubic-bezier(.16,1,.3,1) forwards}@keyframes ds-tear{0%{transform:none}25%{transform:translateY(.3rem) rotate(4deg)}100%{transform:translateY(9rem) rotate(16deg);opacity:0}}@media (prefers-reduced-motion:reduce){.ds-tabs__tab.ds-is-torn{animation:none;opacity:.25}}@media (max-width:559px){.ds-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}.ds-tabs__tab:nth-child(n+5){display:none}}"
     }
   ],
   "narrative": {
     "northStar": "The Wheat-Paste Wall",
-    "overview": "Every project is a street poster announcing its release, wheat-pasted on one sidewalk-shed wall, newest on top; below the wall the same work is set straight on printed paper. The page has exactly two registers and never mixes them. The wall shouts: condensed wood type in black, paper white and three fluorescent inks, torn edges, paste crinkle and gloss, and, where WebGL runs, real lit paper whose corner lifts under the cursor to show the older bill pasted beneath. The paper reads: newsprint sheets with black rules, straight columns and printed status chips, holding everything the wall shouted in a calm order.\n\nEverything on the page is a physical material under one raking light from the top left. There is one ground: hunter-green painted plywood, built from a real CC0 photograph with seams, screw rows, paint runs and buffed-out graffiti. Bills and sheets are paper pasted onto it, never panels floating over it. The work itself, screenshots and in-game renders, prints unretouched; only the paper it is printed on wears. The interface recedes into the world: navigation is a black sniping strip, the contact form is a flyer with tear-off tabs, the footer is a stencil painted on the wall.\n\nThe first viewport holds every project at once: the headliner bill carries the name and a live-now strip, four image bills carry the lead projects with their honest status, a lineup bill ranks every other project by type size, and a flyer points to contact. On desktop the whole collage is fitted to the viewport; on phones the wall grows taller than the screen and the first screen holds the name and the complete lineup. The build folded the separate BattlePassTimer bill the direction planned into the lineup, where BattlePassTimer is the lead act.",
+    "overview": "Every project is a street poster announcing its release, wheat-pasted on one sidewalk-shed wall, newest on top; below the wall the same work is set straight on printed paper. The page has exactly two registers and never mixes them. The wall shouts: condensed wood type in black, paper white and three fluorescent inks, torn edges, paste crinkle and gloss, and, where WebGL runs, real lit paper whose corner lifts under the cursor and that a visitor can grab and tear off the wall to uncover the bill pasted beneath. The paper reads: newsprint sheets with black rules, straight columns and printed status chips, holding everything the wall shouted in a calm order, then the owner's papers, the résumé and the contact flyer.\n\nEverything on the page is a physical material under one raking light from the top left. There is one ground: hunter-green painted plywood, built from a real CC0 photograph with seams, screw rows, paint runs and buffed-out graffiti. Bills and sheets are paper pasted onto it, never panels floating over it. The work itself, screenshots and in-game renders, prints unretouched; only the paper it is printed on wears. The interface recedes into the world: navigation is a black sniping strip, the contact form is a flyer with tear-off tabs, the footer is a stencil painted on the wall.\n\nThe first viewport holds every project at once: the headliner bill carries the name and a live-now strip, four image bills carry the lead projects with their honest status, a lineup bill ranks every other project by type size, and a flyer points to contact. On desktop the whole collage is fitted to the viewport; on phones the wall grows taller than the screen and the first screen holds the name and the complete lineup. The build folded the separate BattlePassTimer bill the direction planned into the lineup, where BattlePassTimer is the lead act.",
     "keyCharacteristics": [
       "One painted-plywood ground for the whole page; paper is pasted on it, never a second theme.",
       "Two registers: a loud paste-up wall and a calm printed program, each with its own type scale.",
       "Condensed wood type sized to fill its bill; lineup acts ranked by size like a concert bill.",
       "Black, paper white and three fluorescent inks; every status is written in words.",
       "Torn masks, paste crinkle, newsprint fibre and green-black shadows from one top-left light.",
-      "A WebGL paper twin for every bill that only paints; the HTML bill stays the link, the focus target and the text.",
+      "A WebGL paper twin for every bill that only paints; the HTML bill stays the link, the focus target and the text, and follows whichever bill is showing.",
+      "Stacks of real bills: peel one off and the next is underneath.",
       "Real screenshots and renders, unretouched, each carrying its provenance."
     ],
     "rules": [
@@ -631,7 +627,8 @@
       },
       {
         "name": "The Mark Rule",
-        "body": "Use the owner's InceptumRex logo as supplied: the emblem alone where it must be small (the strip, the icons), the full lockup only on a light paper ground and wide enough to read (the footer label). Never recolour, redraw or re-letter it, and never bring its cyan into the interface."
+        "body": "Use the logo as supplied: the emblem alone where it must be small (the strip, the icons), the full lockup only on a light paper ground and wide enough to read (the footer label). Never recolour, redraw, outline or re-letter it, and never pull its cyan into the interface. At 16px the emblem's ring and pins blur; a simplified small-size drawing would be the owner's call.",
+        "section": "components"
       }
     ],
     "dos": [
@@ -644,7 +641,8 @@
       "Do cast every shadow down and to the right in green-black from the one top-left light, in CSS and WebGL alike.",
       "Do keep every focus ring in contrast with the surface it lands on: yellow on the wall and the strip, black on paper and newsprint, pink around fields.",
       "Do print screenshots and renders unretouched and caption what is simulated or rendered.",
-      "Do give every shipping raster an ORIGIN record: a `.json` sidecar for WebP, embedded metadata for JPEG and PNG."
+      "Do give every shipping raster an ORIGIN record: a `.json` sidecar for WebP, embedded metadata for JPEG and PNG.",
+      "Do give every image bill a stack of real bills whose facts are also in print, and keep the last bill of a stack pasted for good."
     ],
     "donts": [
       "Don't set the work in a card grid, a dark hero or a logo wall; work lives on the wall as bills and on paper as entries.",
@@ -661,6 +659,7 @@
       "Don't tint, duotone or filter a screenshot, and don't ship a raster without its ORIGIN record.",
       "Don't set readable text on the wall in anything dimmer than Stencil White, or shrink a lineup act below 4.8cqw; the grain eats contrast and 4.8cqw is the legibility floor.",
       "Don't split a bill into several small links; one bill is one target.",
+      "Don't let a pull follow a link, or take vertical swipes on the wall away from the page.",
       "Don't recolour or redraw the InceptumRex logo, or bring its cyan into the interface.",
       "Don't put the personal email or phone from the résumé PDFs on the page; the site's public channels are the only contact.",
       "Don't let the résumé paste-up hide the sheet when it cannot reveal it: no three.js, reduced motion, Save-Data, a jump to #about or print all show the sheet as is."

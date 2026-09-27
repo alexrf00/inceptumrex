@@ -11,7 +11,6 @@
   --wall: #355e3b;
   --wall-deep: #2b4d31;
   --wall-ink: #eef1e8;
-  --wall-dim: #cfd8cc;
 
   --black: #121212;
   --paper: #f4f4ef;
@@ -447,6 +446,57 @@ body {
   z-index: 20;
 }
 
+/* Peeling. With the WebGL paper the bills are paper to grab, not text to
+   select; image bills leave vertical swipes to the page and take sideways ones
+   as a peel, so a phone can pull a bill off without trapping the scroll. */
+.wall[data-gl="ready"] .poster {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.wall[data-gl="ready"] .poster--image {
+  touch-action: pan-y pinch-zoom;
+}
+.wall[data-grab] .poster--image {
+  cursor: grab;
+}
+.wall[data-peeling],
+.wall[data-peeling] * {
+  cursor: grabbing;
+}
+
+/* The re-paste tag: a scrap of black sniping strip pasted low on the wall,
+   shown once a bill has been torn off. */
+.wall__repaste {
+  position: absolute;
+  left: clamp(1rem, 4vw, 3rem);
+  bottom: 0.8rem;
+  z-index: 21;
+  min-height: 2.75rem;
+  padding: 0.8rem 1.1rem 0.75rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--black);
+  color: var(--yellow);
+  font: 800 0.95rem/1 var(--font-display);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-1.4deg);
+  filter: drop-shadow(0.3rem 0.5rem 0.45rem rgb(6 16 10 / 0.45));
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.wall__repaste:hover {
+  background: color-mix(in srgb, var(--black) 86%, var(--paper));
+}
+.wall__repaste:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+}
+.wall__repaste[hidden] {
+  display: none;
+}
+
 /* Portrait tablets and narrow windows: a square stage. The name and the lineup
    across the top, the flyer pasted over the lineup's bare side, the four image
    bills staggered below with torn remnants of older bills between them. */
@@ -579,6 +629,58 @@ body {
   margin-top: 0.7rem;
   font: 500 0.9rem/1.45 var(--font-body);
   color: var(--sheet-dim);
+}
+
+/* Papers: set like program entries, with the paper's kind above its name and
+   its findings numbered in wood type. */
+.entry--paper {
+  /* The paper page's own tokens, for its figure on this sheet. */
+  --pp-ink: #2b2b27;
+  --pp-mono: ui-monospace, "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+}
+.entry--paper .entry__media {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  margin: 0;
+}
+.entry--paper:not(:has(.entry__media)) .entry__text {
+  grid-column: 1 / -1;
+}
+.paper-entry__kind {
+  margin-bottom: 0.7rem;
+  font: 700 0.78rem/1.3 var(--font-narrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sheet-dim);
+}
+.paper-entry__head {
+  margin-top: 1.5rem;
+  font: 700 0.78rem/1.3 var(--font-narrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sheet-ink);
+}
+.paper-entry__findings {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 60ch;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: finding;
+}
+.paper-entry__findings li {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  counter-increment: finding;
+  font: 400 1.0625rem/1.6 var(--font-body);
+  color: #2b2b27;
+}
+.paper-entry__findings li::before {
+  content: counter(finding);
+  font: 900 1.3rem/1.25 var(--font-display);
+  color: var(--sheet-ink);
 }
 
 .entry__text {
@@ -1110,6 +1212,17 @@ body {
   }
   .tabs__tab:nth-child(n + 5) {
     display: none;
+  }
+}
+
+/* Four destinations need the whole strip on a phone: the emblem stays and the
+   wordmark steps aside (the link's accessible name still carries it). */
+@media (max-width: 479px) {
+  .strip__mark span {
+    display: none;
+  }
+  .strip__nav {
+    gap: 0.95rem;
   }
 }
 

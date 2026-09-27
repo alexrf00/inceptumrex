@@ -75,12 +75,12 @@ export const featured: Project[] = [
     id: "fiscalia",
     layout: "row",
     name: "Fiscalia",
-    kind: "Product",
+    kind: "ERP",
     years: "2025 to now",
     status: { label: "Live site", tone: "pink", note: "pre-revenue" },
-    line: "Electronic invoicing for Dominican businesses, built to the DGII's rules.",
+    line: "An ERP for Dominican businesses, built around DGII electronic invoicing.",
     body:
-      "Fiscalia issues all ten e-CF document types. Each invoice is built, checked against the DGII's official schemas and business rules, signed and sent, and the customer gets a printable invoice with its QR and security code. Around that fiscal core sit the tools a small business runs on: point of sale with cash shifts, inventory with lot expiry, recurring billing, 606 and 609 report files and payroll.",
+      "Fiscalia runs a small business from one place: point of sale with cash shifts, invoices, credit and debit notes, inventory by branch with lot expiry, purchases and expenses, recurring billing, payroll with TSS and IR-3, and the DGII's 606 and 609 report files. At its core it issues all ten e-CF document types: each invoice is built, checked against the DGII's official schemas and business rules, signed and sent, and the customer gets a printable invoice with its QR and security code.",
     detail:
       "The DGII certified my own taxpayer registration as an electronic invoicer using Fiscalia, on May 3, 2026 and again on a fresh production account on September 11. Three services back it: a Spring Boot system of record, a stateless bridge that signs with XMLDSig and talks to the DGII, and a Next.js front end, with 9,361 automated tests between them.",
     role: "Solo founder-engineer",
