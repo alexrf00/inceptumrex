@@ -1,125 +1,1124 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* ---------------------------------------------------------------------------
+   InceptumRex: a sidewalk-shed wall of wheat-pasted posters, with the work set
+   straight on paper below it. One ground (the painted plywood) for the whole
+   page; paper sheets are pasted on it, never a second theme.
+   ------------------------------------------------------------------------ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-}
-
+/* Paint and paper. The wall is NYC sidewalk-shed hunter green (#355E3B). */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --wall: #355e3b;
+  --wall-deep: #2b4d31;
+  --wall-ink: #eef1e8;
+  --wall-dim: #cfd8cc;
+
+  --black: #121212;
+  --paper: #f4f4ef;
+  --sheet: #efefe9;
+  --sheet-ink: #161614;
+  --sheet-dim: #4a4a44;
+  --rule: #161614;
+
+  --pink: #ff2d87;
+  --yellow: #ffe414;
+  --orange: #ff6a1f;
+  --alarm: #a0001e;
+
+  --strip-h: 3.5rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --sheet-shadow: 0.5rem 0.9rem 2.2rem rgb(5 14 8 / 0.5), 0 2px 4px rgb(5 14 8 / 0.45);
+
+  --fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.4 0 0 0 0 0.36 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  /* A torn paper edge as a mask, and paste crinkle as neutral soft-light relief. */
+  --torn: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cfilter id='t' x='-5%25' y='-5%25' width='110%25' height='110%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.09' numOctaves='2' seed='4' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='5' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3Crect x='3' y='3' width='394' height='394' fill='%23000' filter='url(%23t)'/%3E%3C/svg%3E");
+  --torn-hard: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' preserveAspectRatio='none'%3E%3Cfilter id='t' x='-10%25' y='-10%25' width='120%25' height='120%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.035' numOctaves='3' seed='8' result='n'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='n' scale='34' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3Crect x='16' y='16' width='368' height='368' fill='%23000' filter='url(%23t)'/%3E%3C/svg%3E");
+  --crinkle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.045' numOctaves='3' seed='9' result='n'/%3E%3CfeDiffuseLighting in='n' lighting-color='%23fff' surfaceScale='1.4'%3E%3CfeDistantLight azimuth='225' elevation='60'/%3E%3C/feDiffuseLighting%3E%3CfeColorMatrix values='0.58 0 0 0 0 0 0.58 0 0 0 0 0 0.58 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)'/%3E%3C/svg%3E");
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: var(--yellow) var(--wall-deep);
+  background: var(--wall-deep);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
+body {
+  min-height: 100svh;
+  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--wall-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Painted plywood sheets (a real CC0 photograph, see scripts/make-plywood.py)
+     under a raking light from the top left. */
+  background:
+    radial-gradient(110vw 70vh at 8% -5%, color-mix(in srgb, var(--paper) 8%, transparent), transparent 62%),
+    url("/wall/wear.webp") 310px 170px / 1700px 1150px repeat,
+    url("/wall/plywood.webp") 0 0 / 1200px 800px repeat,
+    var(--wall);
+}
+
+::selection {
+  background: var(--pink);
+  color: var(--black);
+}
+
+:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--strip-h) + 1rem);
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 40;
+  padding: 0.7rem 1rem;
+  background: var(--yellow);
+  color: var(--black);
+  font: 800 1rem/1 var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.skip:focus {
+  top: 0.75rem;
+}
+
+/* --- Sniping strip (navigation) ----------------------------------------- */
+
+.strip {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  height: var(--strip-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 clamp(1rem, 3vw, 2.5rem);
+  background: var(--black);
+  box-shadow: 0 0.35rem 1rem rgb(5 14 8 / 0.45);
+}
+.strip__mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font: 800 1.4rem/1 var(--font-stencil);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-decoration: none;
+}
+.strip__emblem {
+  display: block;
+  width: 2.125rem;
+  height: 2.125rem;
+  flex: none;
+}
+.strip__nav {
+  display: flex;
+  gap: clamp(1.1rem, 3vw, 2.5rem);
+}
+.strip__nav a {
+  display: inline-block;
+  padding: 0.6rem 0.1rem;
+  font: 800 1.05rem/1 var(--font-display);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.strip__nav a:hover {
+  color: var(--paper);
+}
+
+/* --- The wall ------------------------------------------------------------ */
+
+.wall {
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100svh - var(--strip-h));
+  padding: clamp(0.9rem, 2vw, 1.5rem) clamp(0.75rem, 1.6vw, 1.5rem) 3rem;
+  overflow: hidden;
+}
+
+.wall__gl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 12;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.wall__stencil {
+  position: absolute;
+  right: clamp(1rem, 4vw, 3rem);
+  bottom: 0.6rem;
+  font: 800 clamp(1.8rem, 3.6vw, 3.2rem)/1 var(--font-stencil);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--wall-ink) 20%, transparent);
+  pointer-events: none;
+}
+
+/* Collage on a fixed-aspect stage that fits the viewport. */
+.wall__stage {
+  position: relative;
+  margin: 0 auto;
+  width: min(1520px, 100%, calc((100svh - var(--strip-h) - 4.25rem) * 1.62));
+  aspect-ratio: 1.62;
+}
+
+/* A bill: the outer box holds place, rotation and shadow; the paper inside is
+   torn at the edge and carries colour and content. */
+.poster {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  aspect-ratio: var(--ar);
+  z-index: var(--z);
+  transform: rotate(var(--rot));
+  /* size, not inline-size: the flyer's tab text also reads the poster height. */
+  container-type: size;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  filter: drop-shadow(0.3rem 0.5rem 0.45rem rgb(6 16 10 / 0.45));
+}
+.poster:focus-visible {
+  outline: 4px solid var(--yellow);
+  outline-offset: 6px;
+}
+.poster__paper {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  background: var(--bg);
+  -webkit-mask: var(--torn) 0 0 / 100% 100% no-repeat;
+  mask: var(--torn) 0 0 / 100% 100% no-repeat;
+}
+.poster__paper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--crinkle) 0 0 / 260px 260px;
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
+}
+.poster--remnant .poster__paper {
+  -webkit-mask-image: var(--torn-hard);
+  mask-image: var(--torn-hard);
+}
+
+/* Newest on top. Each bill overlaps its neighbour only where that neighbour is
+   bare paper, never over a title, a strip or a screenshot. Positions are % of
+   the stage: x and w of its width, y of its height. */
+[data-poster="headliner"]      { --x: 0.6%;  --y: 0.8%;  --w: 41.5%; --ar: 1.22; --rot: -1.1deg; --z: 8; }
+[data-poster="big-party"]      { --x: 41.4%; --y: 0.3%;  --w: 30.2%; --ar: 1.02; --rot: 1.4deg;  --z: 10; }
+[data-poster="fiscalia"]       { --x: 72.1%; --y: 3%;    --w: 28.9%; --ar: 0.9;  --rot: -1.9deg; --z: 3; }
+[data-poster="luzrd"]          { --x: 42%;   --y: 47.8%;   --w: 27.5%; --ar: 1.05; --rot: 0.8deg;  --z: 6; }
+[data-poster="fixion"]         { --x: 69.4%; --y: 56.2%; --w: 26.5%; --ar: 1;    --rot: -1.3deg; --z: 7; }
+[data-poster="lineup"]         { --x: 1.6%;  --y: 57.6%; --w: 26.5%; --ar: 1;    --rot: 0.8deg;  --z: 5; }
+[data-poster="flyer"]          { --x: 27.4%; --y: 64%;   --w: 12.6%; --ar: 0.5;  --rot: 2.6deg;  --z: 9; }
+[data-poster="rem-asepre"]     { --x: 29.5%; --y: 57.5%; --w: 12%;   --ar: 1.6;  --rot: -3deg;   --z: 1; }
+[data-poster="rem-brolick"]    { --x: 93.6%; --y: 60%;   --w: 8%;    --ar: 0.55; --rot: 3deg;    --z: 1; }
+[data-poster="rem-bxgoatdrip"] { --x: 47%;   --y: 86%;   --w: 18%;   --ar: 2.2;  --rot: -1.5deg; --z: 1; }
+
+/* Poster anatomy, all in cqw of the poster's own width (see posters.ts). */
+.poster__name {
+  margin: 0;
+}
+.poster__name span {
+  position: absolute;
+  left: 6cqw;
+  top: var(--top);
+  font: 900 var(--size)/0.86 var(--font-display);
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.poster__blurb {
+  position: absolute;
+  left: 6cqw;
+  top: var(--top);
+  width: 84cqw;
+  margin: 0;
+  font: 600 max(4.6cqw, 13px)/1.28 var(--font-narrow);
+  color: var(--paper);
+}
+.poster__strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: max(11cqw, 28px);
+  margin: 0;
+  padding-left: 6cqw;
+  font: 800 max(4.6cqw, 12px) / max(11cqw, 28px) var(--font-display);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.strip__short {
+  display: none;
+}
+.poster__img {
+  position: absolute;
+  left: var(--inset);
+  top: var(--inset);
+  width: calc(100cqw - 2 * var(--inset));
+  height: var(--img-h);
+  overflow: hidden;
+}
+.poster__img--frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 0.4cqw solid var(--black);
+}
+.poster__logo {
+  position: absolute;
+  left: 50%;
+  top: var(--logo-top);
+  width: var(--logo-w);
+  aspect-ratio: 1280 / 370;
+  transform: translateX(-50%);
+}
+.poster__title {
+  position: absolute;
+  left: 6cqw;
+  top: var(--top);
+  font: 900 var(--size)/0.92 var(--font-display);
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+.poster__sub {
+  position: absolute;
+  left: 6cqw;
+  top: var(--top);
+  font: 600 max(4.6cqw, 12px)/1.2 var(--font-narrow);
+  white-space: nowrap;
+}
+.poster__heading {
+  position: absolute;
+  left: 6cqw;
+  top: 6cqw;
+  margin: 0;
+  font: 900 9cqw/1 var(--font-display);
+  text-transform: uppercase;
+  color: var(--black);
+}
+.poster__act {
+  position: absolute;
+  left: 6cqw;
+  top: var(--top);
+  font: 800 var(--size)/1.02 var(--font-display);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--black);
+}
+.poster__flyer-title {
+  position: absolute;
+  left: 8cqw;
+  top: 8cqw;
+  font: 900 var(--size)/0.9 var(--font-display);
+  text-transform: uppercase;
+  color: var(--black);
+}
+.poster__flyer-title span {
+  display: block;
+}
+.poster__tabs {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  display: flex;
+  border-top: 0.35cqw dashed var(--black);
+}
+.poster__tabs span {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-left: 0.35cqw dashed var(--black);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  font: 600 min(7cqw, 4cqh)/1 var(--font-narrow);
+  color: var(--black);
+}
+.poster__tabs span:last-child {
+  border-left: 0;
+}
+.remnant__name {
+  position: absolute;
+  left: 6cqw;
+  top: 8cqw;
+  font: 900 var(--size)/0.9 var(--font-display);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.remnant__line {
+  position: absolute;
+  left: 6cqw;
+  top: var(--top);
+  font: 600 8cqw/1.2 var(--font-narrow);
+  white-space: nowrap;
+}
+
+/* Compact bills (under 230 px wide): picture, name and a short status. */
+@container (max-width: 229px) {
+  .poster__img {
+    left: 0;
+    top: 0;
+    width: 100cqw;
+    height: var(--c-img-h);
   }
-  body {
-    @apply bg-background text-foreground;
+  .poster__title {
+    top: var(--c-top);
+    font-size: var(--c-size);
   }
-  h1 {
-    @apply text-5xl;
+  .poster__logo {
+    top: var(--c-logo-top);
+    width: var(--c-logo-w);
+  }
+  .poster__sub,
+  .strip__long {
+    display: none;
+  }
+  .strip__short {
+    display: inline;
+  }
+  .poster__strip {
+    height: max(11cqw, 24px);
+    font-size: max(5cqw, 11px);
+    line-height: max(11cqw, 24px);
+  }
+}
+
+/* The paste-up: each bill slaps onto the wall in order, then sits still. */
+@media (prefers-reduced-motion: no-preference) {
+  .poster {
+    animation: paste 0.62s var(--ease-out) both;
+    animation-delay: calc(var(--i) * 85ms + 100ms);
+  }
+  @keyframes paste {
+    from {
+      opacity: 0;
+      transform: rotate(calc(var(--rot) + 3deg)) translateY(-0.8rem) scale(1.045);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(var(--rot));
+    }
+  }
+}
+
+/* When the three.js paper has taken over, the HTML bills stay as links, focus
+   targets and readable text, but stop painting. Opacity, not visibility, so
+   the headline and links stay in the accessibility tree and the tab order. */
+.wall[data-gl="ready"] .wall__gl {
+  opacity: 1;
+}
+.wall[data-gl="ready"] .poster {
+  animation: none;
+  filter: none;
+  transition: filter 0s linear 0.3s;
+}
+.wall[data-gl="ready"] .poster > .poster__paper {
+  opacity: 0;
+  transition: opacity 0s linear 0.3s;
+}
+.wall[data-gl="ready"] .poster:focus-visible,
+.wall[data-gl="ready"] .poster:focus-within {
+  z-index: 20;
+}
+
+/* Portrait tablets and narrow windows: a square stage. The name and the lineup
+   across the top, the flyer pasted over the lineup's bare side, the four image
+   bills staggered below with torn remnants of older bills between them. */
+@media (min-width: 700px) and (orientation: portrait), (min-width: 700px) and (max-width: 899px), (min-width: 700px) and (max-height: 559px) {
+  .wall__stage {
+    width: max(min(100%, 1000px, calc(100svh - var(--strip-h) - 4rem)), min(100%, 640px));
+    aspect-ratio: 1;
+  }
+  [data-poster="headliner"]      { --x: 0.8%;  --y: 0.8%;  --w: 58%;   --ar: 1.2;  --rot: -0.9deg; --z: 8; }
+  [data-poster="lineup"]         { --x: 57.4%; --y: 2.2%;  --w: 41.8%; --ar: 1;    --rot: 1.1deg;  --z: 6; }
+  [data-poster="flyer"]          { --x: 85.6%; --y: 12%;   --w: 15.6%; --ar: 0.52; --rot: 2.2deg;  --z: 7; }
+  [data-poster="big-party"]      { --x: 0.8%;  --y: 51.6%; --w: 36%;   --ar: 1;    --rot: 1.2deg;  --z: 7; }
+  [data-poster="fixion"]         { --x: 38.4%; --y: 58.6%; --w: 25.6%; --ar: 0.95; --rot: -1.1deg; --z: 9; }
+  [data-poster="fiscalia"]       { --x: 65%;   --y: 45.6%; --w: 26%;   --ar: 0.95; --rot: -1.5deg; --z: 5; }
+  [data-poster="luzrd"]          { --x: 65.4%; --y: 73.4%; --w: 27%;   --ar: 1.05; --rot: 1deg;    --z: 6; }
+  [data-poster="rem-asepre"]     { --x: 39%;   --y: 49.6%; --w: 20%;   --ar: 1.6;  --rot: -3deg;   --z: 1; }
+  [data-poster="rem-brolick"]    { --x: 92.4%; --y: 56%;   --w: 7.4%;  --ar: 0.55; --rot: 3deg;    --z: 1; }
+  [data-poster="rem-bxgoatdrip"] { --x: 6%;    --y: 88.6%; --w: 30%;   --ar: 2.6;  --rot: -1.5deg; --z: 1; }
+}
+
+/* Phones: the name, the full lineup directly under it, then the four image
+   bills staggered, Fixion pasted over the bare end of Big Party's strip, and
+   torn remnants of older bills peeking out. The stage is taller than the
+   screen; the first screen holds the name and every project on the lineup. */
+@media (max-width: 699px) {
+  .wall__stage {
+    width: 100%;
+    aspect-ratio: 0.32;
+  }
+  [data-poster="headliner"]      { --x: 0%;    --y: 0%;    --w: 100%;  --ar: 1.17; --rot: -0.7deg; --z: 8; }
+  [data-poster="lineup"]         { --x: 1.5%;  --y: 27.6%; --w: 97%;   --ar: 1;    --rot: 0.9deg;  --z: 6; }
+  [data-poster="big-party"]      { --x: 0.5%;  --y: 59.8%; --w: 56%;   --ar: 0.95; --rot: 1.2deg;  --z: 7; }
+  [data-poster="fiscalia"]       { --x: 58.5%; --y: 60.8%; --w: 41%;   --ar: 0.92; --rot: -1.5deg; --z: 5; }
+  [data-poster="fixion"]         { --x: 45%;   --y: 76.4%; --w: 55%;   --ar: 0.95; --rot: -1deg;   --z: 9; }
+  [data-poster="luzrd"]          { --x: 1%;    --y: 80%;   --w: 43%;   --ar: 1;    --rot: 1deg;    --z: 6; }
+  [data-poster="rem-asepre"]     { --x: 64%;   --y: 57.6%; --w: 34%;   --ar: 1.6;  --rot: -3deg;   --z: 1; }
+  [data-poster="rem-bxgoatdrip"] { --x: 10%;   --y: 93.2%; --w: 42%;   --ar: 2.4;  --rot: -1.5deg; --z: 1; }
+  [data-poster="flyer"],
+  [data-poster="rem-brolick"] {
+    display: none;
+  }
+}
+
+/* --- Paper ------------------------------------------------------------------ */
+
+.paper {
+  display: grid;
+  gap: clamp(3.5rem, 7vw, 7rem);
+  padding: clamp(2.5rem, 6vw, 5.5rem) clamp(0.75rem, 3vw, 3rem) clamp(4rem, 8vw, 7rem);
+}
+
+.sheet {
+  position: relative;
+  width: 100%;
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4.5vw, 4.5rem);
+  background: var(--fibre), var(--sheet);
+  color: var(--sheet-ink);
+  box-shadow: var(--sheet-shadow);
+}
+.sheet :focus-visible {
+  outline-color: var(--black);
+}
+
+.sheet__head {
+  padding-bottom: 1.25rem;
+  border-bottom: 0.35rem solid var(--rule);
+}
+.sheet__title {
+  font: 900 clamp(3rem, 8.5vw, 6.5rem)/0.88 var(--font-display);
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.sheet__lede {
+  max-width: 60ch;
+  margin-top: 1rem;
+  font: 500 1.15rem/1.55 var(--font-body);
+  color: var(--sheet-dim);
+}
+
+/* Program entries */
+.entry {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 1.75rem clamp(1.75rem, 4vw, 3.5rem);
+  padding-block: clamp(2.25rem, 4.5vw, 3.75rem);
+  border-top: 1px solid var(--rule);
+}
+.sheet__head + .entry {
+  border-top: 0;
+}
+/* row: pictures | text, then the facts as one full-width row under both. */
+.entry--row .entry__media { grid-column: 1; grid-row: 1; }
+.entry--row .entry__text  { grid-column: 2; grid-row: 1; }
+.entry--row .entry__facts {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* side: the pictures run long, so the facts hang under the text. */
+.entry--side .entry__media { grid-column: 1; grid-row: 1 / span 2; }
+.entry--side .entry__text  { grid-column: 2; grid-row: 1; }
+.entry--side .entry__facts { grid-column: 2; grid-row: 2; }
+
+/* wide: pictures across the sheet, text and facts side by side below. */
+.entry--wide .entry__media { grid-column: 1 / -1; grid-row: 1; }
+.entry--wide .entry__text  { grid-column: 1; grid-row: 2; }
+.entry--wide .entry__facts { grid-column: 2; grid-row: 2; align-self: start; }
+
+.entry__main,
+.entry__thumb {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background: #d6d6ce;
+  box-shadow: 0 0 0 1px var(--rule);
+}
+.entry__thumbs {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+.entry__thumb {
+  aspect-ratio: 16 / 9;
+}
+.entry__caption {
+  margin-top: 0.7rem;
+  font: 500 0.9rem/1.45 var(--font-body);
+  color: var(--sheet-dim);
+}
+
+.entry__text {
+  container-type: inline-size;
+}
+.entry__name {
+  /* Long single words (BattlePassTimer) shrink to their column. */
+  font: 900 min(clamp(2.7rem, 5.2vw, 4.4rem), calc(185cqi / var(--len, 8)))/0.9 var(--font-display);
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+}
+.entry__line {
+  max-width: 42ch;
+  margin-top: 0.8rem;
+  font: 600 1.25rem/1.4 var(--font-body);
+}
+.entry__body {
+  max-width: 64ch;
+  margin-top: 0.95rem;
+  font: 400 1.0625rem/1.65 var(--font-body);
+  color: #2b2b27;
+}
+.entry__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.4rem;
+}
+.entry__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0;
+  font: 700 0.98rem/1 var(--font-narrow);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sheet-ink);
+  text-decoration: none;
+  border-bottom: 0.2rem solid var(--pink);
+  transition: border-color 0.2s, color 0.2s;
+}
+.entry__links a:hover {
+  border-bottom-color: var(--sheet-ink);
+}
+.entry__links svg {
+  width: 1em;
+  height: 1em;
+}
+
+.entry__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem 1.5rem;
+  align-content: start;
+  padding-top: 1.1rem;
+  border-top: 2px solid var(--rule);
+}
+.entry__facts dt {
+  font: 700 0.78rem/1.3 var(--font-narrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sheet-dim);
+}
+.entry__facts dd {
+  margin-top: 0.3rem;
+  font: 500 0.98rem/1.45 var(--font-body);
+}
+.entry__note {
+  display: block;
+  margin-top: 0.4rem;
+  font: 500 0.9rem/1.35 var(--font-body);
+  color: var(--sheet-dim);
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.4rem 0.55rem 0.35rem;
+  font: 800 0.88rem/1 var(--font-display);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.chip--yellow { background: var(--yellow); }
+.chip--pink { background: var(--pink); }
+.chip--orange { background: var(--orange); }
+.chip--paper { box-shadow: inset 0 0 0 2px var(--black); }
+
+/* Minor projects */
+.minor {
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  padding-top: 1.75rem;
+  border-top: 0.35rem solid var(--rule);
+}
+.minor__title {
+  font: 900 clamp(2.2rem, 4.5vw, 3.4rem)/0.9 var(--font-display);
+  text-transform: uppercase;
+}
+.minor__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.25rem clamp(2rem, 4vw, 3.5rem);
+  margin-top: 2rem;
+}
+.minor__name {
+  font: 800 1.85rem/1 var(--font-display);
+  text-transform: uppercase;
+}
+.minor__line {
+  max-width: 54ch;
+  margin-top: 0.5rem;
+  font: 400 1rem/1.6 var(--font-body);
+  color: #2b2b27;
+}
+.minor__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.8rem;
+  margin-top: 0.75rem;
+  font: 500 0.92rem/1.3 var(--font-body);
+  color: var(--sheet-dim);
+}
+
+/* Résumé. The stage lets the three.js roll hang past the sheet it reveals. */
+.resume-stage {
+  position: relative;
+}
+.resume-roll {
+  position: absolute;
+  left: 0;
+  top: -48px;
+  display: block;
+  width: 100%;
+  height: calc(100% + 96px);
+  pointer-events: none;
+  z-index: 3;
+}
+.resume {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+.resume__side {
+  position: sticky;
+  top: calc(var(--strip-h) + 2rem);
+}
+.resume__photo {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #d6d6ce;
+  box-shadow: 0 0 0 1px var(--rule);
+}
+.resume__links {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+}
+.resume__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0;
+  font: 600 1rem/1.2 var(--font-body);
+  color: var(--sheet-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--pink);
+  text-decoration-thickness: 0.15rem;
+  text-underline-offset: 0.3em;
+  overflow-wrap: anywhere;
+}
+.resume__links svg {
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+}
+.resume__role {
+  margin-top: 0.9rem;
+  font: 600 1.25rem/1.4 var(--font-body);
+}
+.resume__bio {
+  max-width: 62ch;
+  margin-top: 1rem;
+  font: 400 1.0625rem/1.65 var(--font-body);
+  color: #2b2b27;
+}
+.resume__head {
+  margin-top: 2.5rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 2px solid var(--rule);
+  font: 800 1.55rem/1 var(--font-display);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.resume__rows > li {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 1.25rem;
+  padding-top: 1rem;
+}
+.resume__when {
+  font: 600 0.95rem/1.5 var(--font-narrow);
+  color: var(--sheet-dim);
+  font-variant-numeric: tabular-nums;
+}
+.resume__what {
+  font: 400 1.02rem/1.5 var(--font-body);
+}
+.resume__place,
+.resume__by {
+  color: var(--sheet-dim);
+}
+.resume__points {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+.resume__points li {
+  position: relative;
+  max-width: 64ch;
+  padding-left: 1.1rem;
+  font: 400 0.98rem/1.55 var(--font-body);
+  color: #2b2b27;
+}
+/* A short printed rule as the bullet. */
+.resume__points li::before {
+  content: "";
+  position: absolute;
+  left: 0.1rem;
+  top: 0.75em;
+  width: 0.45rem;
+  height: 2px;
+  background: var(--rule);
+}
+.resume__skills {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+.resume__skills > div {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 1.25rem;
+}
+.resume__skills dt {
+  padding-top: 0.12rem;
+  font: 700 0.85rem/1.5 var(--font-narrow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sheet-dim);
+}
+.resume__skills dd {
+  font: 400 1rem/1.55 var(--font-body);
+  color: #2b2b27;
+}
+.resume__lang {
+  margin-top: 1rem;
+  font: 400 1.02rem/1.5 var(--font-body);
+}
+
+/* Contact flyer */
+.contact {
+  display: grid;
+  justify-items: center;
+}
+.flyer {
+  position: relative;
+  width: min(100%, 48rem);
+  padding: clamp(1.6rem, 4.5vw, 3.25rem) clamp(1.4rem, 4.5vw, 3.25rem) 0;
+  background: var(--fibre), var(--paper);
+  color: var(--black);
+  box-shadow: var(--sheet-shadow);
+  transform: rotate(-0.6deg);
+}
+.flyer :focus-visible {
+  outline-color: var(--black);
+}
+.flyer__title {
+  font: 900 clamp(3.4rem, 10vw, 6.4rem)/0.86 var(--font-display);
+  text-transform: uppercase;
+}
+.flyer__line {
+  margin-top: 0.9rem;
+  font: 600 1.25rem/1.4 var(--font-narrow);
+}
+.flyer__form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem 1.4rem;
+  margin-top: 2rem;
+}
+.field {
+  display: grid;
+  gap: 0.45rem;
+  align-content: start;
+}
+.field--wide {
+  grid-column: 1 / -1;
+}
+.field label {
+  font: 700 0.85rem/1.2 var(--font-narrow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.field__opt {
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--sheet-dim);
+  font-weight: 600;
+}
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.55rem 0.1rem;
+  font: 500 1.08rem/1.4 var(--font-body);
+  color: var(--black);
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid var(--black);
+  border-radius: 0;
+  caret-color: var(--pink);
+}
+.field textarea {
+  padding: 0.7rem 0.8rem;
+  border: 2px solid var(--black);
+  resize: vertical;
+}
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 2px;
+}
+.field input:user-invalid,
+.field textarea:user-invalid {
+  border-color: var(--alarm);
+}
+.flyer__error {
+  grid-column: 1 / -1;
+  font: 600 1rem/1.5 var(--font-body);
+  color: var(--alarm);
+}
+.flyer__button {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding: 1rem 1.5rem;
+  font: 800 1.12rem/1 var(--font-display);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  background: var(--black);
+  border: 0;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.flyer__button:hover {
+  background: #2c2c29;
+}
+.flyer__button:active {
+  transform: translateY(1px);
+}
+.flyer__button:disabled {
+  cursor: progress;
+  opacity: 0.65;
+}
+.flyer__button--quiet {
+  color: var(--black);
+  background: var(--yellow);
+}
+.flyer__button--quiet:hover {
+  background: color-mix(in srgb, var(--yellow) 92%, var(--black));
+}
+.flyer__done {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: start;
+  margin-top: 2rem;
+  font: 500 1.08rem/1.5 var(--font-body);
+}
+.flyer__done-title {
+  font: 900 2.6rem/1 var(--font-display);
+  text-transform: uppercase;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 2.25rem calc(-1 * clamp(1.4rem, 4.5vw, 3.25rem)) 0;
+  border-top: 2px dashed var(--black);
+}
+.tabs__tab {
+  height: 11.5rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: var(--paper);
+  border: 0;
+  border-left: 2px dashed var(--black);
+  cursor: pointer;
+  transform-origin: 50% 0;
+  transition: background 0.2s;
+}
+.tabs__tab:first-child {
+  border-left: 0;
+}
+.tabs__tab:hover {
+  background: color-mix(in srgb, var(--paper) 78%, var(--yellow));
+}
+.tabs__tab span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font: 600 0.92rem/1 var(--font-narrow);
+  color: var(--black);
+  white-space: nowrap;
+}
+.tabs__tab.is-torn {
+  pointer-events: none;
+  animation: tear 0.8s var(--ease-out) forwards;
+}
+@keyframes tear {
+  0% { transform: none; }
+  25% { transform: translateY(0.3rem) rotate(4deg); }
+  100% { transform: translateY(9rem) rotate(16deg); opacity: 0; }
+}
+.tabs__status {
+  min-height: 2.75rem;
+  padding: 0.8rem 0 1rem;
+  font: 600 0.98rem/1.4 var(--font-body);
+}
+
+/* --- Foot ------------------------------------------------------------------- */
+
+.foot {
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
+  padding: 1rem clamp(1rem, 3vw, 2.5rem) 4rem;
+  text-align: center;
+}
+/* A printed label pasted on the wall: clean-cut paper, one light, a slight tilt. */
+.foot__label {
+  width: min(34rem, 100%);
+  margin-bottom: 0.9rem;
+  padding: clamp(0.4rem, 1.4vw, 0.9rem) clamp(0.6rem, 2vw, 1.2rem);
+  background: var(--fibre), var(--paper);
+  box-shadow: var(--sheet-shadow);
+  transform: rotate(-1.2deg);
+}
+.foot__label img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.foot__line {
+  font: 500 1rem/1.5 var(--font-body);
+  color: var(--wall-ink);
+}
+.foot__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.75rem;
+}
+.foot__links a {
+  display: inline-block;
+  padding: 0.4rem 0;
+  font: 600 1rem/1.2 var(--font-body);
+  color: var(--wall-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 0.15rem;
+  text-underline-offset: 0.3em;
+}
+
+/* --- Small screens --------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  .entry {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .entry .entry__media,
+  .entry .entry__text,
+  .entry .entry__facts {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .entry--row .entry__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .minor__list,
+  .resume {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .resume__side {
+    position: static;
+    max-width: 22rem;
+  }
+}
+
+@media (max-width: 559px) {
+  .strip__mark {
+    gap: 0.5rem;
+    font-size: 1.15rem;
+    letter-spacing: 0.1em;
+  }
+  .strip__emblem {
+    width: 1.875rem;
+    height: 1.875rem;
+  }
+  .strip__nav a {
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+  }
+  .entry__facts,
+  .entry--row .entry__facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .flyer__form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .resume__rows > li,
+  .resume__skills > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+  }
+  .tabs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .tabs__tab:nth-child(n + 5) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .tabs__tab.is-torn {
+    animation: none;
+    opacity: 0.25;
   }
 }

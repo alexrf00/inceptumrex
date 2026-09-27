@@ -1,23 +1,26 @@
-import { Navigation } from "@/components/navigation"
-import { HeroSection } from "@/components/hero-section"
-import { AboutSection } from "@/components/about-section"
-import { ServicesSection } from "@/components/services-section"
-import { WhyUsSection } from "@/components/why-us-section"
-import { ClientsSection } from "@/components/clients-section"
-import { ContactSection } from "@/components/contact-section"
-import { Footer } from "@/components/footer"
+import { Strip } from "@/components/Strip"
+import { Wall } from "@/components/wall/Wall"
+import { Program } from "@/components/paper/Program"
+import { Resume } from "@/components/paper/Resume"
+import { Flyer } from "@/components/paper/Flyer"
+import { Foot } from "@/components/Foot"
 
-export default function InceptumRexBusiness() {
+export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
-      <Navigation />
-      <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <WhyUsSection />
-      <ClientsSection />
-      <ContactSection />
-      <Footer />
-    </div>
+    <>
+      <a className="skip" href="#work">
+        Skip to the work
+      </a>
+      <Strip />
+      <main id="top">
+        <Wall />
+        <div className="paper">
+          <Program />
+          <Resume />
+          <Flyer />
+        </div>
+      </main>
+      <Foot />
+    </>
   )
 }

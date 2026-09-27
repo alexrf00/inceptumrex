@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# inceptumrex.com
 
-## Getting Started
+The portfolio of Alex M. Rodriguez (InceptumRex): every project pasted on one wall of
+posters, then set straight on paper below it.
 
-First, run the development server:
+## Run it
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`npm run build` builds the static site; its `postbuild` step regenerates `sitemap.xml` and
+`robots.txt` with next-sitemap. Deploys run on Vercel.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where things live
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| What | File |
+|---|---|
+| Every fact, line of copy and screenshot list | `src/content/work.ts` |
+| The wall's posters (size, color, text, image crop) | `src/components/wall/posters.ts` |
+| Poster positions per screen size | `src/app/globals.css`, the `[data-poster=...]` rules |
+| The HTML poster (accessible, and the no-WebGL wall) | `src/components/wall/Poster.tsx` |
+| The three.js paper (lighting, corner curl, shadows) | `src/components/wall/wall-scene.ts` |
+| The canvas that paints each poster's WebGL texture | `src/components/wall/poster-texture.ts` |
+| The paper program, résumé and contact flyer | `src/components/paper/` |
+| Product truth, claims to avoid, evidence | `PRODUCT.md` |
 
-## Learn More
+## Adding or changing a project
 
-To learn more about Next.js, take a look at the following resources:
+1. Add the images to `public/work/` as WebP and embed where they came from:
+   `impeccable embed-prompt public/work/<file>.webp --prompt "ORIGIN: ..."`.
+2. Add the project to `featured` (full paper entry) or `minor` (one line on the bill) in
+   `src/content/work.ts`.
+3. To give it a poster on the wall, add a spec in `posters.ts` and a position rule in
+   `globals.css`; the lineup poster lists minor projects by id.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Poster sizes are in `cqw`, percent of the poster's own width. `Poster.tsx` and
+`poster-texture.ts` read the same numbers (`imageLayout`, `lineupTops`), so the HTML poster
+and its three.js paper twin always agree. Change a number in one place only.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## How the wall behaves
 
-## Deploy on Vercel
+- The HTML posters render first, with a short paste-up entrance.
+- When motion is allowed and data saver is off, three.js loads after the page is idle, paints
+  each poster onto lit paper and takes over. The HTML posters stay underneath as the links,
+  the focus targets and the text screen readers read.
+- The corner nearest the pointer curls; keyboard focus curls the bottom-right corner.
+  Nothing renders while nothing moves.
+- Under `prefers-reduced-motion` or without WebGL, the HTML wall is the wall.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contact form
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The flyer posts to the same Basin form endpoint as the old site, with the same field names
+and order: `name`, `phone` (optional), `email`, `message`.
+
+## Never publish
+
+Secrets or keys, personal documents, other people's data (for example LuzRD chat names),
+confidential dashboards, client logos without permission, unknown-source art, or numbers
+that do not come from real data. See `PRODUCT.md`.

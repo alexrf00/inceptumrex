@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="32.10 22.10 164.80 164.80" role="img" aria-labelledby="logo-title">
+    <title id="logo-title">InceptumRex</title>
+    <g transform="translate(20 10) scale(1.05)">
+    
+    <circle cx="90" cy="90" r="78" fill="#0b0b0d" stroke="none" stroke-width="1" />
+    <g fill="none" stroke="#34d8ff" stroke-linecap="round" stroke-width="2.2" transform="rotate(-4 90 90)">
+      <circle cx="90" cy="90" r="69" stroke-dasharray="15 11" opacity="0.88" />
+      
+        <line x1="145.99" y1="118.87" x2="156.66" y2="124.37" />
+        <circle cx="156.66" cy="124.37" r="2.99" />
+        <line x1="108.87" y1="149.06" x2="112.83" y2="161.44" />
+        <circle cx="112.83" cy="161.44" r="1.79" />
+        <line x1="59.75" y1="148.66" x2="55.63" y2="156.66" />
+        <circle cx="55.63" cy="156.66" r="2.36" />
+        <line x1="29.04" y1="109.48" x2="18.56" y2="112.83" />
+        <circle cx="18.56" cy="112.83" r="2.83" />
+        <line x1="34.01" y1="61.13" x2="23.34" y2="55.63" />
+        <circle cx="23.34" cy="55.63" r="2.79" />
+        <line x1="70.22" y1="28.08" x2="67.17" y2="18.56" />
+        <circle cx="67.17" cy="18.56" r="2.04" />
+        <line x1="118.87" y1="34.01" x2="124.37" y2="23.34" />
+        <circle cx="124.37" cy="23.34" r="2.21" />
+        <line x1="152.87" y1="69.91" x2="161.44" y2="67.17" />
+        <circle cx="161.44" cy="67.17" r="2.34" />
+    </g>
+    <g fill="none" stroke="#f3f1eb" stroke-linecap="square" stroke-linejoin="miter">
+      <path d="M54 67 L61 44 L76 58 L90 29 L104 58 L119 44 L126 67" stroke="#34d8ff" stroke-width="5" />
+      <path d="M62 128 V78 H94 C112 78 122 86 122 99 C122 112 112 119 94 119 H62" stroke-width="8" />
+      <path d="M91 119 L126 138" stroke-width="8" />
+      <path d="M62 78 V66" stroke="#34d8ff" stroke-width="8" />
+    </g>
+    <circle cx="90" cy="90" r="4" fill="#34d8ff" />
+    <path d="M86 90 H94 M90 86 V94" stroke="#0b0b0d" stroke-width="1.4" />
+  </g>
+  </svg>

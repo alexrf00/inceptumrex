@@ -1,0 +1,669 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-27T21:25:26Z",
+  "title": "Design System: InceptumRex",
+  "extensions": {
+    "colorMeta": {
+      "wall": {
+        "role": "primary",
+        "displayName": "Sidewalk-Shed Green",
+        "canonical": "#355e3b",
+        "oklch": "oklch(44.1% 0.073 147.7)",
+        "tonalRamp": [
+          "#001002",
+          "#032e0e",
+          "#244c2b",
+          "#436d49",
+          "#648f69",
+          "#86b28b",
+          "#aad7ae",
+          "#cefdd3"
+        ]
+      },
+      "wall-deep": {
+        "role": "primary",
+        "displayName": "Shed Shadow Green",
+        "canonical": "#2b4d31",
+        "oklch": "oklch(38.6% 0.062 148.6)",
+        "tonalRamp": [
+          "#001003",
+          "#0a2d13",
+          "#294b2f",
+          "#486b4e",
+          "#698d6e",
+          "#8bb090",
+          "#aed5b3",
+          "#d3fbd8"
+        ]
+      },
+      "pink": {
+        "role": "secondary",
+        "displayName": "Fluorescent Pink",
+        "canonical": "#ff2d87",
+        "oklch": "oklch(66.1% 0.245 1.9)",
+        "tonalRamp": [
+          "#1d0009",
+          "#490221",
+          "#7b043c",
+          "#af0f59",
+          "#eb0177",
+          "#fe6b9c",
+          "#feafc4",
+          "#ffe8ed"
+        ]
+      },
+      "yellow": {
+        "role": "secondary",
+        "displayName": "Fluorescent Yellow",
+        "canonical": "#ffe414",
+        "oklch": "oklch(91.3% 0.188 100.5)",
+        "tonalRamp": [
+          "#0e0b00",
+          "#2b2500",
+          "#4b4304",
+          "#6f6202",
+          "#948307",
+          "#baa612",
+          "#e3cb08",
+          "#fff198"
+        ]
+      },
+      "orange": {
+        "role": "secondary",
+        "displayName": "Fluorescent Orange",
+        "canonical": "#ff6a1f",
+        "oklch": "oklch(70.2% 0.198 42.5)",
+        "tonalRamp": [
+          "#1a0400",
+          "#421401",
+          "#702802",
+          "#a03e09",
+          "#d45511",
+          "#fc7940",
+          "#ffb598",
+          "#ffe9e1"
+        ]
+      },
+      "alarm": {
+        "role": "tertiary",
+        "displayName": "Alarm Red",
+        "canonical": "#a0001e",
+        "oklch": "oklch(44.5% 0.180 23.0)",
+        "tonalRamp": [
+          "#1e0002",
+          "#4c0109",
+          "#800016",
+          "#b11e2c",
+          "#d9494c",
+          "#ff7270",
+          "#ffb2ae",
+          "#ffe9e7"
+        ]
+      },
+      "black": {
+        "role": "neutral",
+        "displayName": "Poster Black",
+        "canonical": "#121212",
+        "oklch": "oklch(18.2% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Bill Paper",
+        "canonical": "#f4f4ef",
+        "oklch": "oklch(96.6% 0.007 106.5)",
+        "tonalRamp": [
+          "#0b0b08",
+          "#252522",
+          "#42423e",
+          "#61615d",
+          "#83837e",
+          "#a5a5a1",
+          "#c9c9c5",
+          "#efefea"
+        ]
+      },
+      "paper-back": {
+        "role": "neutral",
+        "displayName": "Paper Back",
+        "canonical": "#d9d9d1",
+        "oklch": "oklch(88.3% 0.011 106.6)",
+        "tonalRamp": [
+          "#0c0b07",
+          "#26251f",
+          "#42423c",
+          "#62625b",
+          "#83837c",
+          "#a6a69e",
+          "#cacac2",
+          "#efefe7"
+        ]
+      },
+      "wall-ink": {
+        "role": "neutral",
+        "displayName": "Stencil White",
+        "canonical": "#eef1e8",
+        "oklch": "oklch(95.3% 0.012 121.7)",
+        "tonalRamp": [
+          "#0a0c07",
+          "#24261f",
+          "#41433c",
+          "#60625b",
+          "#81847c",
+          "#a4a69e",
+          "#c8cac2",
+          "#edf0e7"
+        ]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Newsprint",
+        "canonical": "#efefe9",
+        "oklch": "oklch(95.0% 0.008 106.6)",
+        "tonalRamp": [
+          "#0b0b08",
+          "#252521",
+          "#42423e",
+          "#62625c",
+          "#83837d",
+          "#a5a5a0",
+          "#c9c9c4",
+          "#efefe9"
+        ]
+      },
+      "sheet-ink": {
+        "role": "neutral",
+        "displayName": "Press Black",
+        "canonical": "#161614",
+        "oklch": "oklch(19.9% 0.004 106.7)",
+        "tonalRamp": [
+          "#0b0b09",
+          "#252523",
+          "#424240",
+          "#61615f",
+          "#828280",
+          "#a5a5a2",
+          "#c9c9c6",
+          "#efefec"
+        ]
+      },
+      "sheet-body": {
+        "role": "neutral",
+        "displayName": "Long-Copy Ink",
+        "canonical": "#2b2b27",
+        "oklch": "oklch(28.8% 0.007 106.8)",
+        "tonalRamp": [
+          "#0b0b08",
+          "#252521",
+          "#42423e",
+          "#61615d",
+          "#83837e",
+          "#a5a5a0",
+          "#c9c9c4",
+          "#efefe9"
+        ]
+      },
+      "sheet-dim": {
+        "role": "neutral",
+        "displayName": "Press Grey",
+        "canonical": "#4a4a44",
+        "oklch": "oklch(40.7% 0.010 106.8)",
+        "tonalRamp": [
+          "#0c0b07",
+          "#252520",
+          "#42423c",
+          "#62625b",
+          "#83837c",
+          "#a5a59f",
+          "#cacac2",
+          "#efefe8"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Printed Rule",
+        "canonical": "#161614",
+        "oklch": "oklch(19.9% 0.004 106.7)",
+        "tonalRamp": [
+          "#0b0b09",
+          "#252523",
+          "#424240",
+          "#61615f",
+          "#828280",
+          "#a5a5a2",
+          "#c9c9c6",
+          "#efefec"
+        ]
+      },
+      "plate-well": {
+        "role": "neutral",
+        "displayName": "Plate Well",
+        "canonical": "#d6d6ce",
+        "oklch": "oklch(87.4% 0.011 106.6)",
+        "tonalRamp": [
+          "#0c0b07",
+          "#26251f",
+          "#42423c",
+          "#62625b",
+          "#83837b",
+          "#a6a69e",
+          "#cacac2",
+          "#efefe7"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "bill-headliner": {
+        "displayName": "Headliner",
+        "purpose": "The name on the headliner bill and the page's h1. Each line gets its own size that fills the bill: ALEX M. 29.8cqw, RODRIGUEZ 22.3cqw."
+      },
+      "bill-title": {
+        "displayName": "Bill Title",
+        "purpose": "An image bill's project name, 22 to 25cqw per bill (Fiscalia 22, Fixion 24, LuzRD 25); 17cqw on a compact bill."
+      },
+      "bill-act": {
+        "displayName": "Lineup Act",
+        "purpose": "One project per line on the lineup bill, ranked by size: 8, 6.6, 6.6, 5.8, 5.8, 5.2, 5.2, 4.8, 4.8cqw."
+      },
+      "bill-strip": {
+        "displayName": "Status Strip",
+        "purpose": "The status line across a bill's foot; its line-height is the strip's height. Compact bills use max(5cqw, 11px) in a max(11cqw, 24px) strip."
+      },
+      "bill-print": {
+        "displayName": "Bill Print",
+        "purpose": "A bill's small print: the headliner blurb (13px floor, 1.28) and an image bill's one-line sub (12px floor, 1.2)."
+      },
+      "sheet-title": {
+        "displayName": "Sheet Title",
+        "purpose": "The head of a printed sheet: the program and the résumé. The contact flyer's title runs clamp(3.4rem, 10vw, 6.4rem)/0.86."
+      },
+      "entry-name": {
+        "displayName": "Entry Name",
+        "purpose": "A project's name in the program; its letter count caps the size so a long single word fits the column."
+      },
+      "section-head": {
+        "displayName": "Section Head",
+        "purpose": "Résumé sections, over a 2px rule."
+      },
+      "standfirst": {
+        "displayName": "Standfirst",
+        "purpose": "An entry's one line (max 42ch) and the résumé role."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading copy on newsprint in Long-Copy Ink, at most 64ch."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Image captions in Press Grey; status notes use 0.9rem/1.35."
+      },
+      "label": {
+        "displayName": "Fact Label",
+        "purpose": "Tracked capitals over fact values (Status, Kind, Role, Built with), in Press Grey."
+      },
+      "link-label": {
+        "displayName": "Link Label",
+        "purpose": "Program links, in capitals over a 0.2rem pink rule."
+      },
+      "nav": {
+        "displayName": "Navigation",
+        "purpose": "Work, About and Contact on the sniping strip, yellow on black."
+      },
+      "chip": {
+        "displayName": "Chip",
+        "purpose": "Printed status chips."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Send inquiry and Send another."
+      },
+      "mark": {
+        "displayName": "Studio Mark",
+        "purpose": "INCEPTUMREX on the sniping strip."
+      },
+      "stencil": {
+        "displayName": "Wall Stencil",
+        "purpose": "POST NO BILLS painted on the wall, decorative, Stencil White at 20%. The footer mark uses the same face at clamp(3.2rem, 11vw, 8.5rem)/0.9, 16%, as a logotype."
+      }
+    },
+    "shadows": [
+      {
+        "name": "bill-drop",
+        "value": "drop-shadow(0.3rem 0.5rem 0.45rem rgb(6 16 10 / 0.45))",
+        "purpose": "A filter on every HTML bill, so the shadow follows the torn edge. Replaced by the WebGL paper shadow once WebGL takes over."
+      },
+      {
+        "name": "sheet",
+        "value": "0.5rem 0.9rem 2.2rem rgb(5 14 8 / 0.5), 0 2px 4px rgb(5 14 8 / 0.45)",
+        "purpose": "The program and résumé sheets and the contact flyer, pasted flat on the wall (--sheet-shadow)."
+      },
+      {
+        "name": "strip",
+        "value": "0 0.35rem 1rem rgb(5 14 8 / 0.45)",
+        "purpose": "The sniping strip over the wall."
+      },
+      {
+        "name": "webgl-paper",
+        "value": "copy of the bill scaled 1.012, offset away from the light by 7px + 0.9 x height, alpha 0.34 to 0.56, rgb(0.02, 0.07, 0.04), 4.5% soft edge",
+        "purpose": "The three.js paper's cast shadow; grows as a peeled flap lifts."
+      },
+      {
+        "name": "keyline",
+        "value": "0 0 0 1px #161614",
+        "purpose": "The 1px Printed Rule ring around printed images on paper. A print keyline, not elevation."
+      },
+      {
+        "name": "chip-ring",
+        "value": "inset 0 0 0 2px #121212",
+        "purpose": "The outlined paper chip for work that is not running."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The one curve (--ease-out): the paste-up entrance and the tab tear."
+      },
+      {
+        "name": "paste",
+        "value": "0.62s cubic-bezier(0.16, 1, 0.3, 1) both; delay calc(var(--i) * 85ms + 100ms); from opacity 0 and rotate(calc(var(--rot) + 3deg)) translateY(-0.8rem) scale(1.045)",
+        "purpose": "The page's one entrance: each bill slaps onto the wall in DOM order, then sits still. prefers-reduced-motion: no-preference only."
+      },
+      {
+        "name": "gl-handover",
+        "value": "canvas opacity 0.3s ease-out, no earlier than 1500ms after navigation; HTML paper opacity 0 after a 0.3s step",
+        "purpose": "WebGL takes over after the paste-up has finished, with no visible swap."
+      },
+      {
+        "name": "peel-spring",
+        "value": "stiffness 170, damping 18; fold (0.045 + 0.2 x nearness^1.6) x short side; curl radius clamp(0.065 x short side, 10px, 30px); press +520px/s; focus 0.2 x short side; lift 3px at 10/s",
+        "purpose": "The corner peel toward the pointer (WebGL only; touch moves are ignored, a tap kicks the fold)."
+      },
+      {
+        "name": "tear",
+        "value": "0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; 25% translateY(0.3rem) rotate(4deg); 100% translateY(9rem) rotate(16deg) opacity 0; transform-origin 50% 0",
+        "purpose": "A contact tab tearing off after its email is copied."
+      },
+      {
+        "name": "state",
+        "value": "color, border-color, background 0.2s; press translateY(1px) 0.1s",
+        "purpose": "Hover and press on links and buttons."
+      },
+      {
+        "name": "render-on-demand",
+        "value": "requestAnimationFrame only while a spring moves and the wall intersects the viewport",
+        "purpose": "The WebGL wall never renders idle."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "no paste-up, no WebGL mount, no tear (torn tab rests at opacity 0.25), scroll-behavior auto",
+        "purpose": "prefers-reduced-motion: reduce. The HTML wall is the complete wall."
+      },
+      {
+        "name": "resume-paste-up",
+        "value": "WebGL roll; run clamp(0.9ms per px of sheet, 1.6s, 3.2s) ease-in-out cubic; radius clamp(2.8% of sheet width, 14px, 34px) thinning to 55%; fade 280ms; clip-path reveal on the HTML sheet",
+        "purpose": "The résumé sheet is pasted up as it arrives: a rolled sheet waits on its top edge, then unrolls down it, revealing the real HTML sheet above the roll. Skipped under reduced motion, Save-Data, an in-view arrival, print, or before three.js is ready; never hides the sheet for more than 4s."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desktop-wall",
+        "value": "(min-width: 900px) and (orientation: landscape) and (min-height: 560px)",
+        "purpose": "The collage on a 1.62 stage fitted to the viewport."
+      },
+      {
+        "name": "tablet-wall",
+        "value": "(min-width: 700px) and (orientation: portrait), (min-width: 700px) and (max-width: 899px), (min-width: 700px) and (max-height: 559px)",
+        "purpose": "A square stage: name and lineup across the top."
+      },
+      {
+        "name": "phone-wall",
+        "value": "(max-width: 699px)",
+        "purpose": "A tall 0.32 stage: name, full lineup, then the image bills; no flyer bill."
+      },
+      {
+        "name": "paper-one-column",
+        "value": "(max-width: 899px)",
+        "purpose": "Entries, the minor list and the résumé go to one column."
+      },
+      {
+        "name": "small-phone",
+        "value": "(max-width: 559px)",
+        "purpose": "Facts and form in one column, four tabs, smaller strip type."
+      },
+      {
+        "name": "compact-bill",
+        "value": "@container (max-width: 229px)",
+        "purpose": "An image bill under 230px: full-bleed print, 17cqw title, no sub, short status."
+      }
+    ],
+    "materials": [
+      {
+        "name": "torn",
+        "value": "var(--torn): feTurbulence 0.09 (2 octaves) + feDisplacementMap 5, as a mask",
+        "purpose": "The torn edge of every current bill."
+      },
+      {
+        "name": "torn-hard",
+        "value": "var(--torn-hard): feTurbulence 0.035 (3 octaves) + feDisplacementMap 34, as a mask",
+        "purpose": "Remnants of older bills."
+      },
+      {
+        "name": "crinkle",
+        "value": "var(--crinkle): feTurbulence 0.045 lit by feDiffuseLighting (azimuth 225, elevation 60), greyed; 260px tile, soft-light, opacity 0.9",
+        "purpose": "Paste crinkle across the whole bill, hue-neutral."
+      },
+      {
+        "name": "fibre",
+        "value": "var(--fibre): feTurbulence 0.9 (2 octaves) at 9% alpha; 320px tile",
+        "purpose": "Newsprint fibre on the sheets and the contact flyer."
+      },
+      {
+        "name": "plywood",
+        "value": "url(/wall/plywood.webp) 0 0 / 1200px 800px repeat",
+        "purpose": "Three painted 4 x 8 ft plywood sheets with seams and screw rows, from a CC0 photograph (scripts/make-plywood.py)."
+      },
+      {
+        "name": "wear",
+        "value": "url(/wall/wear.webp) 310px 170px / 1700px 1150px repeat",
+        "purpose": "Paint runs and graffiti buff marks, tiled off the plywood's period."
+      },
+      {
+        "name": "raking-light",
+        "value": "radial-gradient(110vw 70vh at 8% -5%, color-mix(in srgb, var(--paper) 8%, transparent), transparent 62%)",
+        "purpose": "The top-left light on the wall."
+      },
+      {
+        "name": "webgl-paper",
+        "value": "ragged alpha 2.6px (remnants 7px); crinkle normal 0.2; sheen pow 60 x (0.03 + 0.09 wet); grain 1%; back #d9d9d1 with 14% show-through",
+        "purpose": "The three.js paper twin."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Sniping Strip",
+      "kind": "nav",
+      "refersTo": "strip-nav",
+      "description": "The sticky black strip across the top of the wall: the stencil studio mark and three yellow destinations.",
+      "html": "<header class=\"ds-strip\"><a class=\"ds-strip__mark\" href=\"#top\">InceptumRex</a><nav aria-label=\"Primary\"><ul class=\"ds-strip__nav\"><li><a href=\"#work\">Work</a></li><li><a href=\"#about\">About</a></li><li><a href=\"#contact\">Contact</a></li></ul></nav></header>",
+      "css": ".ds-strip{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:3.5rem;padding:0 clamp(1rem,3vw,2.5rem);background:var(--black,#121212);box-shadow:0 .35rem 1rem rgb(5 14 8/.45)}.ds-strip__mark{font:800 1.4rem/1 var(--font-stencil,'Big Shoulders Stencil Display',sans-serif);letter-spacing:.16em;text-transform:uppercase;color:var(--paper,#f4f4ef);text-decoration:none}.ds-strip__nav{display:flex;gap:clamp(1.1rem,3vw,2.5rem);margin:0;padding:0;list-style:none}.ds-strip__nav a{display:inline-block;padding:.6rem .1rem;font:800 1.05rem/1 var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.14em;text-transform:uppercase;color:var(--yellow,#ffe414);text-decoration:none;transition:color .2s}.ds-strip__nav a:hover{color:var(--paper,#f4f4ef)}.ds-strip a:focus-visible{outline:3px solid var(--yellow,#ffe414);outline-offset:3px}"
+    },
+    {
+      "name": "Headliner Bill",
+      "kind": "custom",
+      "refersTo": "bill-headliner",
+      "description": "The name as wood type, each line sized to fill the bill, a blurb and the pink live-now strip. Torn, crinkled, tilted.",
+      "html": "<div class=\"ds-headliner\"><span class=\"ds-headliner__paper\"><span class=\"ds-headliner__line\" style=\"--top:6cqw;--size:29.8cqw;color:var(--yellow,#ffe414)\">Alex M.</span><span class=\"ds-headliner__line\" style=\"--top:31.63cqw;--size:22.3cqw;color:var(--paper,#f4f4ef)\">Rodriguez</span><span class=\"ds-headliner__blurb\">Games, fiscal software and civic tools, built end to end. Dominican Republic and New York.</span><span class=\"ds-headliner__strip\">Live now: Fiscalia, LuzRD, BattlePassTimer</span></span></div>",
+      "css": ".ds-headliner{position:relative;width:min(100%,460px);aspect-ratio:1.22;container-type:size;transform:rotate(-1.1deg);filter:drop-shadow(.3rem .5rem .45rem rgb(6 16 10/.45))}.ds-headliner__paper{position:absolute;inset:0;overflow:hidden;background:var(--black,#121212);-webkit-mask:var(--torn) 0 0/100% 100% no-repeat;mask:var(--torn) 0 0/100% 100% no-repeat}.ds-headliner__paper::after{content:\"\";position:absolute;inset:0;pointer-events:none;background:var(--crinkle) 0 0/260px 260px;mix-blend-mode:soft-light;opacity:.9}.ds-headliner__line{position:absolute;left:6cqw;top:var(--top);font:900 var(--size)/.86 var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:-.005em;text-transform:uppercase;white-space:nowrap}.ds-headliner__blurb{position:absolute;left:6cqw;top:54.81cqw;width:84cqw;font:600 max(4.6cqw,13px)/1.28 var(--font-narrow,'Archivo Narrow',sans-serif);color:var(--paper,#f4f4ef)}.ds-headliner__strip{position:absolute;left:0;right:0;bottom:0;height:max(11cqw,28px);padding-left:6cqw;font:800 max(4.6cqw,12px)/max(11cqw,28px) var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;background:var(--pink,#ff2d87);color:var(--black,#121212)}"
+    },
+    {
+      "name": "Image Bill",
+      "kind": "custom",
+      "refersTo": "bill-image-paper",
+      "description": "A project poster linking to its program entry: a framed print (stand-in here), the title, a one-line sub and the status strip; compact under 230px.",
+      "html": "<a class=\"ds-imagebill\" href=\"#work-fiscalia\" aria-label=\"Fiscalia. Electronic invoicing for Dominican businesses, built to DGII rules. Live\"><span class=\"ds-imagebill__paper\"><span class=\"ds-imagebill__print\"></span><span class=\"ds-imagebill__title\">Fiscalia</span><span class=\"ds-imagebill__sub\">e-CF invoicing, built to DGII rules</span><span class=\"ds-imagebill__strip\"><span class=\"ds-imagebill__long\">Live: fiscaliaservice.com</span><span class=\"ds-imagebill__short\" aria-hidden=\"true\">Live</span></span></span></a>",
+      "css": ".ds-imagebill{position:relative;display:block;width:min(100%,380px);aspect-ratio:.9;container-type:size;color:inherit;text-decoration:none;transform:rotate(-1.9deg);filter:drop-shadow(.3rem .5rem .45rem rgb(6 16 10/.45))}.ds-imagebill:focus-visible{outline:4px solid var(--yellow,#ffe414);outline-offset:6px}.ds-imagebill__paper{position:absolute;inset:0;overflow:hidden;background:var(--paper,#f4f4ef);-webkit-mask:var(--torn) 0 0/100% 100% no-repeat;mask:var(--torn) 0 0/100% 100% no-repeat}.ds-imagebill__paper::after{content:\"\";position:absolute;inset:0;pointer-events:none;background:var(--crinkle) 0 0/260px 260px;mix-blend-mode:soft-light;opacity:.9}.ds-imagebill__print{position:absolute;left:4cqw;top:4cqw;width:92cqw;height:62cqw;background:#d6d6ce}.ds-imagebill__print::after{content:\"\";position:absolute;inset:0;border:.4cqw solid var(--black,#121212)}.ds-imagebill__title{position:absolute;left:6cqw;top:69.5cqw;font:900 22cqw/.92 var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:-.005em;text-transform:uppercase;color:var(--black,#121212)}.ds-imagebill__sub{position:absolute;left:6cqw;top:91.14cqw;font:600 max(4.6cqw,12px)/1.2 var(--font-narrow,'Archivo Narrow',sans-serif);white-space:nowrap;color:var(--black,#121212)}.ds-imagebill__strip{position:absolute;left:0;right:0;bottom:0;height:max(11cqw,28px);padding-left:6cqw;font:800 max(4.6cqw,12px)/max(11cqw,28px) var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;background:var(--orange,#ff6a1f);color:var(--black,#121212)}.ds-imagebill__short{display:none}@container (max-width:229px){.ds-imagebill__print{left:0;top:0;width:100cqw;height:60cqw}.ds-imagebill__print::after{display:none}.ds-imagebill__title{top:63cqw;font-size:17cqw}.ds-imagebill__sub,.ds-imagebill__long{display:none}.ds-imagebill__short{display:inline}.ds-imagebill__strip{height:max(11cqw,24px);font-size:max(5cqw,11px);line-height:max(11cqw,24px)}}"
+    },
+    {
+      "name": "Lineup Bill",
+      "kind": "custom",
+      "refersTo": "bill-lineup",
+      "description": "Every other project as a ranked concert bill: act size is billing. The whole bill is one link (to the paper list of the same projects) named by an aria-label that lists every act; the acts are print, so small acts never become small tap targets. Its focus ring lands on the wall, outside the paper.",
+      "html": "<a class=\"ds-lineup\" href=\"#\" aria-label=\"Also on the bill: BattlePassTimer, Omni Run, dubbtogether, BxGoatDrip, Stitch Designer, Excel Enricher, Fixion 2D, ASEPRE, Brolick Gym. Details in print below\"><span class=\"ds-lineup__paper\"><span class=\"ds-lineup__heading\">Also on the bill</span><span class=\"ds-lineup__acts\"><span class=\"ds-lineup__act\" style=\"--top:19cqw;--size:8cqw\">BattlePassTimer</span><span class=\"ds-lineup__act\" style=\"--top:28.66cqw;--size:6.6cqw\">Omni Run</span><span class=\"ds-lineup__act\" style=\"--top:36.89cqw;--size:6.6cqw\">dubbtogether</span><span class=\"ds-lineup__act\" style=\"--top:45.12cqw;--size:5.8cqw\">BxGoatDrip</span><span class=\"ds-lineup__act\" style=\"--top:52.54cqw;--size:5.8cqw\">Stitch Designer</span><span class=\"ds-lineup__act\" style=\"--top:59.96cqw;--size:5.2cqw\">Excel Enricher</span><span class=\"ds-lineup__act\" style=\"--top:66.76cqw;--size:5.2cqw\">Fixion 2D</span><span class=\"ds-lineup__act\" style=\"--top:73.56cqw;--size:4.8cqw\">ASEPRE</span><span class=\"ds-lineup__act\" style=\"--top:79.96cqw;--size:4.8cqw\">Brolick Gym</span></span><span class=\"ds-lineup__strip\">Details in print below</span></span></a>",
+      "css": ".ds-lineup{display:block;color:inherit;text-decoration:none;position:relative;width:min(100%,380px);aspect-ratio:1;container-type:size;transform:rotate(.8deg);filter:drop-shadow(.3rem .5rem .45rem rgb(6 16 10/.45))}.ds-lineup__paper{position:absolute;inset:0;overflow:hidden;background:var(--yellow,#ffe414);-webkit-mask:var(--torn) 0 0/100% 100% no-repeat;mask:var(--torn) 0 0/100% 100% no-repeat}.ds-lineup__paper::after{content:\"\";position:absolute;inset:0;pointer-events:none;background:var(--crinkle) 0 0/260px 260px;mix-blend-mode:soft-light;opacity:.9}.ds-lineup__heading{position:absolute;left:6cqw;top:6cqw;font:900 9cqw/1 var(--font-display,'Big Shoulders Display',sans-serif);text-transform:uppercase;color:var(--black,#121212)}.ds-lineup__acts{display:block}.ds-lineup__act{white-space:nowrap;color:var(--black,#121212);position:absolute;left:6cqw;right:6cqw;top:var(--top);font:800 var(--size)/1.02 var(--font-display,'Big Shoulders Display',sans-serif);text-transform:uppercase}.ds-lineup__strip{position:absolute;left:0;right:0;bottom:0;height:max(11cqw,28px);padding-left:6cqw;font:800 max(4.6cqw,12px)/max(11cqw,28px) var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;background:var(--black,#121212);color:var(--yellow,#ffe414)}.ds-lineup:focus-visible{outline:4px solid var(--yellow,#ffe414);outline-offset:6px}"
+    },
+    {
+      "name": "Status Chips",
+      "kind": "chip",
+      "refersTo": "chip-yellow",
+      "description": "Printed status in words: fluorescent fields for live or shipping work, the outlined paper chip for the rest.",
+      "html": "<span class=\"ds-chip ds-chip--yellow\">In development</span> <span class=\"ds-chip ds-chip--pink\">Live site</span> <span class=\"ds-chip ds-chip--orange\">Live</span> <span class=\"ds-chip ds-chip--paper\">Prototype</span>",
+      "css": ".ds-chip{display:inline-block;padding:.4rem .55rem .35rem;font:800 .88rem/1 var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.07em;text-transform:uppercase;color:var(--black,#121212)}.ds-chip--yellow{background:var(--yellow,#ffe414)}.ds-chip--pink{background:var(--pink,#ff2d87)}.ds-chip--orange{background:var(--orange,#ff6a1f)}.ds-chip--paper{box-shadow:inset 0 0 0 2px var(--black,#121212)}"
+    },
+    {
+      "name": "Program Entry",
+      "kind": "card",
+      "refersTo": "paper-sheet",
+      "description": "A project set straight on newsprint (wide layout): the print across the sheet, then text and a ruled facts list side by side.",
+      "html": "<article class=\"ds-entry\"><div class=\"ds-entry__media\"><figure class=\"ds-entry__print\"></figure><p class=\"ds-entry__caption\">Rendered inside the game.</p></div><div class=\"ds-entry__text\"><h3 class=\"ds-entry__name\">Big Party 3D</h3><p class=\"ds-entry__line\">An online party brawl for up to 12 outlaws, rebuilt in three.js.</p><p class=\"ds-entry__body\">Big Party began as a 2D Godot game whose free demo has been on Steam since August 6, 2026.</p><ul class=\"ds-entry__links\"><li><a href=\"https://bigparty.me\">bigparty.me<svg viewBox=\"0 0 256 256\" aria-hidden=\"true\"><path d=\"M204,64V168a12,12,0,0,1-24,0V93L72.49,200.49a12,12,0,0,1-17-17L163,76H88a12,12,0,0,1,0-24H192A12,12,0,0,1,204,64Z\"/></svg></a></li></ul></div><dl class=\"ds-entry__facts\"><div><dt>Status</dt><dd><span class=\"ds-entry__chip\">In development</span><span class=\"ds-entry__note\">2D demo free on Steam</span></dd></div><div><dt>Kind</dt><dd>Game, 2026</dd></div><div><dt>Role</dt><dd>Solo: design, code, netcode, backend</dd></div><div><dt>Built with</dt><dd>three.js, JavaScript, Electron</dd></div></dl></article>",
+      "css": ".ds-entry{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1.75rem clamp(1.75rem,4vw,3.5rem);padding:clamp(1.5rem,4.5vw,4.5rem);background-color:var(--sheet,#efefe9);background-image:var(--fibre);color:var(--sheet-ink,#161614);box-shadow:.5rem .9rem 2.2rem rgb(5 14 8/.5),0 2px 4px rgb(5 14 8/.45)}.ds-entry__media{grid-column:1/-1}.ds-entry__print{margin:0;aspect-ratio:2400/776;background:#d6d6ce;box-shadow:0 0 0 1px var(--rule,#161614)}.ds-entry__caption{margin:.7rem 0 0;font:500 .9rem/1.45 var(--font-body,'Archivo',system-ui,sans-serif);color:var(--sheet-dim,#4a4a44)}.ds-entry__name{margin:0;font:900 clamp(2.7rem,5.2vw,4.4rem)/.9 var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:-.005em;text-transform:uppercase}.ds-entry__line{max-width:42ch;margin:.8rem 0 0;font:600 1.25rem/1.4 var(--font-body,'Archivo',system-ui,sans-serif)}.ds-entry__body{max-width:64ch;margin:.95rem 0 0;font:400 1.0625rem/1.65 var(--font-body,'Archivo',system-ui,sans-serif);color:#2b2b27}.ds-entry__links{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;margin:1.4rem 0 0;padding:0;list-style:none}.ds-entry__links a{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem 0;font:700 .98rem/1 var(--font-narrow,'Archivo Narrow',sans-serif);letter-spacing:.06em;text-transform:uppercase;color:var(--sheet-ink,#161614);text-decoration:none;border-bottom:.2rem solid var(--pink,#ff2d87);transition:border-color .2s,color .2s}.ds-entry__links a:hover{border-bottom-color:var(--sheet-ink,#161614)}.ds-entry__links a:focus-visible{outline:3px solid var(--black,#121212);outline-offset:3px}.ds-entry__links svg{width:1em;height:1em;fill:currentColor}.ds-entry__facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem 1.5rem;align-content:start;align-self:start;margin:0;padding-top:1.1rem;border-top:2px solid var(--rule,#161614)}.ds-entry__facts dt{font:700 .78rem/1.3 var(--font-narrow,'Archivo Narrow',sans-serif);letter-spacing:.12em;text-transform:uppercase;color:var(--sheet-dim,#4a4a44)}.ds-entry__facts dd{margin:.3rem 0 0;font:500 .98rem/1.45 var(--font-body,'Archivo',system-ui,sans-serif)}.ds-entry__chip{display:inline-block;padding:.4rem .55rem .35rem;font:800 .88rem/1 var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.07em;text-transform:uppercase;color:var(--black,#121212);background:var(--yellow,#ffe414)}.ds-entry__note{display:block;margin-top:.4rem;font:500 .9rem/1.35 var(--font-body,'Archivo',system-ui,sans-serif);color:var(--sheet-dim,#4a4a44)}@media (max-width:899px){.ds-entry{grid-template-columns:minmax(0,1fr)}}@media (max-width:559px){.ds-entry__facts{grid-template-columns:minmax(0,1fr)}}"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Send inquiry: yellow display capitals on Poster Black, square.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Send inquiry</button>",
+      "css": ".ds-btn-primary{padding:1rem 1.5rem;font:800 1.12rem/1 var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.09em;text-transform:uppercase;color:var(--yellow,#ffe414);background:var(--black,#121212);border:0;border-radius:0;cursor:pointer;transition:background .2s,transform .1s}.ds-btn-primary:hover{background:#2c2c29}.ds-btn-primary:active{transform:translateY(1px)}.ds-btn-primary:focus-visible{outline:3px solid var(--black,#121212);outline-offset:3px}.ds-btn-primary:disabled{cursor:progress;opacity:.65}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Send another: black capitals on yellow, after a message is sent.",
+      "html": "<button class=\"ds-btn-quiet\" type=\"button\">Send another</button>",
+      "css": ".ds-btn-quiet{padding:1rem 1.5rem;font:800 1.12rem/1 var(--font-display,'Big Shoulders Display',sans-serif);letter-spacing:.09em;text-transform:uppercase;color:var(--black,#121212);background:var(--yellow,#ffe414);border:0;border-radius:0;cursor:pointer;transition:background .2s,transform .1s}.ds-btn-quiet:hover{background:color-mix(in srgb,var(--yellow,#ffe414) 92%,var(--black,#121212))}.ds-btn-quiet:active{transform:translateY(1px)}.ds-btn-quiet:focus-visible{outline:3px solid var(--black,#121212);outline-offset:3px}"
+    },
+    {
+      "name": "Underline Field",
+      "kind": "input",
+      "refersTo": "input-line",
+      "description": "A flyer field: tracked label over a transparent input with a 2px black underline, pink caret and pink focus ring; Alarm Red when invalid.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-field-email\">Email</label><input id=\"ds-field-email\" name=\"email\" type=\"email\" autocomplete=\"email\" required></div>",
+      "css": ".ds-field{display:grid;gap:.45rem;padding:1.25rem;background-color:var(--paper,#f4f4ef);background-image:var(--fibre)}.ds-field label{font:700 .85rem/1.2 var(--font-narrow,'Archivo Narrow',sans-serif);letter-spacing:.1em;text-transform:uppercase;color:var(--black,#121212)}.ds-field input{width:100%;padding:.55rem .1rem;font:500 1.08rem/1.4 var(--font-body,'Archivo',system-ui,sans-serif);color:var(--black,#121212);background:transparent;border:0;border-bottom:2px solid var(--black,#121212);border-radius:0;caret-color:var(--pink,#ff2d87)}.ds-field input:focus-visible{outline:3px solid var(--pink,#ff2d87);outline-offset:2px}.ds-field input:user-invalid{border-color:var(--alarm,#a0001e)}"
+    },
+    {
+      "name": "Tear-off Tabs",
+      "kind": "custom",
+      "refersTo": "tear-tab",
+      "description": "The contact flyer's foot: dashed perforated tabs; pressing one copies the email and tears it off (static under reduced motion).",
+      "html": "<div class=\"ds-tabs\"><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button><button class=\"ds-tabs__tab\" type=\"button\" aria-label=\"Copy the email address inceptumrex@gmail.com\"><span>inceptumrex@gmail.com</span></button></div>",
+      "css": ".ds-tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:2px dashed var(--black,#121212);background:var(--paper,#f4f4ef)}.ds-tabs__tab{height:11.5rem;display:grid;place-items:center;padding:0;background:var(--paper,#f4f4ef);border:0;border-left:2px dashed var(--black,#121212);cursor:pointer;transform-origin:50% 0;transition:background .2s}.ds-tabs__tab:first-child{border-left:0}.ds-tabs__tab:hover{background:color-mix(in srgb,var(--paper,#f4f4ef) 78%,var(--yellow,#ffe414))}.ds-tabs__tab:focus-visible{outline:3px solid var(--black,#121212);outline-offset:3px}.ds-tabs__tab span{writing-mode:vertical-rl;transform:rotate(180deg);font:600 .92rem/1 var(--font-narrow,'Archivo Narrow',sans-serif);color:var(--black,#121212);white-space:nowrap}.ds-tabs__tab.ds-is-torn{pointer-events:none;animation:ds-tear .8s cubic-bezier(.16,1,.3,1) forwards}@keyframes ds-tear{0%{transform:none}25%{transform:translateY(.3rem) rotate(4deg)}100%{transform:translateY(9rem) rotate(16deg);opacity:0}}@media (prefers-reduced-motion:reduce){.ds-tabs__tab.ds-is-torn{animation:none;opacity:.25}}@media (max-width:559px){.ds-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}.ds-tabs__tab:nth-child(n+5){display:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Wheat-Paste Wall",
+    "overview": "Every project is a street poster announcing its release, wheat-pasted on one sidewalk-shed wall, newest on top; below the wall the same work is set straight on printed paper. The page has exactly two registers and never mixes them. The wall shouts: condensed wood type in black, paper white and three fluorescent inks, torn edges, paste crinkle and gloss, and, where WebGL runs, real lit paper whose corner lifts under the cursor to show the older bill pasted beneath. The paper reads: newsprint sheets with black rules, straight columns and printed status chips, holding everything the wall shouted in a calm order.\n\nEverything on the page is a physical material under one raking light from the top left. There is one ground: hunter-green painted plywood, built from a real CC0 photograph with seams, screw rows, paint runs and buffed-out graffiti. Bills and sheets are paper pasted onto it, never panels floating over it. The work itself, screenshots and in-game renders, prints unretouched; only the paper it is printed on wears. The interface recedes into the world: navigation is a black sniping strip, the contact form is a flyer with tear-off tabs, the footer is a stencil painted on the wall.\n\nThe first viewport holds every project at once: the headliner bill carries the name and a live-now strip, four image bills carry the lead projects with their honest status, a lineup bill ranks every other project by type size, and a flyer points to contact. On desktop the whole collage is fitted to the viewport; on phones the wall grows taller than the screen and the first screen holds the name and the complete lineup. The build folded the separate BattlePassTimer bill the direction planned into the lineup, where BattlePassTimer is the lead act.",
+    "keyCharacteristics": [
+      "One painted-plywood ground for the whole page; paper is pasted on it, never a second theme.",
+      "Two registers: a loud paste-up wall and a calm printed program, each with its own type scale.",
+      "Condensed wood type sized to fill its bill; lineup acts ranked by size like a concert bill.",
+      "Black, paper white and three fluorescent inks; every status is written in words.",
+      "Torn masks, paste crinkle, newsprint fibre and green-black shadows from one top-left light.",
+      "A WebGL paper twin for every bill that only paints; the HTML bill stays the link, the focus target and the text.",
+      "Real screenshots and renders, unretouched, each carrying its provenance."
+    ],
+    "rules": [
+      {
+        "name": "The One Ground Rule",
+        "body": "The painted plywood is the only page ground. Paper (bills, sheets, the flyer) is pasted onto it; nothing introduces a second background, a theme toggle or a panel colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink-On-Black Rule",
+        "body": "A fluorescent ink is either a flat field carrying Poster Black type, or type set on Poster Black. Pink, yellow and orange are never type on paper, newsprint or the wall; there they appear only as a link rule, a caret or a focus ring.",
+        "section": "colors"
+      },
+      {
+        "name": "The Words-Carry-Status Rule",
+        "body": "Every project's status is written out (Live, Live site, In development, Prototype, Offline). A fluorescent field marks work that is live or shipping; the outlined paper chip marks work that is not running. Which fluorescent ink a project wears is a paste-up colour choice (Fiscalia's chip is pink while its wall strip is orange), never a status code.",
+        "section": "colors"
+      },
+      {
+        "name": "The Wood-Type Rule",
+        "body": "A headliner line is set as large as its bill allows: each line gets its own size so it fills the bill's width (ALEX M. 29.8cqw, RODRIGUEZ 22.3cqw), set tight at 0.86 with -0.005em tracking in 900 capitals. Remnant and under-bill names are fitted to 88cqw of width by formula. Never one size for every line.",
+        "section": "typography"
+      },
+      {
+        "name": "The Billing Rule",
+        "body": "On the lineup bill type size is billing: the acts step down 8, 6.6, 6.6, 5.8, 5.8, 5.2, 5.2, 4.8 and 4.8cqw in listed order, the way a concert bill ranks its acts.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two Registers Rule",
+        "body": "Big Shoulders shouts on the wall and heads the paper; reading copy is Archivo at 1.0625rem/1.65 within 64ch; Archivo Narrow is only a bill's small print and paper's tracked labels. A new text role picks its register first.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paste-Up Rule",
+        "body": "Newest on top, and a bill overlaps a neighbour only where that neighbour is bare paper, never over a title, a status strip or a screenshot. Gaps fill with torn remnants of older, real work, which are residue rather than content.",
+        "section": "layout"
+      },
+      {
+        "name": "The One-Number Rule",
+        "body": "A bill measurement lives in exactly one place and both renderers read it; the WebGL paper must be able to replace the HTML bill without the layout moving.",
+        "section": "layout"
+      },
+      {
+        "name": "The One Light Rule",
+        "body": "One light, from the upper left: the wall's radial highlight, the crinkle's diffuse light (azimuth 225°, elevation 60°), every CSS shadow offset (positive x, positive y) and the WebGL light vector (-0.55, 0.62, 0.56) agree. No second light, no glow, no neutral-grey shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Mark Rule",
+        "body": "Use the owner's InceptumRex logo as supplied: the emblem alone where it must be small (the strip, the icons), the full lockup only on a light paper ground and wide enough to read (the footer label). Never recolour, redraw or re-letter it, and never bring its cyan into the interface."
+      }
+    ],
+    "dos": [
+      "Do size each headliner line to fill its bill, one size per line (29.8cqw and 22.3cqw today), and rank lineup acts by type size.",
+      "Do define every bill measurement once, in `cqw` in `posters.ts`, and read it through the shared helpers (`imageLayout`, `lineupTops`, `blurbTop`, `remnantNameSize`) in both `Poster.tsx` and `poster-texture.ts`, mirroring every CSS `max()` floor in the painter.",
+      "Do paste a new bill with a spec in `posters.ts` and a position rule for each of the three stages (or hide it on phones, as the flyer is), newest on top, overlapping only bare paper.",
+      "Do fill gaps on the wall with torn remnants of real older work, `aria-hidden` and at the bottom of the stack.",
+      "Do write every status in words on a chip or a strip: fluorescent for live or shipping work, the outlined paper chip for the rest.",
+      "Do set a fluorescent ink as a field under black type, or as type on Poster Black, and nowhere else.",
+      "Do cast every shadow down and to the right in green-black from the one top-left light, in CSS and WebGL alike.",
+      "Do keep every focus ring in contrast with the surface it lands on: yellow on the wall and the strip, black on paper and newsprint, pink around fields.",
+      "Do print screenshots and renders unretouched and caption what is simulated or rendered.",
+      "Do give every shipping raster an ORIGIN record: a `.json` sidecar for WebP, embedded metadata for JPEG and PNG."
+    ],
+    "donts": [
+      "Don't set the work in a card grid, a dark hero or a logo wall; work lives on the wall as bills and on paper as entries.",
+      "Don't add a second ground (a theme toggle, a dark section, a coloured panel); paper is pasted on the one wall.",
+      "Don't round a corner. Paper is cut or torn.",
+      "Don't set pink, yellow or orange type on paper, newsprint or the wall, and don't use Alarm Red for anything but errors.",
+      "Don't let a bill cover a neighbour's title, status strip or screenshot.",
+      "Don't change a bill measurement in one renderer only.",
+      "Don't reorder the DOM for a stage; stages move bills through custom properties only.",
+      "Don't hide the HTML twin with `visibility` or `display` when WebGL takes over, and don't let the canvas take pointer events.",
+      "Don't run a continuous render loop; render only while something moves and the wall is on screen.",
+      "Don't mount WebGL under reduced motion or Save-Data, and don't put anything a visitor needs only in the WebGL paper; what the peel reveals is residue whose facts also live in print.",
+      "Don't tilt or overlap the program and résumé sheets; only bills tilt, and the contact flyer is one.",
+      "Don't tint, duotone or filter a screenshot, and don't ship a raster without its ORIGIN record.",
+      "Don't set readable text on the wall in anything dimmer than Stencil White, or shrink a lineup act below 4.8cqw; the grain eats contrast and 4.8cqw is the legibility floor.",
+      "Don't split a bill into several small links; one bill is one target.",
+      "Don't recolour or redraw the InceptumRex logo, or bring its cyan into the interface.",
+      "Don't put the personal email or phone from the résumé PDFs on the page; the site's public channels are the only contact.",
+      "Don't let the résumé paste-up hide the sheet when it cannot reveal it: no three.js, reduced motion, Save-Data, a jump to #about or print all show the sheet as is."
+    ]
+  }
+}
