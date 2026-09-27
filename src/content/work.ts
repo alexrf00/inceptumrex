@@ -1,6 +1,6 @@
 // Single source of truth for everything the site says about the work.
 // Every fact here is checked against the owner's repos, store listings, live
-// sites or his own analytics export (see PRODUCT.md). No invented numbers.
+// sites or the owner's own analytics export (see PRODUCT.md). No invented numbers.
 
 export type Tone = "pink" | "yellow" | "orange" | "paper"
 

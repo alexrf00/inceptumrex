@@ -13,7 +13,7 @@ web
 
 ## Product Purpose
 
-inceptumrex.com is the personal portfolio of Alex M. Rodriguez, with InceptumRex as his studio label. It shows every project and game he has built (shipped, live and prototype) with real imagery, and turns interest into a work inquiry through one contact form. Success: within the first screen a visitor sees the range (games, fiscal software, civic tools) and the proof (live sites, a Steam listing, real screenshots), then follows a live link or sends an inquiry.
+inceptumrex.com is the personal portfolio of Alex M. Rodriguez, with InceptumRex as the studio label. It shows every project and game Alex has built (shipped, live and prototype) with real imagery, and turns interest into a work inquiry through one contact form. Success: within the first screen a visitor sees the range (games, fiscal software, civic tools) and the proof (live sites, a Steam listing, real screenshots), then follows a live link or sends an inquiry.
 
 The site used to sell computer repair and IT support. Owner decision (2026-09-27): **portfolio only**. The repair-business copy, service list, hours and "certified technicians" claims are retired; one contact form stays for work inquiries.
 
@@ -39,7 +39,7 @@ One engineer who builds whole products end to end, across worlds that rarely sha
 - **Big Party art:** the 3D game's images are rendered inside the game; the 2D game's sprites and painted capsules are AI-generated and must be labelled as such if shown.
 - **Credit:** Fixion was co-developed with Frankely Diaz, who wrote most of its core gameplay; Alex built its menus, Steam networking and lobbies, economy and backend worker, and map pipeline. BrolickGym was a collaboration.
 - **Never publish:** secrets or keys, personal documents, other people's personal data (for example LuzRD's live chat names), Steamworks or other confidential dashboards, client logos without permission, and third-party or unknown-source artwork (the Fixion Ciguapa paintings, the Omni Run mascots).
-- **Numbers:** only figures that come from the owner's own data (store listings, the LuzRD Search Console export, repository history) or his own résumé. The résumé's 40% and 60% figures are his statements from his résumé PDFs and appear only there. No invented metrics.
+- **Numbers:** only figures that come from the owner's own data (store listings, the LuzRD Search Console export, repository history) or the owner's own résumé. The résumé's 40% and 60% figures are the owner's statements from the résumé PDFs and appear only there. No invented metrics.
 
 ## Brand Commitments
 

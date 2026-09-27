@@ -12,7 +12,7 @@ export function Resume() {
       <section id="about" className="sheet resume" aria-labelledby="about-title">
         <div className="resume__side">
           <figure className="resume__photo">
-            <Image src="/work/alex.webp" alt="Alex M. Rodriguez in a red cap, a black pug asleep against him" fill sizes="(min-width: 900px) 320px, 70vw" style={{ objectFit: "cover", objectPosition: "50% 40%" }} />
+            <Image src="/work/alex.webp" alt="Alex M. Rodriguez in a red cap, resting beside a sleeping black pug" fill sizes="(min-width: 900px) 320px, 70vw" style={{ objectFit: "cover", objectPosition: "50% 40%" }} />
           </figure>
           <ul className="resume__links">
             <li>
