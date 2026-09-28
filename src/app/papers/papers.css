@@ -582,6 +582,57 @@
   border-bottom: 2px solid var(--rule);
 }
 
+/* Numbers in a table line up on their right edge. */
+.pp-table .pp-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.pp-table thead th:not(:first-child):not(:nth-child(2)) {
+  text-align: right;
+}
+.pp-table--data tbody th {
+  white-space: nowrap;
+}
+/* A row that names the group of rows below it. */
+.pp-table .pp-group {
+  padding-top: 1rem;
+  font: 700 0.78rem/1.3 var(--font-narrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sheet-dim);
+}
+
+/* The paper's own documents: the PDF and the repository, as printed links. */
+.pp-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.75rem;
+  margin-top: 1.25rem;
+}
+.pp-article .pp-links > li {
+  padding-left: 0;
+}
+.pp-article .pp-links > li::before {
+  content: none;
+}
+.pp-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font: 600 1rem/1.4 var(--font-body);
+  color: var(--sheet-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+.pp-links a:hover {
+  text-decoration-thickness: 3px;
+}
+.pp-links a:focus-visible {
+  outline: 2px solid var(--sheet-ink);
+  outline-offset: 3px;
+}
+
 /* Listings: set flush on the sheet between a 2px and a 1px rule. */
 .pp-scroll--code {
   border-top: 2px solid var(--rule);

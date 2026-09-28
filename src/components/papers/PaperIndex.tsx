@@ -13,8 +13,8 @@ import { PackageAnatomy } from "./sealed-skills/figures"
 const figures: Record<string, { figure: ReactNode; caption: string; label: string }> = {
   "sealed-skills": {
     figure: <PackageAnatomy />,
-    label: "Figure 1 of Sealed Skills, scrolls sideways",
-    caption: "Figure 1 of the paper. Anatomy of a sealed package. Each recipient entry holds the content key wrapped to the public key that provider publishes on its own domain.",
+    label: "Figure from Sealed Skills, scrolls sideways",
+    caption: "From the paper's design. Anatomy of a sealed package. Each recipient entry holds the content key wrapped to the public key that provider publishes on its own domain.",
   },
 }
 

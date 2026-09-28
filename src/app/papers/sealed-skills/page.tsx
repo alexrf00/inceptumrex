@@ -1,18 +1,21 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import type { ReactNode } from "react"
-import { ArrowLeft } from "@phosphor-icons/react/dist/ssr"
+import { ArrowLeft, ArrowUpRight, FilePdf } from "@phosphor-icons/react/dist/ssr"
 import { Strip } from "@/components/Strip"
 import { Foot } from "@/components/Foot"
 import { Code } from "@/components/papers/Code"
 import { Contents, type ContentsEntry } from "@/components/papers/Contents"
 import { ScrollRegion } from "@/components/papers/ScrollRegion"
-import { PackageAnatomy, SealingSequence, TrustBoundary, UnsealingSequence } from "@/components/papers/sealed-skills/figures"
+import { PackageAnatomy, TrustBoundary } from "@/components/papers/sealed-skills/figures"
+import { ExtractionByCategory } from "@/components/papers/sealed-skills/charts"
 import { paperHref, papers } from "@/content/papers"
 import { person } from "@/content/work"
 
-// "Sealed Skills", v0.2, set verbatim from the owner's draft on one newsprint
-// sheet. Only the author line differs from the draft: it carries the full name.
+// "Sealed Skills", v1.0: the research paper that grew out of the v0.2 position
+// paper. The page sets the paper's abstract, introduction, results, limitations
+// and conclusion verbatim from its LaTeX source (condensed where marked); the
+// full text is the PDF, and the code, data and source are on GitHub.
 
 function findPaper(slug: string) {
   const found = papers.find((p) => p.slug === slug)
@@ -23,6 +26,8 @@ function findPaper(slug: string) {
 const paper = findPaper("sealed-skills")
 const href = paperHref(paper)
 const title = `${paper.title}, ${paper.author}`
+const PDF = "/papers/sealed-skills.pdf"
+const REPO = "https://github.com/alexrf00/sealed-skills"
 
 export const metadata: Metadata = {
   title,
@@ -37,19 +42,30 @@ export const metadata: Metadata = {
     siteName: "InceptumRex",
     publishedTime: paper.date,
     authors: [paper.author],
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Alex M. Rodriguez: every project pasted on one wall" }],
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Alex M. Rodriguez: every project pasted on one wall",
+      },
+    ],
   },
-  twitter: { card: "summary_large_image", title, description: paper.subtitle, images: ["/og.jpg"] },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description: paper.subtitle,
+    images: ["/og.jpg"],
+  },
 }
 
 const ABSTRACT =
-  "Agent skills, the packaged instructions, scripts and reference files that teach an AI model a specialised job, are becoming commercial products, yet they ship as plain text that anyone can copy. This paper proposes Sealed Skills: a skill is encrypted to a public key that an AI provider publishes at a fixed address on its own domain. The skill owner fetches that key over HTTPS, seals the skill offline, and distributes the package anywhere. No onboarding, agreement or other exchange with the provider is required, and only the holder of the matching private key, the provider, can open the package. We show that decryption must happen on the provider's servers and never in a client application the user controls, because anything present on the user's device can be extracted. We then set out the channels through which a skill can still reach the person using the AI, what reduces each one, and the one design that keeps secret logic away from both the model and the user: placing it behind a tool on the owner's own server. Finally, we are explicit about what sealing without a handshake gives up: contractual terms, audit and reliable revocation."
+  "LLM agent skills (folders of instructions, scripts and reference files that an agent loads on demand) are becoming commercial products, yet they ship as plain text that anyone can copy. We present Sealed Skills, a packaging scheme in which a skill is encrypted with HPKE to a public key that an AI provider publishes at a well-known URL on its own domain. The owner seals offline with no handshake, packages can be distributed through untrusted channels, and only the provider's servers can open them; clients send a reference and a licence and never receive the skill. Our prototype seals and opens a 10 KB skill in under half a millisecond. We then measure the channel encryption cannot close: the model must read the skill, and its answers go to the user. Across eight synthetic skills, 24 extraction attacks and two open 7–8B models, 72–75% of attack conversations disclose at least half of a skill's rules and 35–41% reproduce it nearly verbatim. A confidentiality instruction reduces substantial extraction to 19% and 46%, but for one model at the cost of failing a third of legitimate tasks, mostly by refusing them. A de-obfuscating lexical output filter reduces substantial extraction to 1.6–3.1% but blocks 12.5–25% of benign replies, because models quote rules while applying them; embedding-similarity filtering is far weaker. Per-customer canaries appear in 98% of verbatim leaks, enabling attribution. In a tool-use case study, scripts co-located with a code interpreter are extractable, while an owner-hosted tool protects the code but still reveals its rate table to ordinary queries. Sealing protects a skill's artifacts from copying; it does not make its content or function secret."
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
-  headline: paper.title,
-  alternativeHeadline: paper.subtitle,
+  headline: `${paper.title}: ${paper.subtitle}`,
   author: { "@type": "Person", name: paper.author, url: person.site },
   datePublished: paper.date,
   version: paper.version,
@@ -57,28 +73,26 @@ const jsonLd = {
   inLanguage: "en",
   url: new URL(href, person.site).href,
   keywords: paper.topics,
+  encoding: {
+    "@type": "MediaObject",
+    contentUrl: new URL(PDF, person.site).href,
+    encodingFormat: "application/pdf",
+  },
+  isBasedOn: REPO,
 }
 
 const CONTENTS = [
   { id: "intro", n: "1", title: "Introduction" },
-  { id: "terms", n: "2", title: "Parties and terms" },
-  { id: "goals", n: "3", title: "Goals and non-goals" },
-  { id: "overview", n: "4", title: "How it works" },
-  { id: "publish", n: "5", title: "The published key" },
-  { id: "seal", n: "6", title: "Sealing without a handshake" },
-  { id: "where", n: "7", title: "Where decryption happens" },
-  { id: "load", n: "8", title: "Loading a sealed skill" },
-  { id: "format", n: "9", title: "Package format" },
-  { id: "keys", n: "10", title: "Keys and rotation" },
-  { id: "threats", n: "11", title: "Threat model" },
-  { id: "leaks", n: "12", title: "Keeping it from the user" },
-  { id: "tradeoffs", n: "13", title: "What the handshake gave" },
-  { id: "build", n: "14", title: "Who builds what" },
-  { id: "adoption", n: "15", title: "Adoption path" },
-  { id: "open", n: "16", title: "Open questions" },
-  { id: "conclusion", n: "17", title: "Conclusion" },
-  { id: "appendix", n: "A", title: "Reference pseudocode" },
-  { id: "refs", n: "B", title: "References" },
+  { id: "design", n: "2", title: "Design" },
+  { id: "goals", n: "3", title: "Goals and threat model" },
+  { id: "setup", n: "4", title: "Evaluation setup" },
+  { id: "cost", n: "5", title: "RQ1: cost of sealing" },
+  { id: "extraction", n: "6", title: "RQ2: extraction from context" },
+  { id: "filters", n: "7", title: "RQ3: output filters" },
+  { id: "scripts", n: "8", title: "RQ4: scripts through tools" },
+  { id: "limits", n: "9", title: "Limitations" },
+  { id: "conclusion", n: "10", title: "Conclusion" },
+  { id: "refs", n: "R", title: "Selected references" },
 ] as const satisfies readonly ContentsEntry[]
 
 type SectionId = (typeof CONTENTS)[number]["id"]
@@ -99,95 +113,87 @@ function Section({ id, children }: { id: SectionId; children: ReactNode }) {
   )
 }
 
-const KEY_DOCUMENT = `GET https://provider-a.example/.well-known/sealed-skill-keys
-
-{
-  "issuer": "provider-a.example",
-  "keys": [
-    {
-      "key_id": "pa-2026-09-k3",
-      "kty": "OKP", "crv": "X25519", "x": "base64url…",
-      "hpke_suite": { "kem": "0x0020", "kdf": "0x0001", "aead": "0x0002" },
-      "seal_until": "2026-12-31T00:00:00Z",
-      "decrypt_until": "2027-12-31T00:00:00Z",
-      "attestation": "base64…"   // optional, see below
-    }
-  ],
-  "policy_url": "https://provider-a.example/sealed-skills/policy"
-}`
-
-const MANIFEST = `{
-  "format": "sealed-skill/0.2",
-  "skill": {
-    "id": "com.example.tax-reconciler",
-    "version": "2.3.0",
-    "public_description": "Reconciles purchase ledgers against monthly tax filings.",
-    "owner": "did:web:example.com"
-  },
-  "payload": {
-    "aead": "AES-256-GCM",
-    "chunking": "STREAM-64KiB",
-    "size": 482113,
-    "sha256": "9f2c…e71a"
-  },
-  "recipients": [
-    {
-      "provider": "provider-a.example",
+const MANIFEST = `{ "format": "sealed-skill/0.2",
+  "skill":   { "id": "com.example.tax-reconciler", "version": "2.3.0",
+               "public_description": "Reconciles purchase ledgers against tax filings.",
+               "owner": "did:web:example.com" },
+  "payload": { "aead": "AES-256-GCM", "chunking": "STREAM-64KiB",
+               "size": 482113, "sha256": "9f2c…e71a" },
+  "recipients": [{ "provider": "provider-a.example", "key_id": "pa-2026-09-k3",
       "key_source": "https://provider-a.example/.well-known/sealed-skill-keys",
-      "key_id": "pa-2026-09-k3",
-      "hpke_suite": { "kem": "0x0020", "kdf": "0x0001", "aead": "0x0002" },
-      "enc": "base64…",
-      "wrapped_cek": "base64…"
-    }
-  ],
-  "policy": {
-    "confidential": true,
-    "licence_issuer_key": "https://licensing.example.com/.well-known/jwks.json",
-    "allowed_runtimes": ["python3"],
-    "scripts_readable_by_model": false
+      "hpke_suite": {"kem": "0x0020", "kdf": "0x0001", "aead": "0x0002"},
+      "enc": "…", "wrapped_cek": "…" }],
+  "policy":  { "confidential": true, "scripts": "owner-hosted",
+               "licence_issuer_key": "https://licensing.example.com/.well-known/jwks.json" },
+  "signature": { "alg": "Ed25519", "key_id": "example-signing-2026", "sig": "…" } }`
+
+// Table 1 and a subset of Table 2 of the paper, from results/summary.json.
+const TABLE_1 = [
+  {
+    model: "Llama 3.1 8B",
+    guard: "no",
+    full: "35.4",
+    subst: "71.9",
+    rules: "70.4",
+    canary: "42.2",
+    success: "100.0",
+    benignRules: "20.1",
   },
-  "signature": { "alg": "Ed25519", "key_id": "example-signing-2026", "sig": "base64…" }
-}`
+  {
+    model: "Llama 3.1 8B",
+    guard: "yes",
+    full: "13.5",
+    subst: "18.8",
+    rules: "19.5",
+    canary: "15.6",
+    success: "65.6",
+    benignRules: "15.1",
+  },
+  {
+    model: "Qwen 2.5 7B",
+    guard: "no",
+    full: "41.1",
+    subst: "74.5",
+    rules: "74.3",
+    canary: "46.9",
+    success: "96.9",
+    benignRules: "14.0",
+  },
+  {
+    model: "Qwen 2.5 7B",
+    guard: "yes",
+    full: "18.8",
+    subst: "46.4",
+    rules: "46.6",
+    canary: "20.8",
+    success: "96.9",
+    benignRules: "14.9",
+  },
+]
 
-const PSEUDOCODE = `# Runs on the owner's machine. No contact with the provider.
-def seal(skill_dir, providers, owner_key, policy):
-    cek = random_bytes(32)
-    payload = stream_encrypt(cek, tar(skill_dir), chunk=64 * 1024)  # AES-256-GCM
-    header = {"skill": meta(skill_dir), "payload": {"sha256": sha256(payload)}}
-    info = b"sealed-skill/0.2" + sha256(canonical(header))
-
-    recipients = []
-    for p in providers:
-        doc = https_get(f"https://{p}/.well-known/sealed-skill-keys")  # TLS cert = provider's domain
-        key = newest_key_with_seal_until_after(doc, now())
-        require(matches_pin(p, key) and matches_other_vantage_points(p, key))
-        if policy.require_attestation:
-            require(attestation_ok(key))
-        enc, wrapped = hpke_seal(key.public, info=info, plaintext=cek)
-        recipients.append({"provider": p, "key_id": key.id,
-                           "enc": enc, "wrapped_cek": wrapped})
-
-    manifest = header | {"recipients": recipients, "policy": policy}
-    manifest["signature"] = ed25519_sign(owner_key, canonical(manifest))
-    return manifest, payload
-
-
-# Runs ONLY on the provider's servers. Never in a client app.
-def load_sealed(skill_ref, licence):
-    manifest, payload = fetch_package(skill_ref)
-    require(ed25519_verify(owner_public_key(manifest), manifest))
-    require(sha256(payload) == manifest["payload"]["sha256"])
-    if SUPPORTS_LICENSING:
-        require(licence_valid_offline(licence, manifest))  # owner-signed, no call to owner
-
-    r = find_recipient(manifest, SELF)
-    info = b"sealed-skill/0.2" + sha256(canonical(header_of(manifest)))
-    cek = hpke_open(PRIVATE_KEY_IN_HSM, r["enc"], info=info, ciphertext=r["wrapped_cek"])
-    files = untar(stream_decrypt(cek, payload))            # memory only
-
-    mount_run_only(files.scripts)                          # executable, not readable by the model
-    add_output_filter(files.text)                          # block replies that reproduce the skill
-    return add_to_context(files.instructions, confidential=True)`
+const TABLE_2: {
+  group: string
+  rows: [string, string, string, string, string][]
+}[] = [
+  {
+    group: "Without guard instruction",
+    rows: [
+      ["No filter", "71.9", "0.0", "74.5", "0.0"],
+      ["Lexical, L = 12", "3.1", "25.0", "2.6", "18.8"],
+      ["Lexical, L = 24", "9.9", "6.2", "5.2", "3.1"],
+      ["Semantic (τ at 5%)", "50.0", "12.5", "59.4", "3.1"],
+    ],
+  },
+  {
+    group: "With guard instruction",
+    rows: [
+      ["No filter", "18.8", "0.0", "46.4", "0.0"],
+      ["Lexical, L = 12", "2.1", "12.5", "1.6", "18.8"],
+      ["Lexical, L = 24", "2.1", "0.0", "4.7", "9.4"],
+      ["Semantic (τ at 5%)", "16.2", "0.0", "31.8", "6.2"],
+    ],
+  },
+]
 
 export default function SealedSkillsPage() {
   return (
@@ -209,670 +215,349 @@ export default function SealedSkillsPage() {
 
               <article className="pp-article" aria-labelledby="pp-title">
                 <header className="pp-head">
-                  <p className="pp-eyebrow">Position paper · Draft for discussion</p>
+                  <p className="pp-eyebrow">Research paper · Preprint draft</p>
                   <h1 id="pp-title" className="sheet__title pp-title">
                     Sealed Skills
                   </h1>
-                  <p className="pp-subtitle">
-                    Encrypting AI agent skills to a key the AI company publishes, so that only that company&apos;s servers can open them, with no handshake between owner and provider.
-                  </p>
+                  <p className="pp-subtitle">{paper.subtitle}</p>
                   <dl className="pp-facts">
                     <div>
                       <dt>Author</dt>
-                      <dd>Alex M. Rodriguez</dd>
+                      <dd>{paper.author}</dd>
                     </div>
                     <div>
                       <dt>Version</dt>
-                      <dd>0.2</dd>
+                      <dd>{paper.version}</dd>
                     </div>
                     <div>
                       <dt>Date</dt>
                       <dd>
-                        <time dateTime={paper.date}>27 September 2026</time>
+                        <time dateTime={paper.date}>{paper.dateLabel}</time>
                       </dd>
                     </div>
                     <div>
                       <dt>Status</dt>
                       <dd>
-                        <span className="chip chip--paper">Proposal, not a standard</span>
+                        <span className="chip chip--paper">{paper.status}</span>
                       </dd>
                     </div>
                   </dl>
+                  <ul className="pp-links">
+                    <li>
+                      <a href={PDF}>
+                        <FilePdf aria-hidden="true" weight="bold" />
+                        Read the full paper (PDF, 21 pages)
+                      </a>
+                    </li>
+                    <li>
+                      <a href={REPO} rel="noopener">
+                        <ArrowUpRight aria-hidden="true" weight="bold" />
+                        Code, data and LaTeX source on GitHub
+                      </a>
+                    </li>
+                  </ul>
                 </header>
 
                 <div className="pp-abstract">
                   <p className="pp-eyebrow">Abstract</p>
-                  <p>
-                    Agent skills, the packaged instructions, scripts and reference files that teach an AI model a specialised job, are becoming commercial products, yet they ship as plain text that anyone can copy. This paper proposes <strong>Sealed Skills</strong>: a skill is encrypted to a public key that an AI provider publishes at a fixed address on its own domain. The skill owner fetches that key over HTTPS, seals the skill offline, and distributes the package anywhere. No onboarding, agreement or other exchange with the provider is required, and only the holder of the matching private key, the provider, can open the package. We show that decryption must happen on the provider&apos;s servers and never in a client application the user controls, because anything present on the user&apos;s device can be extracted. We then set out the channels through which a skill can still reach the person using the AI, what reduces each one, and the one design that keeps secret logic away from both the model and the user: placing it behind a tool on the owner&apos;s own server. Finally, we are explicit about what sealing without a handshake gives up: contractual terms, audit and reliable revocation.
-                  </p>
+                  <p>{ABSTRACT}</p>
                 </div>
 
                 <div className="pp-changes">
-                  <p className="pp-eyebrow">What changed from v0.1</p>
+                  <p className="pp-eyebrow">From position paper to research paper</p>
                   <ul>
-                    <li>The onboarding handshake is no longer required. Owners seal to a key the provider publishes on its domain (sections 5 and 6).</li>
-                    <li>New section on why decryption must run on the provider&apos;s servers, not in desktop or command-line clients (section 7).</li>
-                    <li>Expanded treatment of how a skill can leak to the end user through the model, with mitigations per channel (section 12).</li>
-                    <li>New section comparing handshake, published-key and online key-release models, and what dropping the handshake costs (section 13).</li>
+                    <li>Version 0.2 was a position paper: it proposed the design. Version 1.0 builds it and measures it.</li>
+                    <li>New: a working prototype, a test corpus of eight skills and 24 attacks, 896 model conversations, a sealing benchmark and a tool-use case study.</li>
+                    <li>New: related work across 61 references, including the closest prior design (van Wyk et al., 2023) and the 2026 skill-stealing attacks.</li>
+                    <li>This page sets the paper in part; the PDF is the complete text.</li>
                   </ul>
                 </div>
 
                 <Section id="intro">
                   <p>
-                    A skill is a folder. It usually holds a main instruction file (for example <code>SKILL.md</code>), optional scripts the agent may run, and reference documents the agent reads when it needs them. The agent loads the skill into its context when a task matches the skill&apos;s description. Good skills encode hard-won domain knowledge: how a tax authority validates a filing, how a hospital codes a procedure, how a firm structures a due-diligence memo.
+                    LLM agents increasingly acquire specialised abilities from <em>skills</em>: directories holding instructions, scripts and reference files that the agent loads when a task calls for
+                    them. A good skill encodes expertise that took time and money to produce, such as how a tax authority cross-checks a filing or how a firm scores a contract, and skills are starting
+                    to be sold. They ship as plain text. Whoever obtains the folder can read it, republish it, or load it into a competing product, and the licence terms attached to it enforce
+                    nothing.
                   </p>
                   <p>
-                    Because a skill is plain text, its protection today is entirely social. Marketplace terms say &quot;do not redistribute&quot;, but the file enforces nothing. One leaked copy can be republished, rebranded, or loaded into a competing product. This discourages the experts whose knowledge would make skills most valuable.
+                    This paper asks what it would take to sell a skill that only a chosen AI provider can open, and how much protection that actually buys. We make three observations. First, the
+                    cryptography is straightforward and cheap: an owner can encrypt a skill to a public key the provider publishes, in the same way anyone can encrypt email to a published key, without
+                    the parties ever talking. Second, the protection depends on a strict architectural rule that is easy to get wrong: the skill must only ever be decrypted on the provider&apos;s
+                    servers, never in a client, because anything present on the user&apos;s device can be extracted by the user. Third, and most important, encryption cannot close the channel that
+                    matters most. To follow a skill, the model must read it in clear text, and the model&apos;s answers go to the user, who can ask for the skill directly, indirectly, or in disguise.
                   </p>
-                  <p>
-                    We propose that commercial skills be <em>sealed</em>: encrypted so that the package is useless ciphertext to everyone except the AI providers its owner names. The motivating case is a skill meant to run only with one assistant, for example Claude from Anthropic, and to stay unreadable to the people using that assistant.
-                  </p>
-                  <p>
-                    Version 0.1 of this paper required an onboarding handshake between owner and provider. This version drops it. An owner should be able to seal a skill for a provider the same way anyone can encrypt an email to a published public key: by looking the key up, without asking permission.
-                  </p>
+                  <h3 className="pp-h3">Contributions</h3>
+                  <ul>
+                    <li>
+                      <strong>Design.</strong> Sealed Skills, a provider-bound packaging scheme for agent skills: HPKE key wrapping to a key published at <code>/.well-known/sealed-skill-keys</code>,
+                      STREAM-encrypted payloads, owner signatures, offline-verifiable licences, and per-customer canaries, with no owner–provider handshake.
+                    </li>
+                    <li>
+                      <strong>Implementation.</strong> An open prototype with a mock provider, and measurements showing sealing costs are negligible next to model inference.
+                    </li>
+                    <li>
+                      <strong>Measurement of the residual channel.</strong> On eight synthetic multi-rule skills, 24 attacks and two open models, we quantify extraction from context, the effect and
+                      utility cost of a guard instruction, and the trade-off curves of lexical and semantic output filters. We use an evidence-grounded judge for rule disclosure after finding that an
+                      unconstrained LLM judge counts applying a rule as disclosing it.
+                    </li>
+                    <li>
+                      <strong>Scripts.</strong> A tool-use case study showing that &ldquo;run-only&rdquo; scripts cannot be enforced in a sandbox that also executes arbitrary code, and that
+                      owner-hosted tools protect implementations but not function.
+                    </li>
+                  </ul>
                 </Section>
 
-                <Section id="terms">
-                  <dl className="pp-defs">
-                    <div>
-                      <dt>Skill owner</dt>
-                      <dd>The person or company that wrote the skill and holds its rights. Holds a long-term signing key.</dd>
-                    </div>
-                    <div>
-                      <dt>AI provider</dt>
-                      <dd>The company that operates the model and the servers on which skills are unsealed and run.</dd>
-                    </div>
-                    <div>
-                      <dt>Provider servers</dt>
-                      <dd>The provider&apos;s own infrastructure, ideally a hardware-isolated environment that can prove what code it runs. The only place a sealed skill is ever decrypted.</dd>
-                    </div>
-                    <div>
-                      <dt>Client application</dt>
-                      <dd>The app the user interacts with: a chat website, a desktop app, a command-line agent such as Claude Code, or a customer&apos;s own integration. Runs on hardware the user controls.</dd>
-                    </div>
-                    <div>
-                      <dt>End user</dt>
-                      <dd>The person using the AI. Benefits from the skill, never sees its contents.</dd>
-                    </div>
-                    <div>
-                      <dt>Key endpoint</dt>
-                      <dd>A fixed HTTPS address on the provider&apos;s domain where it publishes its current sealing public keys.</dd>
-                    </div>
-                    <div>
-                      <dt>Sealed package</dt>
-                      <dd>The distributable artifact: a signed manifest plus an encrypted payload. Safe to host on any public server.</dd>
-                    </div>
-                    <div>
-                      <dt>Content key (CEK)</dt>
-                      <dd>A random 256-bit symmetric key that encrypts one version of one skill.</dd>
-                    </div>
-                  </dl>
-                </Section>
-
-                <Section id="goals">
-                  <div className="pp-goals">
-                    <div>
-                      <h3 className="pp-h3">Goals</h3>
-                      <ul>
-                        <li>
-                          <strong>Confidentiality.</strong> Only the servers of providers the owner names can recover the skill.
-                        </li>
-                        <li>
-                          <strong>No handshake.</strong> The owner can seal for a provider without contacting it.
-                        </li>
-                        <li>
-                          <strong>Hidden from the end user.</strong> The skill file never reaches the client application or the person using it.
-                        </li>
-                        <li>
-                          <strong>Integrity.</strong> Tampering is detected before the skill runs.
-                        </li>
-                        <li>
-                          <strong>Free distribution.</strong> Packages can travel through untrusted marketplaces and mirrors.
-                        </li>
-                        <li>
-                          <strong>Licensing where honoured.</strong> A provider that chooses to can refuse to load a skill without a valid owner-signed licence.
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="pp-h3">Non-goals</h3>
-                      <ul>
-                        <li>Hiding the skill from the provider. Its model has to read it.</li>
-                        <li>Guaranteeing the end user learns nothing. The model&apos;s answers go to the user, and behaviour can be observed (section 12).</li>
-                        <li>Protecting skills on models running on user-controlled hardware.</li>
-                        <li>Binding the provider to terms. Without a handshake there is no agreement to bind it (section 13).</li>
-                      </ul>
-                    </div>
-                  </div>
-                </Section>
-
-                <Section id="overview">
+                <Section id="design">
                   <p>
-                    Sealing uses envelope encryption. The owner encrypts the skill once with a random content key, then wraps that content key for each chosen provider using the public key the provider publishes. Adding a provider means wrapping one more copy of a 32-byte key; the skill itself is not re-encrypted. A signature over the whole manifest binds everything together.
+                    Sealing uses envelope encryption. The owner samples a fresh 256-bit content key, encrypts the skill folder with it in 64 KiB STREAM chunks, and wraps the content key with HPKE (RFC
+                    9180) for each chosen provider, using the public key that provider publishes at a well-known path on its own domain. The HPKE context binds each wrapped key to one skill version
+                    and payload, and an Ed25519 signature covers the whole manifest. Adding a recipient later means wrapping the same 32-byte key once more; the payload is untouched.
                   </p>
                   <figure className="pp-figure">
-                    <ScrollRegion label="Figure 1: Anatomy of a sealed package">
+                    <ScrollRegion label="Figure 1: Anatomy of a sealed package, scrolls sideways">
                       <PackageAnatomy />
                     </ScrollRegion>
                     <figcaption className="pp-cap">
                       <b>Figure 1</b>Anatomy of a sealed package. Each recipient entry holds the content key wrapped to the public key that provider publishes on its own domain.
                     </figcaption>
                   </figure>
-                </Section>
-
-                <Section id="publish">
-                  <p>Each participating provider publishes its sealing keys at a well-known address on its primary domain, for example:</p>
-                  <Code code={KEY_DOCUMENT} lang="json" label="Example key document" />
-                  <p>The fields matter for a scheme with no relationship between the parties:</p>
-                  <ul>
-                    <li>
-                      <strong>
-                        <code>seal_until</code>
-                      </strong>{" "}
-                      tells owners when to stop sealing to this key.
-                    </li>
-                    <li>
-                      <strong>
-                        <code>decrypt_until</code>
-                      </strong>{" "}
-                      is the provider&apos;s public commitment to keep the private key usable until then, so packages sealed today keep working without the owner ever contacting the provider.
-                    </li>
-                    <li>
-                      <strong>
-                        <code>attestation</code>
-                      </strong>{" "}
-                      is optional evidence from the hardware that the private key was generated inside, and cannot leave, an environment running published code. It turns &quot;trust the company&quot; into &quot;trust the company&apos;s measured servers&quot;.
-                    </li>
-                    <li>
-                      <strong>
-                        <code>policy_url</code>
-                      </strong>{" "}
-                      is where the provider states, unilaterally and publicly, how it treats sealed content: no training, no retention beyond the session, refusal of extraction requests. Without a handshake this public statement is the only commitment an owner has.
-                    </li>
-                  </ul>
-                  <div className="pp-note">
-                    <p className="pp-eyebrow">How the owner knows the key is genuine</p>
-                    <p>
-                      The baseline is the provider&apos;s HTTPS certificate: the key came from the provider&apos;s own domain. That is as strong as the domain&apos;s security, so tooling should add cheap checks: fetch from more than one network location and compare, pin the key across fetches and alert on unexpected changes, and, where available, confirm the key appears in a public transparency log. None of these require contacting the provider.
-                    </p>
-                  </div>
-                </Section>
-
-                <Section id="seal">
-                  <p>The owner&apos;s sealing tool does the following. There is no message from the owner to the provider at any step.</p>
-                  <ol className="pp-steps">
-                    <li>
-                      <div>
-                        <strong>Fetch the key.</strong> Download the provider&apos;s key document over HTTPS and select a key whose <code>seal_until</code> is in the future.
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <strong>Check it.</strong> Validate the certificate, compare with the pinned value and other vantage points, and verify attestation if the owner requires it.
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <strong>Encrypt.</strong> Generate a content key and encrypt the skill folder.
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <strong>Wrap.</strong> Wrap the content key to each chosen provider with HPKE (RFC 9180).
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <strong>Sign and publish.</strong> Sign the manifest with the owner&apos;s key and publish the package on any host.
-                      </div>
-                    </li>
-                  </ol>
-                  <figure className="pp-figure">
-                    <ScrollRegion label="Figure 2: Sealing">
-                      <SealingSequence />
-                    </ScrollRegion>
-                    <figcaption className="pp-cap">
-                      <b>Figure 2</b>Sealing. The provider publishes once; any owner can seal to it at any time without the provider knowing.
-                    </figcaption>
-                  </figure>
-                </Section>
-
-                <Section id="where">
                   <p>
-                    This is the most important constraint in the design. <strong>A sealed skill must only ever be decrypted on the provider&apos;s servers.</strong> It must never be decrypted in a client application, even one the provider itself publishes, such as a desktop app or a command-line agent.
+                    The central architectural rule is that <strong>a sealed skill is decrypted only on the provider&apos;s servers, never in a client</strong>, including clients the provider itself
+                    distributes. Any secret shipped to a device the user controls can be extracted by that user, and even a correctly decrypted skill would have to travel from the client to the model
+                    inside the request, where the user can read it. A client therefore sends only a skill reference and, where the owner requires one, a licence token.
                   </p>
-                  <p>The reason is that the user controls their own device. Two things follow:</p>
-                  <ul>
-                    <li>
-                      <strong>Any secret shipped to the device can be extracted.</strong> If a desktop client held a private key, or a credential that proves &quot;I am the provider&quot;, the user could copy it out of the program and decrypt the skill themselves. Obfuscation slows this down; it does not stop it.
-                    </li>
-                    <li>
-                      <strong>Plaintext on the device is visible to the user.</strong> Even if decryption were somehow safe, the skill text would then have to travel to the model inside the request. The user can read that traffic, the program&apos;s memory, and saved transcripts.
-                    </li>
-                  </ul>
                   <figure className="pp-figure">
-                    <ScrollRegion label="Figure 3: The trust boundary">
+                    <ScrollRegion label="Figure 2: The trust boundary, scrolls sideways">
                       <TrustBoundary />
                     </ScrollRegion>
                     <figcaption className="pp-cap">
-                      <b>Figure 3</b>The trust boundary. The client sends a reference; the skill is decrypted, used and filtered entirely on the provider side.
+                      <b>Figure 2</b>The trust boundary. The client sends a reference; the skill is decrypted, used and filtered entirely on the provider side.
                     </figcaption>
                   </figure>
+                  <Code code={MANIFEST} lang="json" label="Abridged manifest (format sealed-skill/0.2)" />
+                </Section>
+
+                <Section id="goals">
+                  <p>The paper states five goals (condensed here):</p>
+                  <ul>
+                    <li>
+                      <strong>G1 Recipient confidentiality.</strong> Only providers named by the owner can recover the skill plaintext from a package.
+                    </li>
+                    <li>
+                      <strong>G2 No handshake.</strong> The owner can seal for a provider using only public information the provider already publishes.
+                    </li>
+                    <li>
+                      <strong>G3 Integrity and binding.</strong> Modified packages are rejected, and a key wrapped for one package cannot be used to open another.
+                    </li>
+                    <li>
+                      <strong>G4 Client exclusion.</strong> The plaintext never reaches the client or the end user as a file.
+                    </li>
+                    <li>
+                      <strong>G5 Output confidentiality.</strong> The end user cannot recover the skill&apos;s contents from the agent&apos;s outputs.
+                    </li>
+                  </ul>
                   <p>
-                    For a provider like Anthropic, this means a sealed skill could be offered through its hosted surfaces (the Claude apps and the API), where the skill is fetched and loaded on Anthropic&apos;s side. A command-line or desktop client would send only the skill&apos;s identifier and licence, and the server would add the skill to Claude&apos;s context before the model runs. The client would never download the skill folder, which is how local skills work today.
+                    G1–G4 are cryptographic or architectural properties. G5 is not: the model must read the skill in clear text to follow it, and its outputs go to the user. We treat G5 as a quantity
+                    to be measured and reduced, not a property to be proved. The recipient provider is trusted with the plaintext, and models running on user-controlled hardware are out of scope.
                   </p>
                 </Section>
 
-                <Section id="load">
-                  <p>When a user&apos;s agent needs the skill, the provider&apos;s servers:</p>
-                  <ol className="pp-steps">
-                    <li>
-                      <div>
-                        <strong>Receive a reference.</strong> The client sends the skill ID, version and, if the skill requires one, a licence token the owner issued to that customer.
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <strong>Fetch and verify.</strong> Download the sealed package from its public location and check the owner&apos;s Ed25519 signature.
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <strong>Check the licence.</strong> If the provider supports licensing, verify the owner-signed token offline: right skill, right customer, not expired. This needs no call to the owner.
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <strong>Unwrap and decrypt.</strong> Find this provider&apos;s recipient entry, open it with the private key, and decrypt the payload into memory. Nothing is written to disk.
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <strong>Load as confidential.</strong> Place the skill in the model&apos;s context marked as sealed, run its scripts in a sandbox that cannot read the skill files back out (section 12), and filter outputs.
-                      </div>
-                    </li>
-                  </ol>
+                <Section id="setup">
+                  <p>
+                    <strong>Models.</strong> Llama 3.1 8B Instruct and Qwen 2.5 7B Instruct, 4-bit quantised, served by Ollama on one NVIDIA RTX 3070 (8 GB), greedy decoding. <strong>Corpus.</strong>{" "}
+                    Eight synthetic skills written for the study (tax reconciliation, veterinary visit summaries, NDA review, clearance pricing, incident postmortems, menu costing, tariff
+                    classification, B2B outreach), each 290–360 words with eight or nine numbered rules, a required output format and a unique canary phrase. <strong>Attacks and tasks.</strong> 24
+                    extraction attacks in six categories and four benign tasks per skill, run against every skill, model and guard setting: 768 attack conversations and 128 benign ones.
+                  </p>
+                  <p>
+                    <strong>Metrics.</strong> Replies are de-obfuscated and, when not in English, back-translated before scoring. A <em>full extraction</em> reaches ROUGE-L recall ≥ 0.9 against the
+                    skill. A rule is <em>disclosed</em> if a reply contains a six-word verbatim run from it, or an LLM judge claims it is stated and quotes evidence that passes three mechanical
+                    checks. A <em>substantial extraction</em> has ROUGE-L ≥ 0.5 or discloses at least half of the rules.
+                  </p>
+                </Section>
+
+                <Section id="cost">
+                  <p>
+                    A 10 KB skill, typical of <code>SKILL.md</code> files, seals in 0.30 ms and opens in 0.39 ms (medians of 50 runs); a 1 MB skill with reference files takes about 2.5 ms; even 64 MB
+                    takes 216 ms to seal and 133 ms to open. Adding a recipient to a sealed 10 MB package takes 0.19 ms, against 34 ms to reseal it. The median benign reply in our experiments took 4.3
+                    s (Llama) and 4.9 s (Qwen) to generate, so unsealing adds well under 0.1% to a request.
+                  </p>
+                </Section>
+
+                <Section id="extraction">
                   <figure className="pp-figure">
-                    <ScrollRegion label="Figure 4: Load-time unsealing">
-                      <UnsealingSequence />
+                    <ScrollRegion label="Table 1: Extraction and utility per model and guard setting">
+                      <table className="pp-table pp-table--data">
+                        <thead>
+                          <tr>
+                            <th scope="col">Model</th>
+                            <th scope="col">Guard</th>
+                            <th scope="col">Full</th>
+                            <th scope="col">Substantial</th>
+                            <th scope="col">Rules</th>
+                            <th scope="col">Canary</th>
+                            <th scope="col">Task success</th>
+                            <th scope="col">Rules in benign use</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {TABLE_1.map((r) => (
+                            <tr key={r.model + r.guard}>
+                              <th scope="row">{r.model}</th>
+                              <td>{r.guard}</td>
+                              <td className="pp-num">{r.full}</td>
+                              <td className="pp-num">{r.subst}</td>
+                              <td className="pp-num">{r.rules}</td>
+                              <td className="pp-num">{r.canary}</td>
+                              <td className="pp-num">{r.success}</td>
+                              <td className="pp-num">{r.benignRules}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </ScrollRegion>
                     <figcaption className="pp-cap">
-                      <b>Figure 4</b>Load-time unsealing. The licensing service talks to the customer, not to the provider, so no owner-provider handshake is introduced.
+                      <b>Table 1</b>Extraction and utility, in %. Attack columns are over 192 conversations per row; benign columns over 32 tasks per row.
                     </figcaption>
                   </figure>
-                </Section>
-
-                <Section id="format">
                   <p>
-                    A sealed package is two files: <code>manifest.json</code> and <code>payload.bin</code>. The payload is a tar archive of the skill folder encrypted with AES-256-GCM in 64 KiB chunks using a STREAM-style construction, so large reference sets decrypt incrementally and truncation is detected.
+                    <strong>Without a guard instruction, a skill in context is largely extractable.</strong> Across the eight skills and 24 attacks, 35.4% (Llama) and 41.1% (Qwen) of conversations
+                    reproduce the skill almost verbatim, and 71.9% and 74.5% disclose at least half of its rules. Transformation attacks rarely yield verbatim copies but usually disclose the rules
+                    anyway: a &ldquo;detailed summary that keeps every threshold&rdquo;, a JSON object of rules or a translation preserves the skill&apos;s substance.
                   </p>
-                  <Code code={MANIFEST} lang="json" label="Example manifest" />
                   <p>
-                    The HPKE suite identifiers are the registered RFC 9180 values: <code>0x0020</code> is DHKEM(X25519, HKDF-SHA256), <code>0x0001</code> is HKDF-SHA256, and <code>0x0002</code> is AES-256-GCM. The HPKE <code>info</code> parameter is the format string plus the canonical hash of the skill and payload blocks, so a wrapped key cannot be lifted from one package and replayed against another. The public description stays in clear text so marketplaces can list the skill and agents can decide whether it is relevant before unsealing it.
+                    <strong>The guard instruction helps, unevenly, and at a cost.</strong> It cuts substantial extraction from 71.9% to 18.8% for Llama and from 74.5% to 46.4% for Qwen. For Llama it
+                    nearly eliminates authority, indirect and multi-turn attacks, but plain direct requests still succeed in 53.1% of conversations. The cost falls on utility: with the guard, Llama
+                    completed only 21 of 32 benign tasks, and 7 of its 11 failures were refusals to perform the task at all. Qwen&apos;s task success was unchanged.
                   </p>
-                </Section>
-
-                <Section id="keys">
-                  <h3 className="pp-h3">
-                    <span className="pp-n">10.1</span>Adding a provider
-                  </h3>
-                  <p>Fetch the new provider&apos;s published key, wrap the existing content key to it, append a recipient entry and re-sign. The payload is unchanged.</p>
-                  <h3 className="pp-h3">
-                    <span className="pp-n">10.2</span>Removing a provider
-                  </h3>
+                  <figure className="pp-figure">
+                    <ScrollRegion label="Figure 3: Substantial extraction by attack category, scrolls sideways">
+                      <ExtractionByCategory />
+                    </ScrollRegion>
+                    <figcaption className="pp-cap">
+                      <b>Figure 3</b>Substantial extraction by attack category, with and without the guard instruction (32 conversations per bar; 48 for transform, 16 for tool).
+                    </figcaption>
+                  </figure>
                   <p>
-                    Deleting a recipient entry takes nothing away from a provider that already has the package. A real removal means a new content key and a re-encrypted payload, published as a new version. Old versions stay decryptable by the removed provider for as long as it keeps its key. With no handshake there is no revocation list the provider has agreed to honour, so removal only affects future versions.
-                  </p>
-                  <h3 className="pp-h3">
-                    <span className="pp-n">10.3</span>Provider key rotation
-                  </h3>
-                  <p>
-                    The provider adds a new key to its endpoint well before the old key&apos;s <code>seal_until</code>, and keeps each private key until its <code>decrypt_until</code>. Owner tooling re-wraps active skills to the newest key on its own schedule. Because owners and providers never talk, the published dates are the whole contract for key lifetime, and providers must treat them as binding.
-                  </p>
-                  <h3 className="pp-h3">
-                    <span className="pp-n">10.4</span>Owner key compromise
-                  </h3>
-                  <p>
-                    If the owner&apos;s signing key leaks, an attacker can sign malicious packages in the owner&apos;s name but cannot read existing ones. The owner publishes the revocation at its domain (the <code>did:web</code> document), issues a new key and re-signs current versions. Providers check the owner&apos;s published key status when verifying a manifest.
-                  </p>
-                  <h3 className="pp-h3">
-                    <span className="pp-n">10.5</span>Licences
-                  </h3>
-                  <p>
-                    Licence tokens are short-lived and signed by the owner&apos;s licensing service, whose public keys are listed in the manifest. A provider verifies them without contacting the owner. Ending a customer&apos;s access means not issuing another token. This works only with providers that choose to check licences.
+                    <strong>Ordinary use already discloses part of a skill.</strong> Even in benign tasks, the models stated 14–20% of a skill&apos;s rules on average, typically by quoting a rule
+                    while applying it, and the guard barely changes this. <strong>Canaries</strong> work for attribution: 205 of the 209 full extractions (98.1%) reproduced the skill&apos;s canary
+                    phrase. They do not survive paraphrase.
                   </p>
                 </Section>
 
-                <Section id="threats">
-                  <ScrollRegion label="Table: Threat model">
-                    <table className="pp-table pp-table--threats">
-                      <thead>
-                        <tr>
-                          <th scope="col">Adversary</th>
-                          <th scope="col">Protected</th>
-                          <th scope="col">How, or why not</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">Pirate with the package</th>
-                          <td>
-                            <span className="chip pp-chip--yes">Yes</span>
-                          </td>
-                          <td>Holds only ciphertext and wrapped keys.</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Marketplace or mirror</th>
-                          <td>
-                            <span className="chip pp-chip--yes">Yes</span>
-                          </td>
-                          <td>Can list and distribute from the public description; cannot read.</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Competing AI provider</th>
-                          <td>
-                            <span className="chip pp-chip--yes">Yes</span>
-                          </td>
-                          <td>Not a recipient, so cannot unwrap.</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Network attacker</th>
-                          <td>
-                            <span className="chip pp-chip--yes">Yes</span>
-                          </td>
-                          <td>Package is encrypted at rest and in transit; signature detects tampering.</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">End user, local client</th>
-                          <td>
-                            <span className="chip pp-chip--yes">Yes</span>
-                          </td>
-                          <td>
-                            Only if decryption stays on the provider&apos;s servers. If a client decrypted locally, this row would be <em>No</em> (section 7).
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">End user, via the model</th>
-                          <td>
-                            <span className="chip chip--paper">Partly</span>
-                          </td>
-                          <td>Can ask the model to reveal or paraphrase the skill. Reduced, not eliminated, by the measures in section 12.</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Attacker controlling provider DNS</th>
-                          <td>
-                            <span className="chip chip--paper">Partly</span>
-                          </td>
-                          <td>Could serve a fake key to owners. Caught by key pinning, multi-vantage fetches and transparency logs.</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Provider employees</th>
-                          <td>
-                            <span className="chip chip--paper">Partly</span>
-                          </td>
-                          <td>Hardware isolation keeps keys and plaintext away from ordinary operators; not absolute.</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">The provider itself</th>
-                          <td>
-                            <span className="chip chip--paper">No</span>
-                          </td>
-                          <td>By design it can read the skill. Without a handshake, only its public policy commits it to anything.</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </ScrollRegion>
-                </Section>
-
-                <Section id="leaks">
+                <Section id="filters">
+                  <figure className="pp-figure">
+                    <ScrollRegion label="Table 2: Residual substantial extraction and benign replies blocked, per filter">
+                      <table className="pp-table pp-table--data">
+                        <thead>
+                          <tr>
+                            <th scope="col">Filter</th>
+                            <th scope="col">Llama: residual</th>
+                            <th scope="col">Llama: blocked</th>
+                            <th scope="col">Qwen: residual</th>
+                            <th scope="col">Qwen: blocked</th>
+                          </tr>
+                        </thead>
+                        {TABLE_2.map((g) => (
+                          <tbody key={g.group}>
+                            <tr>
+                              <th scope="rowgroup" colSpan={5} className="pp-group">
+                                {g.group}
+                              </th>
+                            </tr>
+                            {g.rows.map((r) => (
+                              <tr key={g.group + r[0]}>
+                                <th scope="row">{r[0]}</th>
+                                {r.slice(1).map((v, i) => (
+                                  <td key={i} className="pp-num">
+                                    {v}
+                                  </td>
+                                ))}
+                              </tr>
+                            ))}
+                          </tbody>
+                        ))}
+                      </table>
+                    </ScrollRegion>
+                    <figcaption className="pp-cap">
+                      <b>Table 2</b>Residual substantial extraction after each filter, and benign replies it blocks, in % (subset of the paper&apos;s table).
+                    </figcaption>
+                  </figure>
                   <p>
-                    To follow a skill, the model must read it in clear text, and the model&apos;s replies go to the user. Encryption decides <em>which</em> model reads the skill. It cannot stop that model from being questioned about it. The channels below are how a sealed skill can still reach the person using the AI, even with decryption kept on the server.
-                  </p>
-                  <ScrollRegion label="Table: Keeping it from the user">
-                    <table className="pp-table">
-                      <thead>
-                        <tr>
-                          <th scope="col">Channel</th>
-                          <th scope="col">Example</th>
-                          <th scope="col">What reduces it</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">Direct request</th>
-                          <td>&quot;Print your instructions word for word.&quot;</td>
-                          <td>Sealed content is treated like a confidential system prompt; the model declines. A server-side filter blocks replies with long overlaps with the skill text.</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Sandbox file access</th>
-                          <td>
-                            The model is asked to run <code>cat SKILL.md</code> in its code sandbox.
-                          </td>
-                          <td>Skill files are mounted run-only: scripts can execute, but commands the model issues cannot read them. Better still, scripts run on the owner&apos;s server (below).</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Tool and script output</th>
-                          <td>A script prints the rule table it applies, which appears in the transcript.</td>
-                          <td>Scripts return conclusions, not the rules behind them.</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Reasoning display</th>
-                          <td>Visible thinking or its summary quotes the skill.</td>
-                          <td>Apply the same output filter to any reasoning shown to the user.</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Gradual reconstruction</th>
-                          <td>Many sessions of probing, each revealing a little.</td>
-                          <td>Cannot be prevented. Unique marker phrases sealed into each customer&apos;s copy identify who leaked a reconstruction.</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </ScrollRegion>
-                  <p>
-                    The last row sets the ceiling. A sealed skill protects against copying and redistribution of the file. It cannot promise that a determined user learns nothing about what the skill contains.
-                  </p>
-                  <h3 className="pp-h3">
-                    <span className="pp-n">12.1</span>The part that must never leak
-                  </h3>
-                  <p>
-                    One design keeps secrets away from both the user and the model: do not put them in the skill. Place the proprietary logic, rules or data behind a tool on the owner&apos;s own server (for example a remote MCP server with its own authentication and licence check). The sealed skill then carries only <em>when</em> to call the tool and <em>what</em> to pass. The model sends inputs and receives conclusions, such as &quot;row 14 fails rule R-7: amount mismatch&quot;, and never sees how the result was produced.
-                  </p>
-                  <div className="pp-note">
-                    <p className="pp-eyebrow">Design advice for skill owners</p>
-                    <p>
-                      Use sealing for the instruction text, which needs protection from copying. Put anything that must never be seen, even partly, behind an owner-hosted tool. That approach works with today&apos;s AI products and needs nothing from the provider.
-                    </p>
-                  </div>
-                </Section>
-
-                <Section id="tradeoffs">
-                  <p>
-                    Dropping the onboarding handshake makes sealing as easy as encrypting to a published key. It also removes things only a relationship can provide. The table compares the three models considered while writing this paper.
-                  </p>
-                  <ScrollRegion label="Table: What the handshake gave">
-                    <table className="pp-table pp-table--compare">
-                      <thead>
-                        <tr>
-                          <td />
-                          <th scope="col">Onboarding handshake (v0.1)</th>
-                          <th scope="col" className="pp-chosen">
-                            Published key (this paper)
-                          </th>
-                          <th scope="col">Online key release</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">Owner contacts provider</th>
-                          <td>Once, to onboard</td>
-                          <td className="pp-chosen">Never</td>
-                          <td>Never; provider calls owner on every load</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Signed terms</th>
-                          <td>Yes</td>
-                          <td className="pp-chosen">No; provider&apos;s public policy only</td>
-                          <td>No, unless added</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Revoke access</th>
-                          <td>Provider honours owner&apos;s revocation list</td>
-                          <td className="pp-chosen">New versions only; stop issuing licences</td>
-                          <td>Instant</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Audit of use</th>
-                          <td>Agreed access events</td>
-                          <td className="pp-chosen">None, unless the provider volunteers</td>
-                          <td>Every request</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Owner runs a service</th>
-                          <td>Feeds only</td>
-                          <td className="pp-chosen">Optional licensing service</td>
-                          <td>Yes, and it must stay up</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Works offline</th>
-                          <td>Yes</td>
-                          <td className="pp-chosen">Yes</td>
-                          <td>No</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </ScrollRegion>
-                  <p>
-                    The published-key model is the simplest to adopt and the hardest to break operationally: nothing needs to be online, and a provider can support thousands of owners without a single agreement. Owners who need contractual terms, audit or instant revocation can layer the handshake or online release on top later, since the package format stays the same.
+                    The <strong>lexical filter</strong> is effective against what the models actually produce: at L = 12 it blocks every full extraction and reduces substantial extraction to 1.6–3.1%
+                    across all four configurations. Of the 18 conversations (of 768) that still leak substantially, 13 are transformation attacks: nine poems that restate one rule per stanza and four
+                    translations. The price is utility: because models quote rules while applying them, the same filter blocks 12.5–25% of benign replies. The <strong>semantic filter</strong> performs
+                    poorly on its own: sentence embeddings cannot separate a reply that states a rule from one that applies it. These numbers are an optimistic bound for the defender, because the
+                    attacks are not adaptive to the filter.
                   </p>
                 </Section>
 
-                <Section id="build">
-                  <h3 className="pp-h3">AI providers</h3>
-                  <ul>
-                    <li>A key document at a well-known address, with keys generated and held in isolated hardware, published lifetimes, and optional attestation.</li>
-                    <li>Server-side loading of sealed skills by reference, so clients never receive the skill.</li>
-                    <li>Confidential handling in the model and runtime: extraction refusal, output filtering, run-only skill files in sandboxes.</li>
-                    <li>A public policy stating how sealed content is treated.</li>
-                    <li>Optional: licence verification against owner-published keys.</li>
-                  </ul>
+                <Section id="scripts">
                   <p>
-                    At the time of writing we are not aware of any major AI provider, Anthropic included, that publishes a skill-sealing key or loads encrypted skills. This paper describes what such support would look like.
+                    We gave the agent a proprietary withholding-calculator script and two tools: one that runs the script, and one that runs arbitrary Python in the agent&apos;s workspace. In the{" "}
+                    <em>co-located</em> design the script sits in the workspace; in the <em>owner-hosted</em> design it runs on the owner&apos;s side and only results come back.
                   </p>
-                  <h3 className="pp-h3">Skill owners</h3>
-                  <ul>
-                    <li>A sealing tool that fetches and checks provider keys, encrypts, wraps and signs.</li>
-                    <li>Optionally, a licensing service that issues short-lived tokens to paying customers.</li>
-                    <li>An owner-hosted tool for any logic that must never be exposed (section 12.1).</li>
-                  </ul>
-                  <h3 className="pp-h3">The ecosystem</h3>
-                  <ul>
-                    <li>An open specification for the key document and the package format.</li>
-                    <li>Transparency logs and monitors that record provider keys over time.</li>
-                    <li>Marketplaces that list sealed skills from their public descriptions.</li>
-                  </ul>
+                  <p>
+                    <strong>Source extraction.</strong> Executing the attacks&apos; code directly, as an obedient agent would, printed the full script in all three co-located attempts and in none of
+                    the owner-hosted ones. With the models in the loop, Qwen printed the complete script, rate table and canary included, in 1 of 6 attacks; no owner-hosted run leaked the source (0 of
+                    12). &ldquo;Run-only&rdquo; is not a property a co-located sandbox can provide.
+                  </p>
+                  <p>
+                    <strong>Functional extraction.</strong> Owner hosting protects the code, not its function. Asked to run the tool once per category, the models reconstructed the entire rate table
+                    in three of four model–design combinations, and a second probe exposed the minimum threshold and the 45,000 cap in all four. Any secret that is directly readable from input–output
+                    pairs is disclosed by ordinary use.
+                  </p>
                 </Section>
 
-                <Section id="adoption">
-                  <ol className="pp-phases">
-                    <li>
-                      <span className="pp-phases__when">Today</span>
-                      <p>
-                        <b>Owner-hosted tools.</b> Secret logic runs on the owner&apos;s server and is called by the model as a tool. Needs no provider support and already keeps the valuable part hidden.
-                      </p>
-                    </li>
-                    <li>
-                      <span className="pp-phases__when">Stage 1</span>
-                      <p>
-                        <b>Published key and server-side loading.</b> A provider publishes a sealing key and accepts sealed skills by reference on its hosted surfaces. Stops piracy and competing providers, and keeps the file off users&apos; devices.
-                      </p>
-                    </li>
-                    <li>
-                      <span className="pp-phases__when">Stage 2</span>
-                      <p>
-                        <b>Attested keys and confidential handling.</b> Keys are bound to measured hardware; run-only sandboxes and output filtering become standard for sealed content.
-                      </p>
-                    </li>
-                    <li>
-                      <span className="pp-phases__when">Stage 3</span>
-                      <p>
-                        <b>Open standard.</b> A shared key-document and package format across providers, with optional licensing, audit or onboarding layered on top.
-                      </p>
-                    </li>
-                  </ol>
-                </Section>
-
-                <Section id="open">
-                  <ul>
-                    <li>
-                      <strong>Safety review.</strong> Providers can decrypt and scan sealed skills for malware and prompt injection; marketplaces cannot, and will rely on provider scanning.
-                    </li>
-                    <li>
-                      <strong>Customer inspection.</strong> Regulated customers may need to know what their agents follow. An auditor could be added as an extra recipient with its own published key.
-                    </li>
-                    <li>
-                      <strong>Unwanted recipients.</strong> Any owner can seal to any provider without asking. Providers may want a way to decline sealed skills from unknown owners, for example by requiring a verified owner identity.
-                    </li>
-                    <li>
-                      <strong>Liability.</strong> When a sealed skill gives harmful advice, the customer cannot read the cause. Who can see the plaintext during an incident investigation needs a public answer.
-                    </li>
-                    <li>
-                      <strong>Local and open-weight models.</strong> A model on user hardware cannot keep a key from its user. Sealed skills are a feature of hosted AI services.
-                    </li>
-                    <li>
-                      <strong>Composition.</strong> When one sealed skill&apos;s output feeds another provider&apos;s model, confidentiality rules must carry across.
-                    </li>
-                  </ul>
+                <Section id="limits">
+                  <p>
+                    The extraction study uses two 7–8B open models run locally with greedy decoding and a single sample per prompt; frontier hosted models have stronger instruction-following and may
+                    be both more resistant to naive requests and more capable of faithful paraphrase. The corpus is eight synthetic skills written for this study, and the 24 attacks are hand-written
+                    rather than optimised. The semantic filter&apos;s threshold is calibrated on the same benign prompts on which its block rate is reported, and benign rates rest on 32 tasks per
+                    configuration. Rule disclosure is judged by a 7B model constrained by mechanical evidence checks; the manual check of its decisions is small (85 decisions) and has not been
+                    repeated by an independent annotator. The tool-use case study is illustrative. The design has not been implemented by any AI provider; we are not aware of any provider that
+                    currently publishes a skill-sealing key or loads encrypted skills, so the provider in the study is a mock.
+                  </p>
                 </Section>
 
                 <Section id="conclusion">
                   <p>
-                    Skills are turning expert knowledge into software that AI agents run, and that market needs better protection than a licence clause on a text file. Sealed Skills offer a simple mechanism: the AI company publishes a key on its own domain, the owner encrypts to it without asking anyone, and only that company&apos;s servers can open the skill.
+                    Agent skills are becoming a medium for selling expertise, and today they ship as plain text. Sealed Skills let an owner encrypt a skill to the public key an AI provider publishes
+                    on its domain, without any handshake, so that only that provider&apos;s servers can open it and no client ever receives it. Our prototype shows the cryptographic cost is negligible
+                    next to model inference. Our measurements show that the harder problem sits at the model&apos;s output: once a skill is in context, a user can extract much of it, guard
+                    instructions and output filters reduce but do not eliminate this, and every filter trades leakage against legitimate use. For content that must stay secret, the answer is
+                    architectural: keep it behind an owner-hosted tool and out of the model&apos;s context entirely.
                   </p>
-                  <p>
-                    Three findings shape the design. Decryption must stay on the provider&apos;s servers, because anything on the user&apos;s device can be extracted. The model can still be questioned about what it read, so sealing protects the file from copying but cannot guarantee the user learns nothing. And dropping the handshake trades contracts, audit and revocation for simplicity. For logic that must never be seen, the answer already exists: keep it on the owner&apos;s own server and let the model call it as a tool.
-                  </p>
-                </Section>
-
-                <Section id="appendix">
-                  <p>Illustrative only. A real implementation should use a vetted HPKE library and streaming AEAD rather than hand-rolled primitives.</p>
-                  <Code code={PSEUDOCODE} lang="python" label="Reference pseudocode" />
                 </Section>
 
                 <Section id="refs">
+                  <p>The paper cites 61 works; the complete list is in the PDF. Among them:</p>
                   <ol className="pp-refs">
                     <li>
                       R. Barnes, K. Bhargavan, B. Lipp, C. Wood. <em>Hybrid Public Key Encryption.</em> RFC 9180, IETF, 2022.
                     </li>
                     <li>
-                      S. Josefsson, I. Liusvaara. <em>Edwards-Curve Digital Signature Algorithm (EdDSA).</em> RFC 8032, IETF, 2017.
+                      M. A. van Wyk, M. Bekker, X. L. Richards, K. J. Nixon. <em>Protect Your Prompts: Protocols for IP Protection in LLM Applications.</em> arXiv:2306.06297, 2023.
                     </li>
                     <li>
-                      M. Nottingham. <em>Well-Known Uniform Resource Identifiers (URIs).</em> RFC 8615, IETF, 2019.
+                      Y. Zhang, N. Carlini, D. Ippolito. <em>Effective Prompt Extraction from Language Models.</em> COLM 2024.
                     </li>
                     <li>
-                      M. Jones. <em>JSON Web Key (JWK).</em> RFC 7517, IETF, 2015.
+                      Y.-L. Tsai, Y.-A. Lu, C.-Y. Tsai, M. Lyu, R. A. Popa, C.-M. Yu. <em>Daydreaming: Stealing Hidden Agent Skills through Black-Box Task Interaction.</em> arXiv:2608.26733, 2026.
                     </li>
                     <li>
-                      B. Laurie, E. Messeri, R. Stradling. <em>Certificate Transparency Version 2.0.</em> RFC 9162, IETF, 2021.
+                      V. T. Hoang, R. Reyhanitabar, P. Rogaway, D. Vizár. <em>Online Authenticated-Encryption and its Nonce-Reuse Misuse-Resistance.</em> CRYPTO 2015.
                     </li>
                     <li>
-                      M. Dworkin. <em>Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC.</em> NIST SP 800-38D, 2007.
+                      B. Chor, A. Fiat, M. Naor. <em>Tracing Traitors.</em> CRYPTO 1994.
                     </li>
-                    <li>
-                      V. T. Hoang, R. Reyhanitabar, P. Rogaway, D. Vizár. <em>Online Authenticated-Encryption and its Nonce-Reuse Misuse-Resistance.</em> CRYPTO 2015 (the STREAM construction).
-                    </li>
-                    <li>
-                      H. Birkholz et al. <em>Remote ATtestation procedureS (RATS) Architecture.</em> RFC 9334, IETF, 2023.
-                    </li>
-                    <li>
-                      W3C Credentials Community Group. <em>did:web Method Specification.</em>
-                    </li>
-                    <li>Model Context Protocol specification (remote servers and authorization).</li>
                   </ol>
                 </Section>
 
                 <footer className="pp-end">
-                  Sealed Skills · v0.2 draft · 27 September 2026. A proposal for discussion. It describes a design, not an existing product, feature of any AI provider, or agreed industry standard.
+                  Sealed Skills · v{paper.version} · {paper.dateLabel}. A preprint draft, not peer reviewed. It describes a design and a study, not an existing product, feature of any AI provider, or
+                  agreed industry standard.
                 </footer>
               </article>
             </div>
@@ -880,7 +565,12 @@ export default function SealedSkillsPage() {
         </div>
       </main>
       <Foot />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
     </>
   )
 }
