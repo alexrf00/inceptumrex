@@ -13,7 +13,7 @@ web
 
 ## Product Purpose
 
-inceptumrex.com is the personal portfolio of Alex M. Rodriguez, with InceptumRex as the studio label. It shows every project and game Alex has built (shipped, live and prototype) with real imagery, carries the papers Alex writes, and turns interest into a work inquiry through one contact form. Success: within the first screen a visitor sees the range (games, fiscal software, civic tools) and the proof (live sites, a Steam listing, real screenshots), then follows a live link or sends an inquiry.
+inceptumrex.com is the personal portfolio of Alex M. Rodriguez, with InceptumRex as the studio label. It shows every project and game Alex has built (shipped, live and prototype) with real imagery, carries the papers and research papers Alex writes on a screen of their own (`/papers`), and turns interest into a work inquiry through one contact form. Success: within the first screen a visitor sees the range (games, fiscal software, civic tools) and the proof (live sites, a Steam listing, real screenshots), then follows a live link or sends an inquiry.
 
 The site used to sell computer repair and IT support. Owner decision (2026-09-27): **portfolio only**. The repair-business copy, service list, hours and "certified technicians" claims are retired; one contact form stays for work inquiries.
 
@@ -58,7 +58,8 @@ One engineer who builds whole products end to end, across worlds that rarely sha
 - **BattlePassTimer:** the live site.
 - **Portrait:** the photo the owner chose in chat (red cap, black pug), EXIF stripped.
 - **Résumé:** the owner's two résumé PDFs (Feb 2026 and an earlier version), merged; titles and dates follow the Feb 2026 one. They also carry a personal Gmail and a phone number, which the site does not publish. The downloadable résumé (`public/Alex-M-Rodriguez-Resume.pdf`) is the Feb 2026 PDF with those two redacted and inceptumrex@gmail.com and inceptumrex.com in their place.
-- **Papers:** *Sealed Skills* (position paper, v0.2, draft for discussion, 27 September 2026). It proposes encrypting AI agent skills to a key the AI company publishes on its own domain; it is a proposal, not a product, a feature of any AI provider or a standard, and says so. The site sets the owner's final draft verbatim at `/papers/sealed-skills`.
+- **Papers and research papers (owner, 2026-09-27: «differentiate clearly papers from research papers»):** two kinds, never mixed. A paper is an essay or an article for any reader; a research paper is technical work for specialists (the question, the design or method, the analysis and the sources). The owner classes Sealed Skills as a research paper (a position paper is one kind of research paper). No paper is out yet, and the site says so instead of inventing one.
+- **Research papers:** *Sealed Skills* (a position paper, v0.2, draft for discussion, 27 September 2026). It proposes encrypting AI agent skills to a key the AI company publishes on its own domain; it is a proposal, not a product, a feature of any AI provider or a standard, and says so. The site sets the owner's final draft verbatim at `/papers/sealed-skills`.
 - **Absences (do not fabricate):** no gameplay video for Fixion or Omni Run; no screenshots for BxGoatDrip, dubbtogether, Stitch Designer or Excel Enricher; no testimonials; no client list beyond named work.
 
 ## Product Principles

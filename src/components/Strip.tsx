@@ -1,6 +1,6 @@
 // The sniping strip: a long black bill pasted across the top of the wall,
-// carrying the studio name and the site's four destinations. Links point at the
-// home page's sections so the strip works the same from a paper's own page.
+// carrying the studio name and the site's four destinations: three sections of
+// the home page and the papers screen, written so they work from any page.
 export function Strip() {
   return (
     <header className="strip">
@@ -15,7 +15,7 @@ export function Strip() {
             <a href="/#work">Work</a>
           </li>
           <li>
-            <a href="/#papers">Papers</a>
+            <a href="/papers">Papers</a>
           </li>
           <li>
             <a href="/#about">About</a>

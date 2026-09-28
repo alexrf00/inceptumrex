@@ -199,7 +199,7 @@ export default function SealedSkillsPage() {
       <main id="top">
         <div className="paper">
           <div id="paper" className="sheet pp-sheet">
-            <Link className="pp-back" href="/#papers">
+            <Link className="pp-back" href="/papers">
               <ArrowLeft aria-hidden="true" weight="bold" />
               Back to the papers
             </Link>

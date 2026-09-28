@@ -24,7 +24,9 @@ npm run dev
 | The three.js paper (lighting, corner curl, shadows) | `src/components/wall/wall-scene.ts` |
 | The canvas that paints each poster's WebGL texture | `src/components/wall/poster-texture.ts` |
 | The paper program, papers sheet, résumé and contact flyer | `src/components/paper/` |
-| The list of papers (title, status, findings) | `src/content/papers.ts` |
+| The list of papers and research papers (kind, status, findings, study) | `src/content/papers.ts` |
+| The papers screen: its wall and its index | `src/app/papers/page.tsx`, `src/components/papers/shelf/`, `src/components/papers/PaperIndex.tsx` |
+| The WebGL paper shared by both walls | `src/components/wall/paper-shader.ts` |
 | Each paper's own page, verbatim, with its figures | `src/app/papers/<slug>/`, `src/components/papers/` |
 | Product truth, claims to avoid, evidence | `PRODUCT.md` |
 
@@ -63,8 +65,11 @@ and its three.js paper twin always agree. Change a number in one place only.
 
 ## Papers
 
-Add a paper to `src/content/papers.ts` (it appears on the home page's Papers sheet) and give
-it a page at `src/app/papers/<slug>/page.tsx`; the shared page styles live in
+Add a paper to `src/content/papers.ts` with its `category`: `"paper"` (an essay or an article for
+any reader; pasted up as a broadside) or `"research"` (technical work for specialists; pasted up
+as a stapled offprint, with a `study` block: question, approach, references, review, and the
+opening of its abstract, verbatim). It appears on the papers screen
+(`/papers`). Give it a page at `src/app/papers/<slug>/page.tsx`; the shared page styles live in
 `src/app/papers/papers.css`. A paper's text is set verbatim from the owner's final draft.
 
 ## Contact form

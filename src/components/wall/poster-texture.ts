@@ -4,13 +4,14 @@ import { COMPACT, blurbTop, imageLayout, lineupTops, remnantNameSize, type BillS
 // same cqw value Poster.tsx and the .poster rules in globals.css use, and every
 // pixel floor is the same CSS max() floor, computed from the poster's css width.
 
-type Fonts = { display: string; narrow: string }
+export type Fonts = { display: string; narrow: string; body: string }
 
 export function readFonts(): Fonts {
   const css = getComputedStyle(document.documentElement)
   return {
     display: css.getPropertyValue("--font-display").trim() || "sans-serif",
     narrow: css.getPropertyValue("--font-narrow").trim() || "sans-serif",
+    body: css.getPropertyValue("--font-body").trim() || "sans-serif",
   }
 }
 
@@ -20,6 +21,7 @@ export async function loadFonts(f: Fonts) {
     document.fonts.load(`800 40px ${f.display}`),
     document.fonts.load(`600 40px ${f.narrow}`),
     document.fonts.load(`700 40px ${f.narrow}`),
+    document.fonts.load(`700 40px ${f.body}`),
   ])
 }
 
@@ -64,16 +66,16 @@ export async function loadImageSet(spec: Omit<ImagePoster, "under">): Promise<Po
   return { photo, logo }
 }
 
-type Ctx = CanvasRenderingContext2D & { letterSpacing?: string }
+export type Ctx = CanvasRenderingContext2D & { letterSpacing?: string }
 
-function setFont(ctx: Ctx, weight: number, size: number, family: string, tracking = 0) {
+export function setFont(ctx: Ctx, weight: number, size: number, family: string, tracking = 0) {
   ctx.font = `${weight} ${size}px ${family}`
   if ("letterSpacing" in ctx) ctx.letterSpacing = `${tracking * size}px`
 }
 
 // Draws one line of text whose CSS line box starts at `top`, matching how the
 // browser places the baseline inside a line box of `lineHeight`.
-function line(ctx: Ctx, text: string, x: number, top: number, size: number, lineHeight: number, color: string) {
+export function line(ctx: Ctx, text: string, x: number, top: number, size: number, lineHeight: number, color: string) {
   const m = ctx.measureText("Hg")
   const ascent = m.fontBoundingBoxAscent ?? size * 0.8
   const descent = m.fontBoundingBoxDescent ?? size * 0.2
@@ -83,7 +85,7 @@ function line(ctx: Ctx, text: string, x: number, top: number, size: number, line
   ctx.fillText(text, x, top + (lineHeight * size - (ascent + descent)) / 2 + ascent)
 }
 
-function wrap(ctx: Ctx, text: string, maxWidth: number) {
+export function wrap(ctx: Ctx, text: string, maxWidth: number) {
   const lines: string[] = []
   let current = ""
   for (const word of text.split(" ")) {
@@ -110,11 +112,11 @@ function cover(ctx: Ctx, img: HTMLImageElement, x: number, y: number, w: number,
   ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h)
 }
 
-type StripSpec = { text: string; short: string; bg: string; fg: string }
+export type StripSpec = { text: string; short: string; bg: string; fg: string }
 
 // The strip: height max(11cqw, 28px) and text max(4.6cqw, 12px); compact
 // bills use max(11cqw, 24px) and max(5cqw, 11px) with the short text.
-function paintStrip(ctx: Ctx, s: StripSpec, small: boolean, W: number, H: number, u: number, px: number, fonts: Fonts) {
+export function paintStrip(ctx: Ctx, s: StripSpec, small: boolean, W: number, H: number, u: number, px: number, fonts: Fonts) {
   const h = small ? Math.max(11 * u, 24 * px) : Math.max(11 * u, 28 * px)
   const size = small ? Math.max(5 * u, 11 * px) : Math.max(4.6 * u, 12 * px)
   ctx.fillStyle = s.bg

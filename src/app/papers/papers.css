@@ -676,3 +676,237 @@
     break-after: avoid;
   }
 }
+
+/* --- The papers wall (/papers) --------------------------------------------- */
+/* The papers screen opens on the plywood like the home page: every paper
+   pasted up as a sheet. A paper is a broadside (one loud sheet, its name in
+   wood type); a research paper is an offprint (a sober stapled booklet). Sheet
+   anatomy is cqw of the sheet's own width, mirrored by shelf-texture.ts. */
+
+.shelf {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(0.75rem, 3vw, 3rem) clamp(2.5rem, 5vw, 4rem);
+  overflow: hidden;
+}
+.shelf__gl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 12;
+  pointer-events: none;
+}
+.shelf__stage {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 3.5vw, 3.25rem);
+  max-width: 1400px;
+  min-height: calc(100svh - var(--strip-h) - 6.5rem);
+  margin: 0 auto;
+}
+
+.sh {
+  position: relative;
+  display: block;
+  flex: none;
+  width: var(--w);
+  aspect-ratio: var(--ar);
+  transform: rotate(var(--rot));
+  container-type: size;
+  color: inherit;
+  text-decoration: none;
+  filter: drop-shadow(0.3rem 0.5rem 0.45rem rgb(6 16 10 / 0.45));
+}
+.sh--head { --w: min(38%, 540px); --ar: 1.12; --rot: -1deg; }
+.sh--broadside { --w: min(25%, 350px); --ar: 0.8; --rot: 1.4deg; }
+.sh--notice { --w: min(21%, 290px); --ar: 1.05; --rot: -2.2deg; }
+.sh--offprint { --w: min(26%, 360px); --ar: 0.72; --rot: 1.2deg; }
+.sh:focus-visible {
+  outline: 4px solid var(--yellow);
+  outline-offset: 6px;
+}
+.sh__paper {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  background: var(--bg, var(--paper));
+  -webkit-mask: var(--torn) 0 0 / 100% 100% no-repeat;
+  mask: var(--torn) 0 0 / 100% 100% no-repeat;
+}
+.sh__paper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--crinkle) 0 0 / 260px 260px;
+  mix-blend-mode: soft-light;
+  opacity: 0.9;
+}
+.sh__name {
+  margin: 0;
+}
+.sh__name span,
+.sh__wood {
+  position: absolute;
+  left: 6cqw;
+  top: var(--top);
+  font: 900 var(--size)/0.86 var(--font-display);
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.sh__blurb {
+  position: absolute;
+  left: 6cqw;
+  top: var(--top);
+  width: 84cqw;
+  margin: 0;
+  font: 600 max(4.6cqw, 13px)/1.28 var(--font-narrow);
+  color: var(--paper);
+}
+.sh__eyebrow {
+  position: absolute;
+  left: 6cqw;
+  top: var(--top);
+  font: 700 max(3.6cqw, 11px)/1.2 var(--font-narrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.sh__line {
+  position: absolute;
+  left: 6cqw;
+  top: var(--top);
+  width: 86cqw;
+  font: 600 max(5.4cqw, 13px)/1.22 var(--font-narrow);
+}
+.sh--notice .sh__line {
+  font: 700 max(7cqw, 14px)/1.1 var(--font-narrow);
+  white-space: nowrap;
+}
+.sh__date {
+  position: absolute;
+  left: 6cqw;
+  bottom: calc(max(11cqw, 28px) + 3cqw);
+  font: 800 9cqw/0.9 var(--font-display);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.sh__strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: max(11cqw, 28px);
+  overflow: hidden;
+  padding-left: 6cqw;
+  font: 800 max(4.6cqw, 12px) / max(11cqw, 28px) var(--font-display);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.sh__strip-short {
+  display: none;
+}
+
+/* The offprint: a black band with the kind and number, the title in the body
+   face, the author at the foot and two staples down the spine. */
+.sh--offprint .sh__paper {
+  background: var(--paper);
+  color: var(--black);
+}
+.sh__band {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--band);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6cqw 0 8cqw;
+  background: var(--black);
+  color: var(--yellow);
+  font: 700 max(4cqw, 11px)/1.2 var(--font-narrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.sh__otitle {
+  position: absolute;
+  left: 8cqw;
+  top: var(--top);
+  width: 84cqw;
+  font: 700 var(--size)/1.1 var(--font-body);
+}
+.sh__author {
+  position: absolute;
+  left: 8cqw;
+  bottom: calc(max(11cqw, 28px) + 4cqw);
+  font: 600 max(4cqw, 11px)/1.2 var(--font-narrow);
+}
+.sh__staple {
+  position: absolute;
+  left: 2.5cqw;
+  top: calc(var(--at) - 3.5cqw);
+  width: 1.4cqw;
+  height: 7cqw;
+  background: var(--black);
+}
+
+/* The paste-up. Without three.js the HTML sheets slap on like the home wall's
+   bills. With it, they wait unseen (data-gl="pending", set before they are
+   parsed) for the paper to paste them up, and stay as links, focus targets and
+   text under it. */
+@media (prefers-reduced-motion: no-preference) {
+  .sh {
+    animation: paste 0.62s var(--ease-out) both;
+    animation-delay: calc(var(--i) * 85ms + 100ms);
+  }
+}
+.shelf[data-gl] .sh {
+  animation: none;
+  filter: none;
+}
+.shelf[data-gl] .sh > .sh__paper {
+  opacity: 0;
+}
+.shelf[data-gl] .sh:focus-visible,
+.shelf[data-gl] .sh:focus-within {
+  z-index: 20;
+}
+
+@media (max-width: 899px) {
+  .shelf__stage {
+    min-height: 0;
+  }
+  .sh--head { --w: min(100%, 580px); }
+  .sh--broadside,
+  .sh--offprint { --w: min(47%, 330px); }
+  .sh--notice { --w: min(42%, 290px); }
+}
+@media (max-width: 559px) {
+  .sh--head { --w: 100%; }
+  .sh--broadside,
+  .sh--offprint { --w: 88%; }
+  .sh--notice { --w: 76%; }
+}
+
+/* --- The index: one sheet per kind ----------------------------------------- */
+
+.papers__kind {
+  margin-bottom: 0.6rem;
+  font: 700 0.78rem/1.3 var(--font-narrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sheet-dim);
+}
+.papers__empty {
+  max-width: 64ch;
+  padding-block: clamp(1.75rem, 3.5vw, 2.5rem) 0.5rem;
+  font: 400 1.0625rem/1.65 var(--font-body);
+  color: var(--pp-ink, #2b2b27);
+}
