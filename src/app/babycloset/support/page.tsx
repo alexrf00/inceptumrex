@@ -28,10 +28,16 @@ export default function BabyClosetSupport() {
       <h2>Getting started</h2>
       <h3>How do I add clothes?</h3>
       <p>
-        Tap <strong>+</strong> in the Closet tab, then take a photo or choose one. Baby Closet finds each garment
-        in the photo, cuts it out and suggests its type and color. Check each piece, change anything that's off
-        (tap the color wheel to fix a color), and save. For the best results, lay clothes flat on a plain
+        Tap <strong>+</strong> in the Closet tab, then take a photo or choose up to 10 at once. Baby Closet finds
+        each garment in the photos, cuts it out and suggests its type and color. Check each piece, change anything
+        that's off (tap the color wheel to fix a color), and save. For the best results, lay clothes flat on a plain
         surface with some space between them.
+      </p>
+      <h3>Why does it say a garment is already in my closet?</h3>
+      <p>
+        When a new garment looks like one you&apos;ve already added (or like another piece in the same photos),
+        Baby Closet shows the look-alike so you don&apos;t add it twice. Tap <strong>Don&apos;t Add</strong> to skip
+        it, or keep it if it&apos;s a different piece. The comparison happens on your iPhone.
       </p>
       <h3>Why was my photo rejected?</h3>
       <p>
@@ -112,8 +118,17 @@ export default function BabyClosetSupport() {
         Baby Closet can remind you of tomorrow&apos;s outfit the evening before (and, if you like, that
         morning), nudge you on Sunday to plan the week, suggest a closet check every four weeks, mark the start
         of each season, and let you know two days before a free trial ends. Turn each one on or off, and set the
-        times, in Settings → <strong>Reminders</strong>. Reminders are scheduled on your iPhone; nothing is
-        sent to a server.
+        times, in Settings → <strong>Reminders</strong>. If you&apos;ve turned on the forecast in Next Style,
+        outfit reminders also mention the weather, like rain on the way or a chilly morning. Reminders are
+        scheduled on your iPhone; nothing is sent to a server.
+      </p>
+
+      <h2>Siri and Shortcuts</h2>
+      <p>
+        Ask Siri &quot;What&apos;s today&apos;s outfit in Baby Closet?&quot; or &quot;What&apos;s tomorrow&apos;s outfit in
+        Baby Closet?&quot; to hear what&apos;s planned, say &quot;Mark today&apos;s outfit as worn in Baby Closet&quot;
+        after getting dressed, or &quot;Give me an outfit idea in Baby Closet&quot; to open Next Style. The same
+        actions are in the Shortcuts app and in Spotlight, with nothing to set up.
       </p>
 
       <h2>Outgrown clothes</h2>

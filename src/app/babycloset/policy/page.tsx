@@ -52,14 +52,18 @@ export default function BabyClosetPolicy() {
         cut-out and suggest its type, a short name, its pattern and how warm it is. This happens entirely on your
         iPhone. The optional stylist note and the stylist&apos;s pick on the Next Style screen are also written by
         Apple Intelligence on your iPhone.
-        Nothing is sent to us or to anyone else to write it. Reminders, if you turn them on, are scheduled on
-        your iPhone as local notifications; no push service or server is involved.
+        Nothing is sent to us or to anyone else to write it. To point out a garment you may have already added,
+        the app compares new cut-outs with the ones in your closet using Apple&apos;s Vision framework, also on your
+        iPhone. Reminders, if you turn them on, are scheduled on your iPhone as local notifications; no push
+        service or server is involved. When you use Siri or Shortcuts to hear or update today&apos;s outfit, Baby
+        Closet reads your plans on your iPhone and sends nothing to us.
       </p>
 
       <h2>Weather</h2>
       <p>
         If you turn on the forecast in Next Style, Baby Closet asks for your approximate location (not your precise
-        one) and sends it to Apple Weather (WeatherKit) to get the forecast for the coming days. The location isn&apos;t
+        one) and sends it to Apple Weather (WeatherKit) to get the forecast for the coming days, which is also used
+        in your outfit reminders. The location isn&apos;t
         stored by the app, isn&apos;t sent to our servers and isn&apos;t linked to your account. You can turn location
         access off anytime in the Settings app.
       </p>
