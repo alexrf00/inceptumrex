@@ -19,7 +19,7 @@ export default function BabyClosetPolicy() {
     <>
       <h1>Privacy Policy</h1>
       <p className="bc__dek">Baby Closet, an iPhone app by Alex M. Rodriguez (InceptumRex)</p>
-      <p className="bc__meta">Effective October 1, 2026</p>
+      <p className="bc__meta">Effective October 2, 2026</p>
 
       <p>
         Baby Closet helps parents photograph their baby's clothes, plan outfits on a calendar and get outfit
@@ -71,11 +71,20 @@ export default function BabyClosetPolicy() {
         baby's name.
       </p>
 
+      <h2>Purchases</h2>
+      <p>
+        Baby Closet Premium is bought through Apple. Apple processes the payment and we never receive your
+        payment details. The app checks whether your subscription is active using Apple&apos;s StoreKit on your
+        iPhone; we don&apos;t store your purchase history on our servers. See the{" "}
+        <a href="/babycloset/terms">Terms of Use</a> for subscription terms.
+      </p>
+
       <h2>Who processes your data</h2>
       <ul>
         <li><strong>Supabase</strong> hosts the database, image storage and sign-in for accounts. Data is
           encrypted in transit, and database rules ensure only you can read it.</li>
-        <li><strong>Apple</strong> and <strong>Google</strong> handle sign-in when you choose them.</li>
+        <li><strong>Apple</strong> and <strong>Google</strong> handle sign-in when you choose them, and Apple handles
+          subscription payments.</li>
       </ul>
       <p>We don't use advertising or analytics services, and we don't sell or rent your data to anyone.</p>
 

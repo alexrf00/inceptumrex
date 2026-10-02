@@ -60,11 +60,47 @@ export default function BabyClosetSupport() {
         closets, or open <strong>Manage Closets</strong> to create, rename, reorder or delete them.
       </p>
 
+      <h2>Baby Closet Premium</h2>
+      <h3>What's free and what's Premium?</h3>
+      <p>
+        The free plan includes one closet with up to 10 garments, outfits and the calendar. Premium adds
+        unlimited garments, up to 20 closets, Next Style suggestions and sync across your devices. Garments
+        you mark as outgrown don&apos;t count toward the free limit.
+      </p>
+      <h3>How does the free trial work?</h3>
+      <p>
+        The yearly plan starts with a 14-day free trial for new subscribers. Cancel at least 24 hours before it
+        ends if you don&apos;t want to continue; otherwise it becomes a paid yearly subscription.
+      </p>
+      <h3>How do I cancel or change my plan?</h3>
+      <p>
+        Open Settings in Baby Closet and tap <strong>Manage Subscription</strong>, or go to the Settings app,
+        tap your name, then <strong>Subscriptions</strong>. Premium stays active until the end of the period
+        you&apos;ve paid for.
+      </p>
+      <h3>I bought Premium on another device. How do I get it here?</h3>
+      <p>
+        Sign in to the App Store with the same Apple Account, then tap <strong>Restore Purchases</strong> in
+        Baby Closet&apos;s Settings.
+      </p>
+      <h3>How do I get a refund?</h3>
+      <p>
+        Purchases go through Apple, so refunds are requested from Apple at{" "}
+        <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.
+      </p>
+
+      <h2>Outgrown clothes</h2>
+      <p>
+        When something no longer fits, open it and tap <strong>Doesn&apos;t Fit Anymore</strong>. It moves to
+        the closet&apos;s <strong>Outgrown</strong> list, out of outfits and suggestions. Open it there and tap{" "}
+        <strong>Fits Again</strong> to bring it back.
+      </p>
+
       <h2>Accounts, sync and privacy</h2>
       <h3>Do I need an account?</h3>
       <p>
-        No. Without an account, everything stays on your iPhone. Sign in with Apple or Google only if you want
-        to sync between your devices.
+        No. Without an account, everything stays on your iPhone. With Premium, sign in with Apple or Google
+        to back up your closets and sync them between your devices.
       </p>
       <h3>What does Baby Closet know about my baby?</h3>
       <p>
