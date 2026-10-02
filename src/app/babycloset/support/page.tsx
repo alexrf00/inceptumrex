@@ -57,7 +57,8 @@ export default function BabyClosetSupport() {
       <p>
         You can keep up to 20 closets, for example one at home, one at Grandma's and one for daycare. Each has
         its own garments, outfits and calendar. Tap the round badge at the top left of any tab to switch
-        closets, or open <strong>Manage Closets</strong> to create, rename, reorder or delete them.
+        closets, or open <strong>Manage Closets</strong> to create, rename, reorder or delete them. To move a
+        garment, open it and tap <strong>Move to Another Closet</strong>; its photo goes with it.
       </p>
 
       <h2>Baby Closet Premium</h2>
