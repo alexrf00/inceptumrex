@@ -63,9 +63,10 @@ export default function BabyClosetSupport() {
       <h2>Baby Closet Premium</h2>
       <h3>What's free and what's Premium?</h3>
       <p>
-        The free plan includes one closet with up to 10 garments, outfits and the calendar. Premium adds
-        unlimited garments, up to 20 closets, Next Style suggestions and sync across your devices. Garments
-        you mark as outgrown don&apos;t count toward the free limit.
+        The free plan includes one closet with up to 10 garments, up to 5 saved outfits, and planning up to 7
+        days ahead with one outfit a day. Premium removes those limits and adds up to 20 closets, Next Style
+        suggestions and sync across your devices. Garments you mark as outgrown don&apos;t count toward the
+        free limit.
       </p>
       <h3>How does the free trial work?</h3>
       <p>
@@ -87,6 +88,15 @@ export default function BabyClosetSupport() {
       <p>
         Purchases go through Apple, so refunds are requested from Apple at{" "}
         <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.
+      </p>
+
+      <h2>Reminders</h2>
+      <p>
+        Baby Closet can remind you of tomorrow&apos;s outfit the evening before (and, if you like, that
+        morning), nudge you on Sunday to plan the week, suggest a closet check every four weeks, mark the start
+        of each season, and let you know two days before a free trial ends. Turn each one on or off, and set the
+        times, in Settings → <strong>Reminders</strong>. Reminders are scheduled on your iPhone; nothing is
+        sent to a server.
       </p>
 
       <h2>Outgrown clothes</h2>

@@ -37,8 +37,9 @@ export default function BabyClosetTerms() {
 
       <h2>Free plan and Premium</h2>
       <p>
-        The free plan includes one closet with up to 10 garments, outfits and the calendar. Baby Closet
-        Premium adds unlimited garments, up to 20 closets, Next Style suggestions and sync across devices.
+        The free plan includes one closet with up to 10 garments, up to 5 saved outfits, and planning up to 7
+        days ahead with one outfit a day. Baby Closet Premium removes those limits and adds up to 20 closets,
+        Next Style suggestions and sync across devices.
         The features included in each plan may change over time.
       </p>
 

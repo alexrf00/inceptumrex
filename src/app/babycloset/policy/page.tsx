@@ -49,7 +49,8 @@ export default function BabyClosetPolicy() {
       </p>
       <p>
         The optional stylist note on the Next Style screen is written by Apple Intelligence on your iPhone.
-        Nothing is sent to us or to anyone else to write it.
+        Nothing is sent to us or to anyone else to write it. Reminders, if you turn them on, are scheduled on
+        your iPhone as local notifications; no push service or server is involved.
       </p>
 
       <h2>If you create an account</h2>
