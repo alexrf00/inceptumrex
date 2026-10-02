@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 
 const title = "Baby Closet Support"
 const description =
-  "Help with Baby Closet: adding clothes, building outfits, planning on the calendar, sharing closets, and deleting your data."
+  "Help with Baby Closet: adding clothes, building outfits, planning on the calendar, closets, and deleting your data."
 const contact = "inceptumrex+babycloset@gmail.com"
 
 export const metadata: Metadata = {
@@ -57,48 +57,14 @@ export default function BabyClosetSupport() {
       <p>
         You can keep up to 20 closets, for example one at home, one at Grandma's and one for daycare. Each has
         its own garments, outfits and calendar. Tap the round badge at the top left of any tab to switch
-        closets, share the current one, or open <strong>Manage Closets</strong> to create, rename, reorder or
-        delete them.
-      </p>
-
-      <h2>Sharing a closet</h2>
-      <h3>How do I share?</h3>
-      <p>
-        Sign in from Settings first; sharing needs an account. Then tap the closet badge and choose{" "}
-        <strong>Share</strong> (or touch and hold a closet in Manage Closets). Choose <strong>Permanent</strong>{" "}
-        or <strong>7 days</strong>, then <strong>Invite to Edit</strong> or <strong>Invite to View Only</strong>,
-        and send the invite.
-      </p>
-      <h3>How does the other person join?</h3>
-      <p>
-        They need Baby Closet and an account. They can open the invite link, or tap the closet badge, choose{" "}
-        <strong>Manage Closets</strong>, then <strong>Join with a Code</strong> and type the 12-character code.
-        Each invite works once and must be used within 7 days.
-      </p>
-      <h3>What can they do?</h3>
-      <ul>
-        <li><strong>Can edit:</strong> add garments, build outfits and plan on the calendar.</li>
-        <li><strong>View only:</strong> see the garments, outfits and calendar without changing anything.</li>
-      </ul>
-      <p>Changes show up on everyone's iPhone within seconds.</p>
-      <h3>How do I remove someone?</h3>
-      <p>
-        Open the closet's share screen and swipe left on the person, or tap <strong>…</strong> and choose{" "}
-        <strong>Revoke Access</strong>. <strong>Stop Sharing</strong> removes everyone at once. The same menu
-        lets you switch someone between can edit and view only, make their access permanent, or give them 7
-        more days. People with 7-day access lose it automatically when the time is up.
-      </p>
-      <h3>How do I leave a closet someone shared with me?</h3>
-      <p>
-        Open its share screen and tap <strong>Leave Closet</strong>. It's removed from your iPhone; anything you
-        added stays in the owner's closet.
+        closets, or open <strong>Manage Closets</strong> to create, rename, reorder or delete them.
       </p>
 
       <h2>Accounts, sync and privacy</h2>
       <h3>Do I need an account?</h3>
       <p>
         No. Without an account, everything stays on your iPhone. Sign in with Apple or Google only if you want
-        to sync between devices or share closets.
+        to sync between your devices.
       </p>
       <h3>What does Baby Closet know about my baby?</h3>
       <p>

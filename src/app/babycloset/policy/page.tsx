@@ -33,8 +33,8 @@ export default function BabyClosetPolicy() {
         <li>Photos are analyzed on your iPhone. The original photo is never kept or uploaded.</li>
         <li>Photos that show a person or a face are rejected before anything is saved.</li>
         <li>Without an account, everything stays on your iPhone.</li>
-        <li>With an account, your closet syncs to your own private account so you can use it on other devices
-          and share it with people you invite.</li>
+        <li>With an account, your closet syncs to your own private account so you can use it on your other
+          devices. Nothing is shared with other users.</li>
         <li>No ads, no tracking, no analytics, and we never sell your data.</li>
         <li>You can delete everything, or your whole account, from Settings in the app.</li>
       </ul>
@@ -54,8 +54,8 @@ export default function BabyClosetPolicy() {
 
       <h2>If you create an account</h2>
       <p>
-        An account is optional. You can sign in with Apple or with Google to sync your closet and to share
-        closets. When you do, the following is stored with your account:
+        An account is optional. You can sign in with Apple or with Google to sync your closet across your
+        devices. When you do, the following is stored with your account:
       </p>
       <ul>
         <li><strong>Account details:</strong> your email address and an account ID. Sign in with Apple only
@@ -64,8 +64,6 @@ export default function BabyClosetPolicy() {
         <li><strong>Your closet:</strong> the garment cut-out images; each garment's type, color, seasons,
           favorite and layering settings; your saved outfits; your calendar plans (date, occasion and optional
           time of day); and your closets' names, emoji and colors.</li>
-        <li><strong>Sharing:</strong> who you've shared a closet with, their access (can edit or view only),
-          how long their access lasts, and pending invite codes.</li>
       </ul>
       <p>
         Occasions are picked from a fixed list rather than typed, so personal notes don't end up in the
@@ -73,19 +71,10 @@ export default function BabyClosetPolicy() {
         baby's name.
       </p>
 
-      <h2>Sharing closets</h2>
-      <p>
-        You decide whether to share a closet, and with whom. When you invite someone, they can see that
-        closet's garments, outfits and calendar, and, if you allow it, change them. People who share a closet
-        can see each other's email addresses. You can change someone's access, revoke it or stop sharing at
-        any time, and anyone can leave a closet shared with them. Your other closets stay private.
-      </p>
-
       <h2>Who processes your data</h2>
       <ul>
         <li><strong>Supabase</strong> hosts the database, image storage and sign-in for accounts. Data is
-          encrypted in transit, and database rules ensure only you, and the people you share a closet with, can
-          read it.</li>
+          encrypted in transit, and database rules ensure only you can read it.</li>
         <li><strong>Apple</strong> and <strong>Google</strong> handle sign-in when you choose them.</li>
       </ul>
       <p>We don't use advertising or analytics services, and we don't sell or rent your data to anyone.</p>
@@ -94,10 +83,8 @@ export default function BabyClosetPolicy() {
       <ul>
         <li><strong>Delete All Data</strong> in Settings removes your closets from your iPhone.</li>
         <li><strong>Delete Account</strong> in Settings permanently deletes your account, your images and
-          everything synced to it, including closets you own and your access to closets shared with you.</li>
+          everything synced to it.</li>
         <li>Deleting the app removes everything stored on your iPhone.</li>
-        <li>If you leave a shared closet, or the owner revokes your access, it's removed from your iPhone. What
-          you added stays in the owner's closet.</li>
       </ul>
       <p>We keep account data only while your account exists.</p>
 
