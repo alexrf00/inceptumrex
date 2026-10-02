@@ -48,9 +48,20 @@ export default function BabyClosetPolicy() {
         to your photo library.
       </p>
       <p>
-        The optional stylist note on the Next Style screen is written by Apple Intelligence on your iPhone.
+        On iPhones with Apple Intelligence, the app also asks Apple&apos;s on-device model to look at each garment
+        cut-out and suggest its type, a short name, its pattern and how warm it is. This happens entirely on your
+        iPhone. The optional stylist note and the stylist&apos;s pick on the Next Style screen are also written by
+        Apple Intelligence on your iPhone.
         Nothing is sent to us or to anyone else to write it. Reminders, if you turn them on, are scheduled on
         your iPhone as local notifications; no push service or server is involved.
+      </p>
+
+      <h2>Weather</h2>
+      <p>
+        If you turn on the forecast in Next Style, Baby Closet asks for your approximate location (not your precise
+        one) and sends it to Apple Weather (WeatherKit) to get the forecast for the coming days. The location isn&apos;t
+        stored by the app, isn&apos;t sent to our servers and isn&apos;t linked to your account. You can turn location
+        access off anytime in the Settings app.
       </p>
 
       <h2>If you create an account</h2>
@@ -84,8 +95,8 @@ export default function BabyClosetPolicy() {
       <ul>
         <li><strong>Supabase</strong> hosts the database, image storage and sign-in for accounts. Data is
           encrypted in transit, and database rules ensure only you can read it.</li>
-        <li><strong>Apple</strong> and <strong>Google</strong> handle sign-in when you choose them, and Apple handles
-          subscription payments.</li>
+        <li><strong>Apple</strong> and <strong>Google</strong> handle sign-in when you choose them. Apple also handles
+          subscription payments and, if you turn on the forecast, provides the weather through WeatherKit.</li>
       </ul>
       <p>We don't use advertising or analytics services, and we don't sell or rent your data to anyone.</p>
 

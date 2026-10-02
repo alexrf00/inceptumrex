@@ -53,6 +53,22 @@ export default function BabyClosetSupport() {
         been worn lately.
       </p>
 
+      <h2>Apple Intelligence and weather</h2>
+      <h3>How does Baby Closet recognize clothes?</h3>
+      <p>
+        On iPhones with Apple Intelligence (iPhone 15 Pro and newer, on iOS 27), Apple&apos;s on-device model looks at
+        each garment you add and suggests its type, a name like &quot;Striped bodysuit&quot;, its pattern and how warm
+        it is. You can change anything before saving. On other iPhones, Apple&apos;s Vision framework suggests the type.
+        Either way, it all happens on your iPhone.
+      </p>
+      <h3>How does Next Style use the weather?</h3>
+      <p>
+        Tap <strong>Match Ideas to the Forecast</strong> in Next Style and allow approximate location. Ideas then
+        match the forecast for the chosen day: warmer layers when it&apos;s cold, light clothes in the heat, rain boots
+        or a raincoat when rain is likely. With Apple Intelligence, the stylist also picks its favorite idea for the day
+        and says why. Weather comes from Apple Weather.
+      </p>
+
       <h2>Closets</h2>
       <p>
         You can keep up to 20 closets, for example one at home, one at Grandma's and one for daycare. Each has
