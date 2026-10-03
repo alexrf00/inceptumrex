@@ -39,6 +39,13 @@ export default function BabyClosetSupport() {
         Baby Closet shows the look-alike so you don&apos;t add it twice. Tap <strong>Don&apos;t Add</strong> to skip
         it, or keep it if it&apos;s a different piece. The comparison happens on your iPhone.
       </p>
+      <h3>Two garments came out as one. What can I do?</h3>
+      <p>
+        Garments that touch or overlap, like a shirt corner lying on the pants, are separated automatically where
+        they meet. If something still comes out as one piece, tap <strong>Separate Pieces</strong> under it. If a
+        garment was split by mistake, tap <strong>Keep as One</strong>. For the best results, leave a little space
+        between pieces. Pairs of shoes, socks and booties stay together.
+      </p>
       <h3>Why was my photo rejected?</h3>
       <p>
         Photos that show a person or a face are rejected on purpose, to keep your family out of the app. Take
