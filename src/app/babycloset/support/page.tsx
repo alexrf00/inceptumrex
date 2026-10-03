@@ -131,6 +131,17 @@ export default function BabyClosetSupport() {
         actions are in the Shortcuts app and in Spotlight, with nothing to set up.
       </p>
 
+      <h2>Laundry</h2>
+      <p>
+        When something goes in the hamper, open it and tap <strong>Put in the Wash</strong>, or use{" "}
+        <strong>Put in the Wash</strong> on a planned or saved outfit to send every piece at once (handy right after
+        marking an outfit as worn). Pieces in the wash show a small washer badge, and Next Style leaves them out of
+        today&apos;s and tomorrow&apos;s ideas. If a planned outfit for today or tomorrow includes something in the wash, the
+        plan shows a heads-up with the best clean swap: tap <strong>Swap</strong>, or <strong>It&apos;s Clean</strong> if
+        it came back in time. Swapping a saved outfit only changes that day. The evening reminder mentions it too.
+        When the laundry is done, open <strong>In the Wash</strong> under the closet and tap <strong>All Clean</strong>.
+      </p>
+
       <h2>Outgrown clothes</h2>
       <p>
         When something no longer fits, open it and tap <strong>Doesn&apos;t Fit Anymore</strong>. It moves to

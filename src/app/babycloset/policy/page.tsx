@@ -78,7 +78,7 @@ export default function BabyClosetPolicy() {
           shares your email (you can choose Apple's Hide My Email). If you sign in with Google, Google also
           shares your name and profile picture with our sign-in provider; Baby Closet doesn't use them.</li>
         <li><strong>Your closet:</strong> the garment cut-out images; each garment's type, color, seasons,
-          favorite and layering settings; your saved outfits; your calendar plans (date, occasion and optional
+          favorite, layering and laundry settings; your saved outfits; your calendar plans (date, occasion and optional
           time of day); and your closets' names, emoji and colors.</li>
       </ul>
       <p>
