@@ -140,13 +140,28 @@ export default function BabyClosetSupport() {
 
       <h2>Laundry</h2>
       <p>
-        When something goes in the hamper, open it and tap <strong>Put in the Wash</strong>, or use{" "}
-        <strong>Put in the Wash</strong> on a planned or saved outfit to send every piece at once (handy right after
-        marking an outfit as worn). Pieces in the wash show a small washer badge, and Next Style leaves them out of
-        today&apos;s and tomorrow&apos;s ideas. If a planned outfit for today or tomorrow includes something in the wash, the
-        plan shows a heads-up with the best clean swap: tap <strong>Swap</strong>, or <strong>It&apos;s Clean</strong> if
-        it came back in time. Swapping a saved outfit only changes that day. The evening reminder mentions it too.
-        When the laundry is done, open <strong>In the Wash</strong> under the closet and tap <strong>All Clean</strong>.
+        When something goes in the hamper, drag it onto the <strong>Wash</strong> basket that appears at the bottom
+        of the closet while you drag, tap <strong>Put in the Wash</strong> on a garment, or use the button on a
+        planned outfit in the calendar to send every piece at once. Pieces in the wash show a small washer badge,
+        and Next Style leaves them out of today&apos;s and tomorrow&apos;s ideas.
+      </p>
+      <p>
+        The basket button at the top of the Closet tab opens the <strong>Wash</strong> screen: everything in the wash,
+        what&apos;s needed back for an outfit planned today or tomorrow, a check to mark each piece clean,{" "}
+        <strong>All Clean</strong> for when the laundry&apos;s done, and <strong>+</strong> to add several pieces at
+        once. If a planned outfit includes something in the wash, the plan suggests the best clean swap; swapping a
+        saved outfit only changes that day.
+      </p>
+      <h3>How do I delete a garment quickly?</h3>
+      <p>
+        Drag it onto the <strong>Delete</strong> basket. Baby Closet always asks before deleting, so nothing is
+        removed by accident.
+      </p>
+
+      <h2>Calendar</h2>
+      <p>
+        Each planned outfit has <strong>Mark as Worn</strong> (from the day itself) and <strong>Put in the
+        Wash</strong> buttons. Tap the outfit, or the expand button, to see it bigger.
       </p>
 
       <h2>Outgrown clothes</h2>
