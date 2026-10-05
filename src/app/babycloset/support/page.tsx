@@ -162,6 +162,13 @@ export default function BabyClosetSupport() {
         No. Without an account, everything stays on your iPhone. With Premium, sign in with Apple or Google
         to back up your closets and sync them between your devices.
       </p>
+      <h3>What happens when I sign out?</h3>
+      <p>
+        Your closets are saved in your account, so signing out removes them from this iPhone and leaves you with
+        an empty closet. Sign in again with the same account to get them back. Before signing out, Baby Closet
+        saves any recent changes; if it can&apos;t (for example, offline), it warns you first. If you sign in with a
+        different account, it starts with that account&apos;s own closets.
+      </p>
       <h3>What does Baby Closet know about my baby?</h3>
       <p>
         Nothing. It never asks for your baby's name, birthday, age, size or photos. Read the{" "}
